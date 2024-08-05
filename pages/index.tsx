@@ -1,3 +1,9 @@
+import Layout from "@/shared/Templates/Layout/Layout";
+
 export default function Home() {
-  return <>test</>;
+  return (
+    <>
+      <Layout>aaa</Layout>
+    </>
+  );
 }

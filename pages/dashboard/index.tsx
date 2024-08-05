@@ -1,7 +1,9 @@
+import Layout from "@/shared/Templates/Layout/Layout";
+
 export default function Dashboard() {
   return (
     <>
-      <div>dashboard</div>
+      <Layout>dashboard</Layout>
     </>
   );
 }

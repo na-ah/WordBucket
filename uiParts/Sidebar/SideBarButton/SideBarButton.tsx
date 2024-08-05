@@ -1,0 +1,26 @@
+import Link from "next/link";
+
+export default function SideBarButton({
+  text,
+  link,
+  color = "blue",
+}: {
+  text: string;
+  link: string;
+  color?: string;
+}) {
+  const colors: { [key: string]: string } = {
+    blue: "hover:bg-sky-600",
+    lime: "hover:bg-lime-600",
+    rose: "hover:bg-rose-600",
+  };
+  return (
+    <>
+      <li
+        className={`bg-zinc-600 rounded-full flex justify-center items-center aspect-square w-3/4 transition-all duration-50  hover:cursor-pointer ${colors[color]}`}
+      >
+        <Link href={link}>{text}</Link>
+      </li>
+    </>
+  );
+}
