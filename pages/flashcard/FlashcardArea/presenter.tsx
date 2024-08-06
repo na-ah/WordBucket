@@ -26,6 +26,59 @@ export default function Presenter({
       />
     </div>
   );
+
+  const historyTable = (
+    <>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <td>日付</td>
+            <td>結果</td>
+            <td>時間</td>
+          </tr>
+        </thead>
+        <tbody>
+          {word.history.map((result, i) => (
+            <tr key={i}>
+              <td>{result.date}</td>
+              <td>{result.result}</td>
+              <td>{result.time}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+
+  const imageArea = (
+    <>
+      <div className="w-fit mx-auto mt-3">
+        {word.image && (
+          <Image
+            src={word.image}
+            width={300}
+            height={300}
+            alt={word.question}
+          />
+        )}
+      </div>
+    </>
+  );
+
+  const exampleArea = (
+    <>
+      <div className="mt-3 p-2 gap-3 bg-zinc-700  flex flex-col items-start overflow-y-auto">
+        {word.example.map((sentence, i) => (
+          <p key={i}>
+            <LeftBarTitle
+              title={sentence}
+              color="lime"
+            />
+          </p>
+        ))}
+      </div>
+    </>
+  );
   return (
     <>
       <div className="h-full w-full my-auto flex flex-col">
@@ -42,50 +95,13 @@ export default function Presenter({
         ) : (
           <>
             <div className="flex flex-col justify-center h-full">
-              <div>
-                <table className="table-auto">
-                  <thead>
-                    <tr>
-                      <td>日付</td>
-                      <td>結果</td>
-                      <td>時間</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {word.history.map((result, i) => (
-                      <tr key={i}>
-                        <td>{result.date}</td>
-                        <td>{result.result}</td>
-                        <td>{result.time}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <div>{historyTable}</div>
               <div className="basis-1/5 flex flex-col h-full justify-center items-center text-2xl bg-zinc-700 ">
                 {word.answer}
               </div>
               <div className="flex gap-3">
-                <div className="mt-3 p-2 gap-3 bg-zinc-700  flex flex-col items-start overflow-y-auto">
-                  {word.example.map((sentence, i) => (
-                    <p key={i}>
-                      <LeftBarTitle
-                        title={sentence}
-                        color="lime"
-                      />
-                    </p>
-                  ))}
-                </div>
-                <div className="w-fit mx-auto mt-3">
-                  {word.image && (
-                    <Image
-                      src={word.image}
-                      width={300}
-                      height={300}
-                      alt={word.question}
-                    />
-                  )}
-                </div>
+                {exampleArea}
+                {imageArea}
               </div>
             </div>
           </>
