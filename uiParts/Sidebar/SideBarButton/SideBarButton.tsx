@@ -17,7 +17,7 @@ export default function SideBarButton({
   return (
     <>
       <li
-        className={`bg-zinc-600 rounded-full flex justify-center items-center aspect-square w-3/4 transition-all duration-50  hover:cursor-pointer ${colors[color]}`}
+        className={`bg-zinc-700 rounded-full flex justify-center items-center aspect-square w-3/4 transition-all duration-50  hover:cursor-pointer ${colors[color]}`}
       >
         <Link href={link}>{text}</Link>
       </li>
