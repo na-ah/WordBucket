@@ -70,9 +70,37 @@ export interface ButtonProps {
 
 export interface FlashcardProps {
   pageTitle: string;
+  isFront: boolean;
+  flipCard: () => void;
+  word: Word;
+  remainingTimePercentage: number;
+  progressStatus: ProgressStatus;
+  markIncorrect: () => void;
+  markCorrect: () => void;
+}
+
+export interface ProgressStatus {
+  completed: number;
+  total: number;
+}
+
+export interface Word {
+  question: string;
+  answer: string;
+  example: string[];
+  image: string;
+  history: Result[];
+}
+
+export interface Result {
+  date: string;
+  result: string;
+  time: number;
 }
 
 export interface FlashcardAreaProps {
-  word: string;
+  word: Word;
   remainingTimePercentage: number;
+  progressStatus: ProgressStatus;
+  isFront: boolean;
 }
