@@ -11,6 +11,7 @@ export default function Button({
 }: ButtonProps) {
   const bgColors: Colors = {
     black: "bg-black",
+    zinc800: "bg-zinc-800",
   };
   const textColors: Colors = {
     white: "text-white",
