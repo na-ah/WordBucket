@@ -1,4 +1,4 @@
-import SideBarButton from "@/uiParts/Sidebar/SideBarButton/SideBarButton";
+import SideBarButton from "@/components/uiParts/Sidebar/SideBarButton/SideBarButton";
 
 export default function Sidebar() {
   return (

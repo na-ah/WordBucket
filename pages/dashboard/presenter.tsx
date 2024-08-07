@@ -1,11 +1,11 @@
-import Layout from "@/shared/Templates/Layout/Layout";
-import DashboardInformation from "./DashboardInformation/DashboardInformation";
+import DashboardInformation from "../../components/dashboard/DashboardInformation/DashboardInformation";
 import { DashboardProps } from "@/types/types";
-import DashboardBox from "./DashboardBoxes/DashboardBox/DashboardBox";
-import DashboardBoxes from "./DashboardBoxes/DashboardBoxies";
-import LeftBarTitle from "@/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
-import Button from "@/uiParts/Dashboard/Button/Button";
-import ButtonList from "@/uiParts/Dashboard/ButtonList/ButtonList";
+import DashboardBox from "../../components/dashboard/DashboardBoxes/DashboardBox/DashboardBox";
+import DashboardBoxes from "../../components/dashboard/DashboardBoxes/DashboardBoxies";
+import LeftBarTitle from "@/components/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
+import Button from "@/components/uiParts/Dashboard/Button/Button";
+import ButtonList from "@/components/uiParts/Dashboard/ButtonList/ButtonList";
+import Layout from "@/components/shared/Templates/Layout/Layout";
 
 export default function Presenter({
   pageTitle,

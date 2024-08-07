@@ -77,6 +77,7 @@ export interface FlashcardProps {
   progressStatus: ProgressStatus;
   markIncorrect: () => void;
   markCorrect: () => void;
+  wordStats: WordStats;
 }
 
 export interface ProgressStatus {
@@ -103,4 +104,11 @@ export interface FlashcardAreaProps {
   remainingTimePercentage: number;
   progressStatus: ProgressStatus;
   isFront: boolean;
+  wordStats: WordStats;
+}
+
+export interface WordStats {
+  averageResponseTime: number;
+  accuracyRate: number;
+  learningCount: number;
 }

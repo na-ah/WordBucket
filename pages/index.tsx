@@ -1,4 +1,4 @@
-import Layout from "@/shared/Templates/Layout/Layout";
+import Layout from "@/components/shared/Templates/Layout/Layout";
 
 export default function Home() {
   return (

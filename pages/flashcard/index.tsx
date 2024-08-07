@@ -1,19 +1,19 @@
-import useTimer from "./hooks/useTimer";
-import useWords from "./hooks/useWords";
+import useTimer from "../../components/flashcard/hooks/useTimer";
+import useWords from "../../components/flashcard/hooks/useWords";
 import Presenter from "./presenter";
 import { useState } from "react";
+import useWordStats from "../../components/flashcard/hooks/useWordStats";
 
 export default function Flashcard() {
   const [isFront, setIsFront] = useState(true);
   const { currentWord, total, completed, markCorrect, markIncorrect } =
     useWords(setIsFront);
-
   const timeLimit = 5 * 1000;
-
   const { time, setTime, timeRemainingPercentage } = useTimer(
     isFront,
     timeLimit
   );
+  const wordStats = useWordStats(currentWord);
 
   function flipCard() {
     setIsFront(!isFront);
@@ -38,6 +38,7 @@ export default function Flashcard() {
         remainingTimePercentage={timeRemainingPercentage}
         markIncorrect={markIncorrect}
         markCorrect={markCorrect}
+        wordStats={wordStats}
       />
     </>
   );

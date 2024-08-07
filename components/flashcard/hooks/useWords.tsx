@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function useWords(
   setIsFront: React.Dispatch<React.SetStateAction<boolean>>
@@ -72,22 +72,24 @@ export default function useWords(
         {
           date: "2024/08/05 20:19",
           result: "incorrect",
-          time: 3.31,
+          time: 1.31,
         },
         {
           date: "2024/08/06 20:23",
           result: "incorrect",
-          time: 3.26,
+          time: 2.26,
         },
         {
           date: "2024/08/06 20:30",
           result: "correct",
-          time: 3.19,
+          time: 1.19,
         },
       ],
     },
   ];
-  const currentWord = words[currentWordIndex];
+  const currentWord = useMemo(() => {
+    return words[currentWordIndex];
+  }, [currentWordIndex]);
 
   function nextWord() {
     setCurrentWordIndex((prevIndex) =>

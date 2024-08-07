@@ -1,5 +1,5 @@
 import { DashboardBoxesProps } from "@/types/types";
-import UnderlineTitle from "@/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
+import UnderlineTitle from "@/components/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
 
 export default function DashboardBoxes({
   listTitle,

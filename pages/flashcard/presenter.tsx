@@ -1,11 +1,11 @@
-import Layout from "@/shared/Templates/Layout/Layout";
 import { FlashcardProps } from "@/types/types";
-import PageTitle from "@/uiParts/Dashboard/PageTitle/PageTitle";
-import FlashcardArea from "./FlashcardArea/flashcardArea";
-import Button from "@/uiParts/Dashboard/Button/Button";
+import PageTitle from "@/components/uiParts/Dashboard/PageTitle/PageTitle";
+import FlashcardArea from "../../components/flashcard/FlashcardArea/flashcardArea";
+import Button from "@/components/uiParts/Dashboard/Button/Button";
 import { GrPowerCycle } from "react-icons/gr";
 import { FaRegCircle } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
+import Layout from "@/components/shared/Templates/Layout/Layout";
 
 export default function Presenter({
   pageTitle,
@@ -16,6 +16,7 @@ export default function Presenter({
   remainingTimePercentage,
   markIncorrect,
   markCorrect,
+  wordStats,
 }: FlashcardProps) {
   return (
     <>
@@ -27,6 +28,7 @@ export default function Presenter({
             progressStatus={progressStatus}
             word={word}
             isFront={isFront}
+            wordStats={wordStats}
           />
           {isFront ? (
             <Button

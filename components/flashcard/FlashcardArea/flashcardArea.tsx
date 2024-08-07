@@ -6,6 +6,7 @@ export default function FlashcardArea({
   word,
   progressStatus,
   remainingTimePercentage,
+  wordStats,
 }: FlashcardAreaProps) {
   return (
     <>
@@ -14,6 +15,7 @@ export default function FlashcardArea({
         remainingTimePercentage={remainingTimePercentage}
         progressStatus={progressStatus}
         isFront={isFront}
+        wordStats={wordStats}
       />
     </>
   );

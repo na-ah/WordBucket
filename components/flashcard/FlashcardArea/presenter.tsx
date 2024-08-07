@@ -1,5 +1,5 @@
 import { FlashcardAreaProps } from "@/types/types";
-import LeftBarTitle from "@/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
+import LeftBarTitle from "@/components/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
 import Image from "next/image";
 
 export default function Presenter({
@@ -7,6 +7,7 @@ export default function Presenter({
   remainingTimePercentage,
   progressStatus,
   isFront,
+  wordStats,
 }: FlashcardAreaProps) {
   const progressBar = (
     <div className="w-full mt-auto flex">
@@ -29,7 +30,7 @@ export default function Presenter({
 
   const historyTable = (
     <>
-      <table className="table-auto">
+      <table className="table-auto w-full">
         <thead>
           <tr>
             <td>日付</td>
@@ -69,16 +70,34 @@ export default function Presenter({
     <>
       <div className="mt-3 p-2 gap-3 bg-zinc-700  flex flex-col items-start overflow-y-auto">
         {word.example.map((sentence, i) => (
-          <p key={i}>
+          <div key={i}>
             <LeftBarTitle
               title={sentence}
               color="lime"
             />
-          </p>
+          </div>
         ))}
       </div>
     </>
   );
+
+  const wordStatsArea = (
+    <div className="flex flex-col">
+      <div className="flex justify-between">
+        <span>accuracyRate:</span>
+        <span>{wordStats.accuracyRate * 100} %</span>
+      </div>
+      <div className="flex justify-between">
+        <span>averageResponseTime:</span>
+        <span>{wordStats.averageResponseTime} sec</span>
+      </div>
+      <div className="flex justify-between">
+        <span>learningCount:</span>
+        <span>{wordStats.learningCount} times</span>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <div className="h-full w-full my-auto flex flex-col">
@@ -94,8 +113,11 @@ export default function Presenter({
           </div>
         ) : (
           <>
-            <div className="flex flex-col justify-center h-full">
-              <div>{historyTable}</div>
+            <div className="flex flex-col h-full">
+              <div className="basis-2/5 flex pt-3">
+                <div className="basis-3/4 text-sm">{historyTable}</div>
+                <div className="basis-auto text-sm">{wordStatsArea}</div>
+              </div>
               <div className="basis-1/5 flex flex-col h-full justify-center items-center text-2xl bg-zinc-700 ">
                 {word.answer}
               </div>

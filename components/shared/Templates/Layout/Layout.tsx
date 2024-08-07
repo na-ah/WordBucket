@@ -1,6 +1,6 @@
-import Main from "@/shared/Main/Main";
-import Sidebar from "@/shared/Sidebar/Sidebar";
 import { ReactNode } from "react";
+import Sidebar from "../../Sidebar/Sidebar";
+import Main from "../../Main/Main";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
