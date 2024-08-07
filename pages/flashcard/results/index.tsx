@@ -2,8 +2,29 @@ import Layout from "@/components/shared/Templates/Layout/Layout";
 import Button from "@/components/uiParts/Dashboard/Button/Button";
 import PageTitle from "@/components/uiParts/Dashboard/PageTitle/PageTitle";
 import UnderlineTitle from "@/components/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
+import {
+  batchSizeAtom,
+  currentDeckAtom,
+  currentDeckIndexAtom,
+} from "@/data/flashcard/flashcardAtoms";
+import { wordsPoolAtom } from "@/data/shared/words";
+import { Word } from "@/types/types";
+import { useAtom } from "jotai";
+import { useRouter } from "next/router";
 
 export default function Results() {
+  const [currentDeck, setCurrentDeck] = useAtom(currentDeckAtom);
+  const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
+  const [batchSize, setBatchSize] = useAtom(batchSizeAtom);
+  const [wordsPool, setWordsPool] = useAtom<Word[]>(wordsPoolAtom);
+  const router = useRouter();
+  function nextDeck() {
+    setCurrentDeckIndex((prevIndex) => {
+      return prevIndex + 1;
+    });
+    router.push("/flashcard");
+  }
+
   const resultsArea = (
     <>
       <div className="flex gap-3 h-full">
@@ -14,16 +35,9 @@ export default function Results() {
           />
           <div className="overflow-y-auto">
             <ul className="flex flex-col items-center">
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
+              {currentDeck.map((data, i) => (
+                <p key={i}>{data.question}</p>
+              ))}
             </ul>
           </div>
         </div>
@@ -66,6 +80,12 @@ export default function Results() {
       </div>
     </>
   );
+
+  const lastRap =
+    (wordsPool.length % batchSize === 0
+      ? wordsPool.length / batchSize
+      : Math.floor(wordsPool.length / batchSize) + 1) - 1;
+
   return (
     <>
       <Layout>
@@ -84,11 +104,14 @@ export default function Results() {
                 bgColor="zinc800"
                 className="border py-2 rounded-lg w-3/4"
               />
-              <Button
-                text="次のセットへ"
-                bgColor="zinc800"
-                className="border py-2 rounded-lg w-3/4"
-              />
+              {currentDeckIndex !== lastRap && (
+                <Button
+                  text="次のセットへ"
+                  onClick={nextDeck}
+                  bgColor="zinc800"
+                  className="border py-2 rounded-lg w-3/4"
+                />
+              )}
             </div>
           </div>
         </div>

@@ -1,18 +1,17 @@
-import { wordsAtom } from "@/data/words";
-import { useAtom } from "jotai";
+import { Word } from "@/types/types";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 
 export default function useWords(
-  setIsFront: React.Dispatch<React.SetStateAction<boolean>>
+  setIsFront: React.Dispatch<React.SetStateAction<boolean>>,
+  words: Word[]
 ) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const router = useRouter();
-  const [words, setWords] = useAtom(wordsAtom);
 
   const currentWord = useMemo(() => {
     return words[currentWordIndex];
-  }, [currentWordIndex]);
+  }, [currentWordIndex, words]);
 
   function nextWord() {
     if (currentWordIndex === words.length - 1) {

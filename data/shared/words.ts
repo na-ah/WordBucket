@@ -1,6 +1,7 @@
+import { Word } from "@/types/types";
 import { atom } from "jotai";
 
-export const wordsAtom = atom([
+export const wordsPoolAtom = atom<Word[]>([
   {
     question: "dog",
     answer: "犬",

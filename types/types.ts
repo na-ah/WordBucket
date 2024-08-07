@@ -89,7 +89,7 @@ export interface Word {
   question: string;
   answer: string;
   example: string[];
-  image: string;
+  image?: string;
   history: Result[];
 }
 
