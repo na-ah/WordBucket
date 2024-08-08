@@ -12,19 +12,25 @@ export default function Results() {
     setCurrentDeckIndex,
     currentDeck,
     nextDeck,
+    correctList,
+    incorrectList,
+    totalAverageResponseTime,
+    totalAccuracyRate,
   } = useDeck();
+
+  console.log(correctList);
 
   const resultsArea = (
     <>
       <div className="flex gap-3 h-full">
         <div className="basis-1/2 flex flex-col px-3 py-5">
           <UnderlineTitle
-            content="8"
+            content={String(correctList.length)}
             title="○"
           />
           <div className="overflow-y-auto">
             <ul className="flex flex-col items-center">
-              {currentDeck.map((data, i) => (
+              {correctList.map((data, i) => (
                 <p key={i}>{data.question}</p>
               ))}
             </ul>
@@ -32,14 +38,14 @@ export default function Results() {
         </div>
         <div className="flex flex-col basis-1/2 px-3 py-5">
           <UnderlineTitle
-            content="5"
+            content={String(incorrectList.length)}
             title="×"
           />
           <div className="px-8 overflow-y-auto">
             <ul className="flex flex-col flex-wrap mt-3 items-center">
-              <li>dog</li>
-              <li>dog</li>
-              <li>dog</li>
+              {incorrectList.map((data, i) => (
+                <p key={i}>{data.question}</p>
+              ))}
             </ul>
           </div>
         </div>
@@ -56,15 +62,11 @@ export default function Results() {
       <div className="px-5 py-3 flex flex-col gap-3">
         <div className="flex justify-between">
           <span>平均解答時間</span>
-          <span>4.21秒</span>
+          <span>{totalAverageResponseTime} 秒</span>
         </div>
         <div className="flex justify-between">
           <span>正答率</span>
-          <span>40%</span>
-        </div>
-        <div className="flex justify-between">
-          <span>改善率</span>
-          <span>67%</span>
+          <span>{totalAccuracyRate * 100} %</span>
         </div>
       </div>
     </>
