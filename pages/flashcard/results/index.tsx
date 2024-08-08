@@ -1,29 +1,18 @@
+import useDeck from "@/components/flashcard/hooks/useDeck";
 import Layout from "@/components/shared/Templates/Layout/Layout";
 import Button from "@/components/uiParts/Dashboard/Button/Button";
 import PageTitle from "@/components/uiParts/Dashboard/PageTitle/PageTitle";
 import UnderlineTitle from "@/components/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
-import {
-  batchSizeAtom,
-  currentDeckAtom,
-  currentDeckIndexAtom,
-} from "@/data/flashcard/flashcardAtoms";
-import { wordsPoolAtom } from "@/data/shared/words";
-import { Word } from "@/types/types";
-import { useAtom } from "jotai";
-import { useRouter } from "next/router";
 
 export default function Results() {
-  const [currentDeck, setCurrentDeck] = useAtom(currentDeckAtom);
-  const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
-  const [batchSize, setBatchSize] = useAtom(batchSizeAtom);
-  const [wordsPool, setWordsPool] = useAtom<Word[]>(wordsPoolAtom);
-  const router = useRouter();
-  function nextDeck() {
-    setCurrentDeckIndex((prevIndex) => {
-      return prevIndex + 1;
-    });
-    router.push("/flashcard");
-  }
+  const {
+    wordsPool,
+    batchSize,
+    currentDeckIndex,
+    setCurrentDeckIndex,
+    currentDeck,
+    nextDeck,
+  } = useDeck();
 
   const resultsArea = (
     <>

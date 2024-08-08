@@ -1,60 +1,60 @@
-import useTimer from "../../components/flashcard/hooks/useTimer";
-import useWords from "../../components/flashcard/hooks/useWords";
-import Presenter from "./presenter";
-import { useMemo, useState } from "react";
-import useWordStats from "../../components/flashcard/hooks/useWordStats";
-import { wordsPoolAtom } from "@/data/shared/words";
-import { Word } from "@/types/types";
-import { useAtom } from "jotai";
-import {
-  batchSizeAtom,
-  currentDeckAtom,
-  currentDeckIndexAtom,
-} from "@/data/flashcard/flashcardAtoms";
+import PageTitle from "@/components/uiParts/Dashboard/PageTitle/PageTitle";
+import FlashcardArea from "../../components/flashcard/FlashcardArea/flashcardArea";
+import Button from "@/components/uiParts/Dashboard/Button/Button";
+import { GrPowerCycle } from "react-icons/gr";
+import { FaRegCircle } from "react-icons/fa6";
+import { RxCross1 } from "react-icons/rx";
+import Layout from "@/components/shared/Templates/Layout/Layout";
+import useFlashcard from "@/components/flashcard/hooks/useFlashcard";
 
 export default function Flashcard() {
-  const [wordsPool, setWordsPool] = useAtom<Word[]>(wordsPoolAtom);
-  const [batchSize, setBatchSize] = useAtom(batchSizeAtom);
-  const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
-  const [currentDeck, setCurrentDeck] = useAtom(currentDeckAtom);
-
-  const [isFront, setIsFront] = useState(true);
-  const { currentWord, total, completed, markCorrect, markIncorrect } =
-    useWords(setIsFront, currentDeck);
-
-  const timeLimit = 5 * 1000;
-  const { time, setTime, timeRemainingPercentage } = useTimer(
+  const {
     isFront,
-    timeLimit
-  );
-
-  const wordStats = useWordStats(currentWord);
-
-  function flipCard() {
-    setIsFront(!isFront);
-    setTime(timeLimit);
-  }
-
-  if (time <= 0) {
-    flipCard();
-  }
+    currentWord,
+    progressStatus,
+    markCorrect,
+    markIncorrect,
+    flipCard,
+    remainingTimePercentage,
+    wordStats,
+  } = useFlashcard();
 
   return (
     <>
-      <Presenter
-        pageTitle={"Flashcard"}
-        flipCard={flipCard}
-        isFront={isFront}
-        word={currentWord}
-        progressStatus={{
-          completed: completed,
-          total: total,
-        }}
-        remainingTimePercentage={timeRemainingPercentage}
-        markIncorrect={markIncorrect}
-        markCorrect={markCorrect}
-        wordStats={wordStats}
-      />
+      <Layout>
+        <div className="flex-1 flex flex-col w-full px-5 py-3">
+          <PageTitle title={"Flashcard"} />
+          <FlashcardArea
+            remainingTimePercentage={remainingTimePercentage}
+            progressStatus={progressStatus}
+            word={currentWord}
+            isFront={isFront}
+            wordStats={wordStats}
+          />
+          {isFront ? (
+            <Button
+              onClick={flipCard}
+              text={<GrPowerCycle />}
+              className="w-full mx-auto py-3 flex justify-center text-5xl text-zinc-200  bg-zinc-700"
+            />
+          ) : (
+            <>
+              <div className="flex w-full bg-zinc-700  text-5xl py-3 justify-around">
+                <Button
+                  text={<RxCross1 />}
+                  className="bg-zinc-700 text6xl"
+                  onClick={markIncorrect}
+                />
+                <Button
+                  text={<FaRegCircle />}
+                  className="bg-zinc-700"
+                  onClick={markCorrect}
+                />
+              </div>
+            </>
+          )}
+        </div>
+      </Layout>
     </>
   );
 }

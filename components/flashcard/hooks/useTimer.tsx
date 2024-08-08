@@ -17,10 +17,11 @@ export default function useTimer(isFront: boolean, timeLimit: number) {
     };
   }, [isFront]);
 
-  const timeRemainingPercentage = (time / timeLimit) * 100;
+  const remainingTimePercentage = (time / timeLimit) * 100;
+
   return {
     time,
     setTime,
-    timeRemainingPercentage,
+    remainingTimePercentage,
   };
 }

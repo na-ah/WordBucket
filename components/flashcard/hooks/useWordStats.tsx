@@ -31,5 +31,6 @@ export default function useWordStats(currentWord: Word) {
       learningCount: calcLearningCount(currentWord),
     };
   }, [currentWord]);
+
   return wordStats;
 }

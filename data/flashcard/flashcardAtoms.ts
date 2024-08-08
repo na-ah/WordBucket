@@ -1,6 +1,7 @@
 import { atom } from "jotai";
-import { wordsPoolAtom } from "../shared/words";
+import { wordsPool } from "../shared/words";
 
+export const wordsPoolAtom = atom(wordsPool);
 export const currentDeckIndexAtom = atom(0);
 export const batchSizeAtom = atom(10);
 

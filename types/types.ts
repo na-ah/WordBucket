@@ -80,6 +80,17 @@ export interface FlashcardProps {
   wordStats: WordStats;
 }
 
+export interface UseFlashcardLogicProps {
+  isFront: boolean;
+  setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
+  currentWordIndex: number;
+  setCurrentWordIndex: React.Dispatch<React.SetStateAction<number>>;
+  currentDeck: Word[];
+  time: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
+  timeLimit: number;
+}
+
 export interface ProgressStatus {
   completed: number;
   total: number;
