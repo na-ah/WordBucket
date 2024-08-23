@@ -5,18 +5,20 @@ export interface MenuPosition {
   left: number;
 }
 
-export interface DashboardProps {
-  pageTitle: string;
-  informations: informations[];
-  reviewList?: DashboardBoxProps[];
-  learningList?: DashboardBoxProps[];
-  studyTermList?: DashboardBoxProps[];
-  correctRatioList?: DashboardBoxProps[];
-  requiredTimeList?: DashboardBoxProps[];
-  menuVisible?: boolean;
-  handleBoxClick?: (e: MouseEvent<HTMLDivElement>) => void;
-  handleMenuClose: () => void;
-  menuPosition?: MenuPosition;
+export interface DashboardMenuProps {
+  menuPosition: MenuPosition;
+}
+
+export interface DashboardBoxListProps {
+  boxPropsList: DashboardBoxPropsList[];
+  handleBoxClick: (e: MouseEvent<HTMLDivElement>) => void;
+}
+
+export interface DashboardBoxPropsList {
+  title: string;
+  count: number;
+  percentage: number;
+  color?: string;
 }
 
 export interface DashboardInformationProps {
@@ -53,7 +55,7 @@ export interface UnderlineTitleProps {
   content: string;
 }
 
-export interface DashboardBoxesProps {
+export interface DashboardBoxWrapperProps {
   listTitle: string;
   listContent: string;
   children: ReactNode;

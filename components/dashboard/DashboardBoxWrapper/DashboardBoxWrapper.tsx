@@ -1,11 +1,11 @@
-import { DashboardBoxesProps } from "@/types/types";
+import { DashboardBoxWrapperProps } from "@/types/types";
 import UnderlineTitle from "@/components/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
 
-export default function DashboardBoxes({
+export default function DashboardBoxWrapper({
   listTitle,
   listContent,
   children,
-}: DashboardBoxesProps) {
+}: DashboardBoxWrapperProps) {
   return (
     <>
       <div className="mt-3 px-3 pb-3 pt-1 bg-zinc-700">
