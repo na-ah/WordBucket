@@ -117,6 +117,39 @@ export interface FlashcardAreaProps {
   wordStats: WordStats;
 }
 
+export interface FlashcardProgressStatusProps {
+  progressStatus: ProgressStatus;
+}
+
+export interface FlashcardWordAreaProps {
+  word: Word;
+  remainingTimePercentage: number;
+}
+
+export interface FlashcardWordProps {
+  word: Word;
+}
+
+export interface FlashcardProgressBarProps {
+  remainingTimePercentage: number;
+}
+
+export interface FlashcardImageAreaProps {
+  word: Word;
+}
+
+export interface FlashcardExampleAreaProps {
+  word: Word;
+}
+
+export interface FlashcardHistoryTableProps {
+  word: Word;
+}
+
+export interface FlashcardWordStatsAreaProps {
+  wordStats: WordStats;
+}
+
 export interface WordStats {
   averageResponseTime: number;
   accuracyRate: number;
@@ -129,7 +162,7 @@ export interface Word {
   image?: string;
   meanings: Meaning[];
   examples: Example[];
-  histories: BackendHistory[];
+  histories: History[];
   average_duration: number;
   correct_rate: number;
   learning_count: number;
@@ -145,7 +178,7 @@ export interface Example {
   example: string;
 }
 
-export interface BackendHistory {
+export interface History {
   id: number;
   datetime: string;
   result: boolean;

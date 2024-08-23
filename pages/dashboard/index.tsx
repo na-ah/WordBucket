@@ -2,7 +2,7 @@ import DashboardBoxWrapper from "../../components/dashboard/Box/DashboardBoxWrap
 import LeftBarTitle from "@/components/shared/LeftBarTitle/LeftBarTitle";
 import useMenu from "@/hooks/dashboard/useMenu";
 import useDashboard from "@/hooks/dashboard/useDashboard";
-import DashboardMenu from "@/components/dashboard/DashboardMenu/dashboardMenu";
+import DashboardMenu from "@/components/dashboard/Menu/DashboardMenu/dashboardMenu";
 import Layout from "@/components/Template/Layout/Layout";
 import DashboardInformationList from "@/components/dashboard/Information/DashboardInformationList/DashboardInformationList";
 import DashboardBoxList from "@/components/dashboard/Box/DashboardBoxList/dashboardBoxList";
