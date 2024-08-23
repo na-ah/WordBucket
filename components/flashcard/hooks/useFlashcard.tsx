@@ -1,5 +1,5 @@
-import useFlashcardState from "./useFlashcardState";
 import useFlashcardLogic from "./useFlashcardLogic";
+import useFlashcardState from "./useFlashcardState";
 
 export default function useFlashcard() {
   const {

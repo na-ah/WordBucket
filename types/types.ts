@@ -80,12 +80,19 @@ export interface FlashcardProps {
   wordStats: WordStats;
 }
 
+export interface FlashcardButtonProps {
+  isFront: boolean;
+  flipCard: () => void;
+  markCorrect: () => void;
+  markIncorrect: () => void;
+}
+
 export interface UseFlashcardLogicProps {
   isFront: boolean;
   setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
   currentWordIndex: number;
   setCurrentWordIndex: React.Dispatch<React.SetStateAction<number>>;
-  currentDeck: Word[];
+  currentDeck: BackendWord[];
   time: number;
   setTime: React.Dispatch<React.SetStateAction<number>>;
   timeLimit: number;
@@ -111,7 +118,7 @@ export interface Result {
 }
 
 export interface FlashcardAreaProps {
-  word: Word;
+  word: BackendWord;
   remainingTimePercentage: number;
   progressStatus: ProgressStatus;
   isFront: boolean;
@@ -122,4 +129,33 @@ export interface WordStats {
   averageResponseTime: number;
   accuracyRate: number;
   learningCount: number;
+}
+
+export interface BackendWord {
+  id: number;
+  word: string;
+  image?: string;
+  meanings: BackendMeaning[];
+  examples: BackendExample[];
+  histories: BackendHistory[];
+  average_duration: number;
+  correct_rate: number;
+  learning_count: number;
+}
+
+export interface BackendMeaning {
+  id: number;
+  meaning: string;
+}
+
+export interface BackendExample {
+  id: number;
+  example: string;
+}
+
+export interface BackendHistory {
+  id: number;
+  datetime: string;
+  result: boolean;
+  duration: number;
 }

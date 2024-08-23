@@ -1,3 +1,4 @@
+import { currentDeckIndexAtom } from "@/data/flashcard/flashcardAtoms";
 import { UseFlashcardLogicProps } from "@/types/types";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
@@ -28,23 +29,24 @@ export default function useFlashcardLogic({
   const nextWord = useCallback(() => {
     if (currentWordIndex === currentDeck.length - 1) {
       showResults();
-      return;
+    } else {
+      setCurrentWordIndex((prevIndex) => prevIndex + 1);
     }
-
-    setCurrentWordIndex((prevIndex) =>
-      prevIndex === currentDeck.length - 1 ? prevIndex : prevIndex + 1
-    );
   }, [currentWordIndex, setCurrentWordIndex, currentDeck.length, showResults]);
 
   const markCorrect = useCallback(() => {
     nextWord();
-    setIsFront(true);
-  }, [nextWord, setIsFront]);
+    if (currentWordIndex !== currentDeck.length - 1) {
+      setIsFront(true);
+    }
+  }, [nextWord, setIsFront, currentDeck.length, currentWordIndex]);
 
   const markIncorrect = useCallback(() => {
     nextWord();
-    setIsFront(true);
-  }, [nextWord, setIsFront]);
+    if (currentWordIndex !== currentDeck.length - 1) {
+      setIsFront(true);
+    }
+  }, [nextWord, setIsFront, currentDeck.length, currentWordIndex]);
 
   useEffect(() => {
     if (time <= 0) {

@@ -1,12 +1,14 @@
 import { atom } from "jotai";
-import { wordsPool } from "../shared/words";
+import { fetchWords } from "./fetchWords";
 
-export const wordsPoolAtom = atom(wordsPool);
+export const wordsPoolAtom = atom(async (get) => {
+  return await fetchWords();
+});
 export const currentDeckIndexAtom = atom(0);
 export const batchSizeAtom = atom(10);
 
-export const currentDeckAtom = atom((get) => {
-  const wordsPool = get(wordsPoolAtom);
+export const currentDeckAtom = atom(async (get) => {
+  const wordsPool = await get(wordsPoolAtom);
   const batchSize = get(batchSizeAtom);
   const currentDeckIndex = get(currentDeckIndexAtom);
 

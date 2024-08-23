@@ -18,8 +18,6 @@ export default function Results() {
     totalAccuracyRate,
   } = useDeck();
 
-  console.log(correctList);
-
   const resultsArea = (
     <>
       <div className="flex gap-3 h-full">
@@ -31,7 +29,7 @@ export default function Results() {
           <div className="overflow-y-auto">
             <ul className="flex flex-col items-center">
               {correctList.map((data, i) => (
-                <p key={i}>{data.question}</p>
+                <p key={i}>{data.word}</p>
               ))}
             </ul>
           </div>
@@ -44,7 +42,7 @@ export default function Results() {
           <div className="px-8 overflow-y-auto">
             <ul className="flex flex-col flex-wrap mt-3 items-center">
               {incorrectList.map((data, i) => (
-                <p key={i}>{data.question}</p>
+                <p key={i}>{data.word}</p>
               ))}
             </ul>
           </div>

@@ -16,21 +16,21 @@ export default function useDeck() {
 
   const sortedDeck = currentDeck.map((word) => ({
     ...word,
-    history: word.history.sort((a, b) => (a.date > b.date ? 1 : -1)),
+    history: word.histories.sort((a, b) => (a.datetime > b.datetime ? 1 : -1)),
   }));
 
   const correctList = sortedDeck.filter(
-    (word) => word.history.at(-1)?.result === "correct"
+    (word) => word.histories.at(-1)?.result === true
   );
 
   const incorrectList = sortedDeck.filter(
-    (word) => word.history.at(-1)?.result === "incorrect"
+    (word) => word.history.at(-1)?.result === false
   );
 
   const totalAverageResponseTime =
     Math.round(
       (correctList
-        .map((word) => word.history.at(-1)?.time ?? 0)
+        .map((word) => word.history.at(-1)?.duration ?? 0)
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0) /
         correctList.length) *
         100

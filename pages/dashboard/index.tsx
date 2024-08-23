@@ -1,27 +1,9 @@
-import { MouseEvent, useRef, useState } from "react";
+import useMenu from "@/components/dashboard/hooks/useMenu";
 import Presenter from "./presenter";
-import { MenuPosition } from "@/types/types";
 
 export default function Dashboard() {
-  const [menuVisible, setMenuVisible] = useState<boolean>(false);
-  const [menuPosition, setMenuPosition] = useState<MenuPosition>({
-    top: 0,
-    left: 0,
-  });
-
-  function handleBoxClick(e: MouseEvent<HTMLDivElement>) {
-    const { clientX, clientY } = e;
-    console.log(`
-      clientX: ${e.clientX}
-      clientY: ${e.clientY}
-      `);
-    setMenuPosition({ top: clientY, left: clientX });
-    setMenuVisible(true);
-  }
-
-  function handleMenuClose() {
-    setMenuVisible(false);
-  }
+  const { menuPosition, menuVisible, handleBoxClick, handleMenuClose } =
+    useMenu();
   return (
     <>
       <Presenter

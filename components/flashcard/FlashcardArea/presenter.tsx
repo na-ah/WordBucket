@@ -39,11 +39,11 @@ export default function Presenter({
           </tr>
         </thead>
         <tbody>
-          {word.history.map((result, i) => (
+          {word.histories.map((result, i) => (
             <tr key={i}>
-              <td>{result.date}</td>
+              <td>{result.datetime}</td>
               <td>{result.result}</td>
-              <td>{result.time}</td>
+              <td>{result.duration}</td>
             </tr>
           ))}
         </tbody>
@@ -59,7 +59,7 @@ export default function Presenter({
             src={word.image}
             width={300}
             height={300}
-            alt={word.question}
+            alt={word.word}
           />
         )}
       </div>
@@ -69,10 +69,10 @@ export default function Presenter({
   const exampleArea = (
     <>
       <div className="mt-3 p-2 gap-3 bg-zinc-700  flex flex-col items-start overflow-y-auto">
-        {word.example.map((sentence, i) => (
+        {word.examples.map((sentence, i) => (
           <div key={i}>
             <LeftBarTitle
-              title={sentence}
+              title={sentence.example}
               color="lime"
             />
           </div>
@@ -108,7 +108,7 @@ export default function Presenter({
         </div>
         {isFront ? (
           <div className="basis-1/5 my-auto flex flex-col justify-center items-center text-2xl bg-zinc-700 ">
-            <div className="mt-auto">{word.question}</div>
+            <div className="mt-auto">{word.word}</div>
             {progressBar}
           </div>
         ) : (
@@ -119,7 +119,9 @@ export default function Presenter({
                 <div className="basis-auto text-sm">{wordStatsArea}</div>
               </div>
               <div className="basis-1/5 flex flex-col h-full justify-center items-center text-2xl bg-zinc-700 ">
-                {word.answer}
+                {word.meanings.map((meaning) => (
+                  <>{meaning.meaning}</>
+                ))}
               </div>
               <div className="flex gap-3">
                 {exampleArea}
