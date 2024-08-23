@@ -1,6 +1,6 @@
 import { DashboardInformationProps, DashboardProps } from "@/types/types";
-import LeftBarTitle from "@/components/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
-import PageTitle from "@/components/uiParts/Dashboard/PageTitle/PageTitle";
+import LeftBarTitle from "@/components/shared/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
+import PageTitle from "@/components/shared/uiParts/Dashboard/PageTitle/PageTitle";
 
 export default function DashboardInformation({
   pageTitle,

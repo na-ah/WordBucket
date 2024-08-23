@@ -1,8 +1,8 @@
 import useDeck from "@/components/flashcard/hooks/useDeck";
-import Layout from "@/components/shared/Layout/Layout";
-import Button from "@/components/uiParts/Dashboard/Button/Button";
-import PageTitle from "@/components/uiParts/Dashboard/PageTitle/PageTitle";
-import UnderlineTitle from "@/components/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
+import Layout from "@/components/shared/Template/Layout/Layout";
+import Button from "@/components/shared/uiParts/Dashboard/Button/Button";
+import PageTitle from "@/components/shared/uiParts/Dashboard/PageTitle/PageTitle";
+import UnderlineTitle from "@/components/shared/uiParts/Dashboard/UnderlineTitle/UnderlineTitle";
 
 export default function Results() {
   const {
