@@ -1,8 +1,8 @@
-import { BackendWord, Word, WordStats } from "@/types/types";
+import { Word, WordStats } from "@/types/types";
 import { useMemo } from "react";
 
-export default function useWordStats(currentWord: BackendWord) {
-  function calcAccuracyRatio(word: BackendWord) {
+export default function useWordStats(currentWord: Word) {
+  function calcAccuracyRatio(word: Word) {
     const learningCount = word.histories.length;
     const correctCount = word.histories.filter(
       (data) => data.result === true
@@ -11,7 +11,7 @@ export default function useWordStats(currentWord: BackendWord) {
     return Math.round((correctCount / learningCount) * 100) / 100;
   }
 
-  function calcAverageResponseTime(word: BackendWord) {
+  function calcAverageResponseTime(word: Word) {
     const learningCount = word.histories.length;
     const totalResponseTime = word.histories
       .map((data) => data.duration)
@@ -20,7 +20,7 @@ export default function useWordStats(currentWord: BackendWord) {
     return Math.round((totalResponseTime / learningCount) * 100) / 100;
   }
 
-  function calcLearningCount(word: BackendWord) {
+  function calcLearningCount(word: Word) {
     return word.histories.length;
   }
 

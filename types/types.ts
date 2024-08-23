@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement, ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 export interface MenuPosition {
   top: number;
@@ -92,7 +92,7 @@ export interface UseFlashcardLogicProps {
   setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
   currentWordIndex: number;
   setCurrentWordIndex: React.Dispatch<React.SetStateAction<number>>;
-  currentDeck: BackendWord[];
+  currentDeck: Word[];
   time: number;
   setTime: React.Dispatch<React.SetStateAction<number>>;
   timeLimit: number;
@@ -103,22 +103,8 @@ export interface ProgressStatus {
   total: number;
 }
 
-export interface Word {
-  question: string;
-  answer: string;
-  example: string[];
-  image?: string;
-  history: Result[];
-}
-
-export interface Result {
-  date: string;
-  result: string;
-  time: number;
-}
-
 export interface FlashcardAreaProps {
-  word: BackendWord;
+  word: Word;
   remainingTimePercentage: number;
   progressStatus: ProgressStatus;
   isFront: boolean;
@@ -131,24 +117,24 @@ export interface WordStats {
   learningCount: number;
 }
 
-export interface BackendWord {
+export interface Word {
   id: number;
   word: string;
   image?: string;
-  meanings: BackendMeaning[];
-  examples: BackendExample[];
+  meanings: Meaning[];
+  examples: Example[];
   histories: BackendHistory[];
   average_duration: number;
   correct_rate: number;
   learning_count: number;
 }
 
-export interface BackendMeaning {
+export interface Meaning {
   id: number;
   meaning: string;
 }
 
-export interface BackendExample {
+export interface Example {
   id: number;
   example: string;
 }

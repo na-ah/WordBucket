@@ -1,10 +1,10 @@
 import Layout from "@/components/shared/Templates/Layout/Layout";
-import { BackendWord } from "@/types/types";
+import { Word } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [words, setWords] = useState<BackendWord[]>([]);
+  const [words, setWords] = useState<Word[]>([]);
   useEffect(() => {
     axios
       .get(
