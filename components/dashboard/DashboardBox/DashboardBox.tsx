@@ -1,10 +1,10 @@
 import { Colors, DashboardBoxProps } from "@/types/types";
 
-export default function Presenter({
+export default function DashboardBox({
   title,
   count,
-  color = "sky",
   percentage,
+  color = "sky",
   ...props
 }: DashboardBoxProps) {
   const colors: Colors = {
