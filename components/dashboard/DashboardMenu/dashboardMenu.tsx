@@ -1,5 +1,5 @@
-import Button from "@/components/shared/uiParts/Dashboard/Button/Button";
-import ButtonList from "@/components/shared/uiParts/Dashboard/ButtonList/ButtonList";
+import Button from "@/components/shared/Button/Button";
+import ButtonList from "@/components/shared/ButtonList/ButtonList";
 import { DashboardMenuProps } from "@/types/types";
 
 export default function DashboardMenu({ menuPosition }: DashboardMenuProps) {

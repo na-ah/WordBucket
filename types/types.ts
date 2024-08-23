@@ -21,12 +21,16 @@ export interface DashboardBoxPropsList {
   color?: string;
 }
 
-export interface DashboardInformationProps {
+export interface DashboardInformationListProps {
   pageTitle: string;
-  informations: informations[];
+  informations: Informations[];
 }
 
-export interface informations {
+export interface DashboardInformationProps {
+  informations: Informations[];
+}
+
+export interface Informations {
   title: string;
   text: string;
   color?: string;

@@ -1,4 +1,5 @@
-import { Colors, DashboardBoxProps } from "@/types/types";
+import { colorList } from "@/data/shared/colorList";
+import { DashboardBoxProps } from "@/types/types";
 
 export default function DashboardBox({
   title,
@@ -7,11 +8,6 @@ export default function DashboardBox({
   color = "sky",
   ...props
 }: DashboardBoxProps) {
-  const colors: Colors = {
-    sky: "bg-sky-500/25",
-    lime: "bg-lime-500/25",
-    rose: "bg-rose-500/25",
-  };
   return (
     <>
       <div
@@ -21,8 +17,11 @@ export default function DashboardBox({
         <p className="absolute -top-3 bg-zinc-700 px-2 z-10">{title}</p>
         <p className="z-10">{count} cards</p>
         <div
-          className={`${colors[color]} bottom-0 w-full absolute`}
-          style={{ height: `${percentage}%` }}
+          className={`bottom-0 w-full absolute`}
+          style={{
+            height: `${percentage}%`,
+            backgroundColor: `${colorList[color]}`,
+          }}
         />
       </div>
     </>

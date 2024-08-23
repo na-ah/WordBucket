@@ -1,11 +1,11 @@
-import DashboardInformation from "../../components/dashboard/DashboardInformation/DashboardInformation";
-import DashboardBoxWrapper from "../../components/dashboard/DashboardBoxWrapper/DashboardBoxWrapper";
-import LeftBarTitle from "@/components/shared/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
-import useMenu from "@/components/dashboard/hooks/useMenu";
-import useDashboard from "@/components/dashboard/hooks/useDashboard";
+import DashboardBoxWrapper from "../../components/dashboard/Box/DashboardBoxWrapper/DashboardBoxWrapper";
+import LeftBarTitle from "@/components/shared/LeftBarTitle/LeftBarTitle";
+import useMenu from "@/hooks/dashboard/useMenu";
+import useDashboard from "@/hooks/dashboard/useDashboard";
 import DashboardMenu from "@/components/dashboard/DashboardMenu/dashboardMenu";
-import DashboardBoxList from "@/components/dashboard/DashboardBoxList/dashboardBoxList";
-import Layout from "@/components/shared/Template/Layout/Layout";
+import Layout from "@/components/Template/Layout/Layout";
+import DashboardInformationList from "@/components/dashboard/Information/DashboardInformationList/DashboardInformationList";
+import DashboardBoxList from "@/components/dashboard/Box/DashboardBoxList/dashboardBoxList";
 
 export default function Dashboard() {
   const { menuPosition, menuVisible, handleBoxClick, handleMenuClose } =
@@ -28,7 +28,7 @@ export default function Dashboard() {
           onClick={() => menuVisible && handleMenuClose()}
         >
           {menuVisible && <DashboardMenu menuPosition={menuPosition} />}
-          <DashboardInformation
+          <DashboardInformationList
             informations={informations}
             pageTitle={"pageTitle"}
           />

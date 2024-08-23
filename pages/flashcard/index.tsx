@@ -1,8 +1,8 @@
-import PageTitle from "@/components/shared/uiParts/Dashboard/PageTitle/PageTitle";
+import PageTitle from "@/components/shared/PageTitle/PageTitle";
 import FlashcardArea from "../../components/flashcard/FlashcardArea/flashcardArea";
-import useFlashcard from "@/components/flashcard/hooks/useFlashcard";
 import FlashcardButton from "@/components/flashcard/FlashcardButton/flashcardButton";
-import Layout from "@/components/shared/Template/Layout/Layout";
+import Layout from "@/components/Template/Layout/Layout";
+import useFlashcard from "@/hooks/flashcard/useFlashcard";
 
 export default function Flashcard() {
   const {

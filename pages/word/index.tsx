@@ -1,9 +1,10 @@
+import { Meaning, Word } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Word() {
-  const [words, setWords] = useState([]);
-  const [meanings, setMeanings] = useState([]);
+export default function WordTest() {
+  const [words, setWords] = useState<Word[]>([]);
+  const [meanings, setMeanings] = useState<Meaning[]>([]);
   useEffect(() => {
     axios
       .get((process.env.NEXT_PUBLIC_LOCAL_HOST + "/words") as string)

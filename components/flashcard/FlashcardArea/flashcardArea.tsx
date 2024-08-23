@@ -1,5 +1,5 @@
 import { FlashcardAreaProps } from "@/types/types";
-import LeftBarTitle from "@/components/shared/uiParts/Dashboard/LeftBarTitle/LeftBarTitle";
+import LeftBarTitle from "@/components/shared/LeftBarTitle/LeftBarTitle";
 import Image from "next/image";
 
 export default function flashcardArea({

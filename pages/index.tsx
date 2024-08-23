@@ -1,4 +1,4 @@
-import Layout from "@/components/shared/Template/Layout/Layout";
+import Layout from "@/components/Template/Layout/Layout";
 import { Word } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
