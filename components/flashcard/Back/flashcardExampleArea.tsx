@@ -1,4 +1,4 @@
-import LeftBarTitle from "@/components/shared/LeftBarTitle/LeftBarTitle";
+import LeftBarTitle from "@/components/shared/LeftBarTitle";
 import { FlashcardExampleAreaProps } from "@/types/types";
 
 export default function FlashcardExampleArea({

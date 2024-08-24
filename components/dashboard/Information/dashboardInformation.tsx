@@ -1,4 +1,4 @@
-import LeftBarTitle from "@/components/shared/LeftBarTitle/LeftBarTitle";
+import LeftBarTitle from "@/components/shared/LeftBarTitle";
 import { DashboardInformationProps } from "@/types/types";
 
 export default function DashboardInformation({

@@ -1,6 +1,6 @@
 import { FlashcardWordAreaProps } from "@/types/types";
-import FlashcardProgressBar from "../FlashcardProgressBar/flashcardProgressBar";
-import FlashcardWord from "../FlashcardWord/flashcardWord";
+import FlashcardProgressBar from "./flashcardProgressBar";
+import FlashcardWord from "./flashcardWord";
 
 export default function FlashcardWordArea({
   word,

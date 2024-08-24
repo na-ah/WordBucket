@@ -1,11 +1,11 @@
-import DashboardBoxWrapper from "../../components/dashboard/Box/DashboardBoxWrapper/DashboardBoxWrapper";
-import LeftBarTitle from "@/components/shared/LeftBarTitle/LeftBarTitle";
+import LeftBarTitle from "@/components/shared/LeftBarTitle";
 import useMenu from "@/hooks/dashboard/useMenu";
 import useDashboard from "@/hooks/dashboard/useDashboard";
-import DashboardMenu from "@/components/dashboard/Menu/DashboardMenu/dashboardMenu";
+import DashboardMenu from "@/components/dashboard/Menu/dashboardMenu";
 import Layout from "@/components/Template/Layout/Layout";
-import DashboardInformationList from "@/components/dashboard/Information/DashboardInformationList/DashboardInformationList";
-import DashboardBoxList from "@/components/dashboard/Box/DashboardBoxList/dashboardBoxList";
+import DashboardInformationList from "@/components/dashboard/Information/DashboardInformationList";
+import DashboardBoxList from "@/components/dashboard/Box/dashboardBoxList";
+import DashboardBoxWrapper from "@/components/dashboard/Box/DashboardBoxWrapper";
 
 export default function Dashboard() {
   const { menuPosition, menuVisible, handleBoxClick, handleMenuClose } =

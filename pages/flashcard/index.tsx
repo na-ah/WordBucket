@@ -1,6 +1,6 @@
-import PageTitle from "@/components/shared/PageTitle/PageTitle";
-import FlashcardArea from "../../components/flashcard/FlashcardArea/flashcardArea";
-import FlashcardButton from "@/components/flashcard/FlashcardButton/flashcardButton";
+import FlashcardArea from "@/components/flashcard/Organisms/flashcardArea";
+import FlashcardButton from "@/components/flashcard/Organisms/flashcardButton";
+import PageTitle from "@/components/shared/PageTitle";
 import Layout from "@/components/Template/Layout/Layout";
 import useFlashcard from "@/hooks/flashcard/useFlashcard";
 

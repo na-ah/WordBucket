@@ -1,3 +1,4 @@
+import exp from "constants";
 import { MouseEvent, ReactNode } from "react";
 
 export interface MenuPosition {
@@ -124,6 +125,24 @@ export interface FlashcardProgressStatusProps {
 export interface FlashcardWordAreaProps {
   word: Word;
   remainingTimePercentage: number;
+}
+
+export interface FlashcardButtonFrontProps {
+  flipCard: () => void;
+}
+
+export interface FlashcardButtonBackProps {
+  markCorrect: () => void;
+  markIncorrect: () => void;
+}
+
+export interface FlashcardAreaBackProps {
+  word: Word;
+  wordStats: WordStats;
+}
+
+export interface FlashcardMeaningAreaProps {
+  word: Word;
 }
 
 export interface FlashcardWordProps {

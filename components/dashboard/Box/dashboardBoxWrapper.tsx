@@ -1,5 +1,5 @@
 import { DashboardBoxWrapperProps } from "@/types/types";
-import UnderlineTitle from "@/components/shared/UnderlineTitle/UnderlineTitle";
+import UnderlineTitle from "@/components/shared/UnderlineTitle";
 
 export default function DashboardBoxWrapper({
   listTitle,

@@ -1,4 +1,4 @@
-import SideBarButton from "@/components/shared/SideBarButton/SideBarButton";
+import SideBarButton from "@/components/shared/SideBarButton";
 
 export default function Sidebar() {
   return (

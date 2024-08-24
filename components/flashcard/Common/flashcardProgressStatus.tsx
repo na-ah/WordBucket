@@ -1,6 +1,6 @@
 import { FlashcardProgressStatusProps } from "@/types/types";
 
-export default function FlashcardProgressCounter({
+export default function FlashcardProgressStatus({
   progressStatus,
 }: FlashcardProgressStatusProps) {
   return (

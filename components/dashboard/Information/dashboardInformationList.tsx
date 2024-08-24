@@ -1,5 +1,5 @@
-import PageTitle from "@/components/shared/PageTitle/PageTitle";
-import DashboardInformation from "../DashboardInformation/dashboardInformation";
+import PageTitle from "@/components/shared/PageTitle";
+import DashboardInformation from "./dashboardInformation";
 import { DashboardInformationListProps } from "@/types/types";
 
 export default function DashboardInformationList({

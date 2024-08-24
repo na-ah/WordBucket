@@ -1,7 +1,7 @@
 import Layout from "@/components/Template/Layout/Layout";
-import Button from "@/components/shared/Button/Button";
-import PageTitle from "@/components/shared/PageTitle/PageTitle";
-import UnderlineTitle from "@/components/shared/UnderlineTitle/UnderlineTitle";
+import Button from "@/components/shared/Button";
+import PageTitle from "@/components/shared/PageTitle";
+import UnderlineTitle from "@/components/shared/UnderlineTitle";
 import useDeck from "@/hooks/flashcard/useDeck";
 
 export default function Results() {
