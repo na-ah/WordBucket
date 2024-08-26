@@ -1,4 +1,3 @@
-import { currentDeckIndexAtom } from "@/data/flashcard/flashcardAtoms";
 import { UseFlashcardLogicProps } from "@/types/types";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";

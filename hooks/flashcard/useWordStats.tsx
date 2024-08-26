@@ -3,6 +3,9 @@ import { useMemo } from "react";
 
 export default function useWordStats(currentWord: Word) {
   function calcAccuracyRatio(word: Word) {
+    if (!word) {
+      return 0;
+    }
     const learningCount = word.histories.length;
     const correctCount = word.histories.filter(
       (data) => data.result === true
@@ -12,6 +15,9 @@ export default function useWordStats(currentWord: Word) {
   }
 
   function calcAverageResponseTime(word: Word) {
+    if (!word) {
+      return 0;
+    }
     const learningCount = word.histories.length;
     const totalResponseTime = word.histories
       .map((data) => data.duration)
@@ -21,6 +27,9 @@ export default function useWordStats(currentWord: Word) {
   }
 
   function calcLearningCount(word: Word) {
+    if (!word) {
+      return 0;
+    }
     return word.histories.length;
   }
 

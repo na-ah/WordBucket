@@ -3,12 +3,12 @@ import {
   currentDeckAtom,
   currentDeckIndexAtom,
   wordsPoolAtom,
-} from "@/data/flashcard/flashcardAtoms";
-import { useAtom } from "jotai";
+} from "@/data/atoms/flashcardAtoms";
+import { useAtom, useAtomValue } from "jotai";
 import { useRouter } from "next/router";
 
 export default function useDeck() {
-  const [currentDeck, setCurrentDeck] = useAtom(currentDeckAtom);
+  const currentDeck = useAtomValue(currentDeckAtom);
   const [batchSize, setBatchSize] = useAtom(batchSizeAtom);
   const [wordsPool, setWordsPool] = useAtom(wordsPoolAtom);
   const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
@@ -54,7 +54,6 @@ export default function useDeck() {
     currentDeckIndex,
     setCurrentDeckIndex,
     currentDeck,
-    setCurrentDeck,
     nextDeck,
     correctList,
     incorrectList,

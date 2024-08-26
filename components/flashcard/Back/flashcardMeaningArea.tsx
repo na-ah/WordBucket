@@ -7,7 +7,7 @@ export default function FlashcardMeaningArea({
     <>
       <div className="flex flex-col h-full justify-center items-center text-2xl bg-zinc-700 ">
         {word.meanings.map((meaning) => (
-          <>{meaning.meaning}</>
+          <div key={meaning.id}>{meaning.meaning}</div>
         ))}
       </div>
     </>

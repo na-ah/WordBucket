@@ -1,71 +1,34 @@
 import Layout from "@/components/Template/Layout/Layout";
-import { Word } from "@/types/types";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { isLoadingAtom, queryAtom } from "@/data/atoms/flashcardAtoms";
+import { useAtom } from "jotai";
+import Link from "next/link";
 
 export default function Home() {
-  const [words, setWords] = useState<Word[]>([]);
-  useEffect(() => {
-    axios
-      .get(
-        process.env.NEXT_PUBLIC_LOCAL_HOST +
-          "/words/search?created_at_to=2024-08-20&created_at_from=2024-08-01&learning_count_min=1&learning_count_max=5&correct_rate_min=0.1&average_duration_min=5&average_duration_max=5.1&status=completed&correct_rate_max=0.74"
-      )
-      .then((res) => {
-        console.log(res.data.words);
-        setWords(res.data.words);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
+  const [query, setQuery] = useAtom(queryAtom);
 
   return (
     <>
       <Layout>
+        {isLoading ? "loading" : "fin"}
         <div>aaa</div>
-        <h1 className="text-3xl">words</h1>
-        <div>
-          {words &&
-            words.map((word) => (
-              <>
-                <div className="mt-3">
-                  <h2 className="text-2xl">word:</h2>
-                  {word.word}
-                </div>
-                <div className="mt-3">
-                  <h2 className="text-2xl">meaning:</h2>
-
-                  {word?.meanings?.map((meaning) => (
-                    <>
-                      <p>{meaning?.meaning}</p>
-                    </>
-                  ))}
-                </div>
-                <div className="mt-3">
-                  <h2 className="text-2xl">examples</h2>
-                  {word?.examples?.map((example) => (
-                    <>
-                      <p>{example?.example}</p>
-                    </>
-                  ))}
-                </div>
-                <div className="mt-3">
-                  <h2 className="text-2xl">histories</h2>
-                  {word?.histories?.map((history) => (
-                    <>
-                      <div className="mb-3">
-                        <p>datetime: {history?.datetime}</p>
-                        <p>result: {history?.result ? "true" : "false"}</p>
-                        <p>duration: {history?.duration}</p>
-                      </div>
-                    </>
-                  ))}
-                </div>
-                <br />
-              </>
-            ))}
-        </div>
+        {isLoading && (
+          <>
+            <p>Loading...</p>
+          </>
+        )}
+        <Link href={"/flashcard"}>
+          <button
+            onClick={() =>
+              setQuery(
+                "/words/search?created_at_to=2024-08-20&created_at_from=2024-08-01&learning_count_min=3&learning_count_max=5&correct_rate_min=0.1&average_duration_min=5&average_duration_max=8.9&status=completed&correct_rate_max=0.9"
+              )
+            }
+          >
+            changeQuery
+          </button>
+        </Link>
+        <p>{query}</p>
       </Layout>
     </>
   );

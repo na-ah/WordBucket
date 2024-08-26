@@ -1,10 +1,17 @@
+import { isLoadingAtom } from "@/data/atoms/flashcardAtoms";
+import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 
 export default function useTimer(isFront: boolean, timeLimit: number) {
   const [time, setTime] = useState(timeLimit);
+  const [isLoading] = useAtom(isLoadingAtom);
 
   useEffect(() => {
     if (!isFront) {
+      return;
+    }
+
+    if (isLoading) {
       return;
     }
 
@@ -15,7 +22,7 @@ export default function useTimer(isFront: boolean, timeLimit: number) {
     return () => {
       clearInterval(timerId);
     };
-  }, [isFront]);
+  }, [isFront, isLoading]);
 
   const remainingTimePercentage = (time / timeLimit) * 100;
 
