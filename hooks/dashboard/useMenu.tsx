@@ -8,7 +8,7 @@ export default function useMenu() {
     left: 0,
   });
 
-  function handleBoxClick(e: MouseEvent<HTMLDivElement>) {
+  function handleBoxClick(e: MouseEvent<HTMLDivElement>, boxName) {
     const { clientX, clientY } = e;
     console.log(`
       clientX: ${e.clientX}
@@ -16,6 +16,7 @@ export default function useMenu() {
       `);
     setMenuPosition({ top: clientY, left: clientX });
     setMenuVisible(true);
+    console.log(boxName);
   }
 
   function handleMenuClose() {

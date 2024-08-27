@@ -15,9 +15,9 @@ export default function useDashboard() {
     low_accuracy_rate: 0,
     medium_accuracy_rate: 0,
     high_accuracy_rate: 0,
-    shortDuration: 0,
-    mediumDuration: 0,
-    longDuration: 0,
+    short_duration: 0,
+    medium_duration: 0,
+    long_duration: 0,
   });
 
   useEffect(() => {
@@ -44,9 +44,9 @@ export default function useDashboard() {
     dashboardData?.high_accuracy_rate;
 
   const durationTotal =
-    dashboardData?.shortDuration +
-    dashboardData?.mediumDuration +
-    dashboardData?.longDuration;
+    dashboardData?.short_duration +
+    dashboardData?.medium_duration +
+    dashboardData?.long_duration;
 
   const informations = [
     { title: "本日の新規カード", text: `${dashboardData?.new_cards}card` },
@@ -81,18 +81,21 @@ export default function useDashboard() {
       count: `${dashboardData?.unlearned}`,
       percentage: `${(dashboardData?.unlearned / learningTotal) * 100}`,
       color: "lime",
+      boxName: "unlearned",
     },
     {
       title: "学習中",
       count: `${dashboardData?.in_progress}`,
       percentage: `${(dashboardData?.in_progress / learningTotal) * 100}`,
       color: "lime",
+      boxName: "in_progress",
     },
     {
       title: "学習済",
       count: `${dashboardData?.completed}`,
       percentage: `${(dashboardData?.completed / learningTotal) * 100}`,
       color: "lime",
+      boxName: "completed",
     },
   ];
 
@@ -102,18 +105,21 @@ export default function useDashboard() {
       count: `${dashboardData?.under_four}`,
       percentage: `${(dashboardData?.under_four / countTotal) * 100}`,
       color: "sky",
+      boxName: "low_count",
     },
     {
       title: "5回～9回",
       count: `${dashboardData?.five_to_nine}`,
       percentage: `${(dashboardData?.five_to_nine / countTotal) * 100}`,
       color: "sky",
+      boxName: "medium_count",
     },
     {
       title: "10回～",
       count: `${dashboardData?.over_ten}`,
       percentage: `${(dashboardData?.over_ten / countTotal) * 100}`,
       color: "sky",
+      boxName: "high_count",
     },
   ];
 
@@ -123,6 +129,7 @@ export default function useDashboard() {
       count: `${dashboardData?.low_accuracy_rate}`,
       percentage: `${(dashboardData?.low_accuracy_rate / accuracyTotal) * 100}`,
       color: "lime",
+      boxName: "low_accuracy_rate",
     },
     {
       title: "20%~50%",
@@ -131,6 +138,7 @@ export default function useDashboard() {
         (dashboardData?.medium_accuracy_rate / accuracyTotal) * 100
       }`,
       color: "lime",
+      boxName: "medium_accuracy_rate",
     },
     {
       title: "50%~",
@@ -139,27 +147,31 @@ export default function useDashboard() {
         (dashboardData?.high_accuracy_rate / accuracyTotal) * 100
       }`,
       color: "lime",
+      boxName: "high_accuracy_rate",
     },
   ];
 
   const requiredTimeList = [
     {
       title: "~2秒",
-      count: `${dashboardData?.shortDuration}`,
-      percentage: `${(dashboardData?.shortDuration / durationTotal) * 100}`,
+      count: `${dashboardData?.short_duration}`,
+      percentage: `${(dashboardData?.short_duration / durationTotal) * 100}`,
       color: "rose",
+      boxName: "short_duration",
     },
     {
       title: "2秒~5秒",
-      count: `${dashboardData?.mediumDuration}`,
-      percentage: `${(dashboardData?.mediumDuration / durationTotal) * 100}`,
+      count: `${dashboardData?.medium_duration}`,
+      percentage: `${(dashboardData?.medium_duration / durationTotal) * 100}`,
       color: "rose",
+      boxName: "medium_duration",
     },
     {
       title: "5秒~",
-      count: `${dashboardData?.longDuration}`,
-      percentage: `${(dashboardData?.longDuration / durationTotal) * 100}`,
+      count: `${dashboardData?.long_duration}`,
+      percentage: `${(dashboardData?.long_duration / durationTotal) * 100}`,
       color: "rose",
+      boxName: "long_duration",
     },
   ];
 

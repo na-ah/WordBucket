@@ -20,6 +20,7 @@ export interface DashboardBoxPropsList {
   count: string;
   percentage: string;
   color?: string;
+  boxName: string;
 }
 
 export interface DashboardInformationListProps {
@@ -42,7 +43,9 @@ export interface DashboardBoxProps {
   count: string;
   percentage: string;
   color?: string;
-  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+  boxName: string;
+  handleBoxClick: (e: MouseEvent<HTMLDivElement>, arg: string) => void;
+  // onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 export interface Colors {
@@ -216,7 +219,7 @@ export interface Dashboard {
   low_accuracy_rate: number;
   medium_accuracy_rate: number;
   high_accuracy_rate: number;
-  shortDuration: number;
-  mediumDuration: number;
-  longDuration: number;
+  short_duration: number;
+  medium_duration: number;
+  long_duration: number;
 }

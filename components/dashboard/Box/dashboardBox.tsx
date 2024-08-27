@@ -6,12 +6,15 @@ export default function DashboardBox({
   count,
   percentage,
   color = "sky",
+  handleBoxClick,
+  boxName,
   ...props
 }: DashboardBoxProps) {
   return (
     <>
       <div
         className="border flex-1 aspect-square flex justify-center items-center relative"
+        onClick={(e) => handleBoxClick(e, boxName)}
         {...props}
       >
         <p className="absolute -top-3 bg-zinc-700 px-2 z-10">{title}</p>

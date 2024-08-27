@@ -15,7 +15,8 @@ export default function DashboardBoxList({
             count={item.count}
             percentage={item.percentage}
             color={item.color}
-            onClick={handleBoxClick}
+            boxName={item.boxName}
+            handleBoxClick={handleBoxClick}
           />
         ))}
       </div>
