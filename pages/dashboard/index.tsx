@@ -3,9 +3,9 @@ import useMenu from "@/hooks/dashboard/useMenu";
 import useDashboard from "@/hooks/dashboard/useDashboard";
 import DashboardMenu from "@/components/dashboard/Menu/dashboardMenu";
 import Layout from "@/components/Template/Layout/Layout";
-import DashboardInformationList from "@/components/dashboard/Information/DashboardInformationList";
 import DashboardBoxList from "@/components/dashboard/Box/dashboardBoxList";
-import DashboardBoxWrapper from "@/components/dashboard/Box/DashboardBoxWrapper";
+import DashboardInformationList from "@/components/dashboard/Information/dashboardInformationList";
+import DashboardBoxWrapper from "@/components/dashboard/Box/dashboardBoxWrapper";
 
 export default function Dashboard() {
   const { menuPosition, menuVisible, handleBoxClick, handleMenuClose } =
@@ -15,7 +15,7 @@ export default function Dashboard() {
     informations,
     reviewList,
     learningList,
-    studyTermList,
+    studyCountList,
     correctRatioList,
     requiredTimeList,
   } = useDashboard();
@@ -43,7 +43,7 @@ export default function Dashboard() {
           </DashboardBoxWrapper>
           <DashboardBoxWrapper
             listTitle={"learning"}
-            listContent={"total: 235 card"}
+            listContent={`total: ${2} card`}
           >
             <DashboardBoxList
               boxPropsList={learningList}
@@ -55,11 +55,11 @@ export default function Dashboard() {
             listContent="total: 235 card"
           >
             <LeftBarTitle
-              title="学習期間"
+              title="学習回数"
               className="mt-3"
             />
             <DashboardBoxList
-              boxPropsList={studyTermList}
+              boxPropsList={studyCountList}
               handleBoxClick={handleBoxClick}
             />
             <LeftBarTitle

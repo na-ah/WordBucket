@@ -1,20 +1,57 @@
-import { atom } from "jotai";
+import { atom, useAtom } from "jotai";
 import axios from "axios";
-import { Word } from "@/types/types";
-
-export const queryAtom = atom(
-  "/words/search?created_at_to=2024-08-20&created_at_from=2024-08-01&learning_count_min=1&learning_count_max=5&correct_rate_min=0.1&average_duration_min=5&average_duration_max=5.1&status=completed&correct_rate_max=0.74"
-);
+import { Dashboard, Word } from "@/types/types";
 
 export const isLoadingAtom = atom(false);
 
-export const wordsPoolAtom = atom(async (get) => {
-  const query = get(queryAtom);
-  const response = await axios.get<{ words: Word[] }>(
-    process.env.NEXT_PUBLIC_LOCAL_HOST + query
-  );
-  return response.data.words;
-});
+export const fetchWords = async (newQuery: string) => {
+  try {
+    const response = await axios.get<{ words: Word[] }>(
+      process.env.NEXT_PUBLIC_LOCAL_HOST + (newQuery || "")
+    );
+    return response.data.words;
+  } catch (error) {
+    console.error("Error fetching words: ", error);
+  }
+};
+
+export const fetchDashboard = async () => {
+  try {
+    const response = await axios.get<Dashboard>(
+      process.env.NEXT_PUBLIC_LOCAL_HOST + "/dashboard"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching words: ", error);
+  }
+};
+
+export const getWords = async (query: string) => {
+  try {
+    const words = await fetchWords(query);
+    return words;
+  } catch (error) {
+    console.error("Error fetching words: ", error);
+  }
+};
+
+export const poolAtom = atom<Word[]>([]);
+
+export const wordsPoolAtom = atom([]);
+
+// export const wordsPoolAtom = atom(async (get) => {
+//   try {
+//     const query = get(queryAtom);
+//     const response = await axios.get<{ words: Word[] }>(
+//       process.env.NEXT_PUBLIC_LOCAL_HOST + (query || "")
+//     );
+
+//     return response.data.words;
+//   } catch (error) {
+//     console.error("Error fetchin words:", error);
+//     throw error;
+//   }
+// });
 
 export const currentDeckIndexAtom = atom(0);
 export const batchSizeAtom = atom(10);

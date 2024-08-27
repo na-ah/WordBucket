@@ -1,5 +1,5 @@
 import { DashboardBoxListProps } from "@/types/types";
-import DashboardBox from "./DashboardBox";
+import DashboardBox from "./dashboardBox";
 
 export default function DashboardBoxList({
   boxPropsList,

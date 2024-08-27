@@ -17,8 +17,8 @@ export interface DashboardBoxListProps {
 
 export interface DashboardBoxPropsList {
   title: string;
-  count: number;
-  percentage: number;
+  count: string;
+  percentage: string;
   color?: string;
 }
 
@@ -39,8 +39,8 @@ export interface Informations {
 
 export interface DashboardBoxProps {
   title: string;
-  count: number;
-  percentage: number;
+  count: string;
+  percentage: string;
   color?: string;
   onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
@@ -202,4 +202,21 @@ export interface History {
   datetime: string;
   result: boolean;
   duration: number;
+}
+
+export interface Dashboard {
+  new_cards: number;
+  today_learning_cards: number;
+  unlearned: number;
+  in_progress: number;
+  completed: number;
+  under_four: number;
+  five_to_nine: number;
+  over_ten: number;
+  low_accuracy_rate: number;
+  medium_accuracy_rate: number;
+  high_accuracy_rate: number;
+  shortDuration: number;
+  mediumDuration: number;
+  longDuration: number;
 }
