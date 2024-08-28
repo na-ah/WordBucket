@@ -45,7 +45,6 @@ export interface DashboardBoxProps {
   color?: string;
   boxName: string;
   handleBoxClick: (e: MouseEvent<HTMLDivElement>, arg: string) => void;
-  // onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 export interface Colors {
@@ -208,18 +207,19 @@ export interface History {
 }
 
 export interface Dashboard {
-  new_cards: number;
-  today_learning_cards: number;
+  [key: string]: unknown;
+  newCards: number;
+  todayLearningCards: number;
   unlearned: number;
-  in_progress: number;
+  inProgress: number;
   completed: number;
-  under_four: number;
-  five_to_nine: number;
-  over_ten: number;
-  low_accuracy_rate: number;
-  medium_accuracy_rate: number;
-  high_accuracy_rate: number;
-  short_duration: number;
-  medium_duration: number;
-  long_duration: number;
+  lowCount: number;
+  mediumCount: number;
+  highCount: number;
+  lowAccuracyRate: number;
+  mediumAccuracyRate: number;
+  highAccuracyRate: number;
+  shortDuration: number;
+  mediumDuration: number;
+  longDuration: number;
 }

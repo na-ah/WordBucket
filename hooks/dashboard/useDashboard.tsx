@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 
 export default function useDashboard() {
   const [dashboardData, setDashboardData] = useState<Dashboard>({
-    new_cards: 0,
-    today_learning_cards: 0,
+    newCards: 0,
+    todayLearningCards: 0,
     unlearned: 0,
-    in_progress: 0,
+    inProgress: 0,
     completed: 0,
-    under_four: 0,
-    five_to_nine: 0,
-    over_ten: 0,
-    low_accuracy_rate: 0,
-    medium_accuracy_rate: 0,
-    high_accuracy_rate: 0,
-    short_duration: 0,
-    medium_duration: 0,
-    long_duration: 0,
+    lowCount: 0,
+    mediumCount: 0,
+    highCount: 0,
+    lowAccuracyRate: 0,
+    mediumAccuracyRate: 0,
+    highAccuracyRate: 0,
+    shortDuration: 0,
+    mediumDuration: 0,
+    longDuration: 0,
   });
 
   useEffect(() => {
@@ -30,29 +30,33 @@ export default function useDashboard() {
 
   const learningTotal =
     dashboardData?.unlearned +
-    dashboardData?.in_progress +
+    dashboardData?.inProgress +
     dashboardData?.completed;
 
   const countTotal =
-    dashboardData?.under_four +
-    dashboardData?.five_to_nine +
-    dashboardData?.over_ten;
+    dashboardData?.lowCount +
+    dashboardData?.mediumCount +
+    dashboardData?.highCount;
 
   const accuracyTotal =
-    dashboardData?.low_accuracy_rate +
-    dashboardData?.medium_accuracy_rate +
-    dashboardData?.high_accuracy_rate;
+    dashboardData?.lowAccuracyRate +
+    dashboardData?.mediumAccuracyRate +
+    dashboardData?.highAccuracyRate;
 
   const durationTotal =
-    dashboardData?.short_duration +
-    dashboardData?.medium_duration +
-    dashboardData?.long_duration;
+    dashboardData?.shortDuration +
+    dashboardData?.mediumDuration +
+    dashboardData?.longDuration;
+
+  console.log(dashboardData.lowCount);
+  console.log(dashboardData.mediumCount);
+  console.log(dashboardData.highCount);
 
   const informations = [
-    { title: "本日の新規カード", text: `${dashboardData?.new_cards}card` },
+    { title: "本日の新規カード", text: `${dashboardData?.newCards}card` },
     {
       title: "本日の学習件数",
-      text: `${dashboardData?.today_learning_cards}cards`,
+      text: `${dashboardData?.todayLearningCards}cards`,
       color: "lime",
     },
   ];
@@ -85,10 +89,10 @@ export default function useDashboard() {
     },
     {
       title: "学習中",
-      count: `${dashboardData?.in_progress}`,
-      percentage: `${(dashboardData?.in_progress / learningTotal) * 100}`,
+      count: `${dashboardData?.inProgress}`,
+      percentage: `${(dashboardData?.inProgress / learningTotal) * 100}`,
       color: "lime",
-      boxName: "in_progress",
+      boxName: "inProgress",
     },
     {
       title: "学習済",
@@ -102,76 +106,74 @@ export default function useDashboard() {
   const studyCountList = [
     {
       title: "～4回",
-      count: `${dashboardData?.under_four}`,
-      percentage: `${(dashboardData?.under_four / countTotal) * 100}`,
+      count: `${dashboardData?.lowCount}`,
+      percentage: `${(dashboardData?.lowCount / countTotal) * 100}`,
       color: "sky",
-      boxName: "low_count",
+      boxName: "lowCount",
     },
     {
       title: "5回～9回",
-      count: `${dashboardData?.five_to_nine}`,
-      percentage: `${(dashboardData?.five_to_nine / countTotal) * 100}`,
+      count: `${dashboardData?.mediumCount}`,
+      percentage: `${(dashboardData?.mediumCount / countTotal) * 100}`,
       color: "sky",
-      boxName: "medium_count",
+      boxName: "mediumCount",
     },
     {
       title: "10回～",
-      count: `${dashboardData?.over_ten}`,
-      percentage: `${(dashboardData?.over_ten / countTotal) * 100}`,
+      count: `${dashboardData?.highCount}`,
+      percentage: `${(dashboardData?.highCount / countTotal) * 100}`,
       color: "sky",
-      boxName: "high_count",
+      boxName: "highCount",
     },
   ];
 
   const correctRatioList = [
     {
       title: "~20%",
-      count: `${dashboardData?.low_accuracy_rate}`,
-      percentage: `${(dashboardData?.low_accuracy_rate / accuracyTotal) * 100}`,
+      count: `${dashboardData?.lowAccuracyRate}`,
+      percentage: `${(dashboardData?.lowAccuracyRate / accuracyTotal) * 100}`,
       color: "lime",
-      boxName: "low_accuracy_rate",
+      boxName: "lowAccuracyRate",
     },
     {
       title: "20%~50%",
-      count: `${dashboardData?.medium_accuracy_rate}`,
+      count: `${dashboardData?.mediumAccuracyRate}`,
       percentage: `${
-        (dashboardData?.medium_accuracy_rate / accuracyTotal) * 100
+        (dashboardData?.mediumAccuracyRate / accuracyTotal) * 100
       }`,
       color: "lime",
-      boxName: "medium_accuracy_rate",
+      boxName: "mediumAccuracyRate",
     },
     {
       title: "50%~",
-      count: `${dashboardData?.high_accuracy_rate}`,
-      percentage: `${
-        (dashboardData?.high_accuracy_rate / accuracyTotal) * 100
-      }`,
+      count: `${dashboardData?.highAccuracyRate}`,
+      percentage: `${(dashboardData?.highAccuracyRate / accuracyTotal) * 100}`,
       color: "lime",
-      boxName: "high_accuracy_rate",
+      boxName: "highAccuracyRate",
     },
   ];
 
   const requiredTimeList = [
     {
       title: "~2秒",
-      count: `${dashboardData?.short_duration}`,
-      percentage: `${(dashboardData?.short_duration / durationTotal) * 100}`,
+      count: `${dashboardData?.shortDuration}`,
+      percentage: `${(dashboardData?.shortDuration / durationTotal) * 100}`,
       color: "rose",
-      boxName: "short_duration",
+      boxName: "shortDuration",
     },
     {
       title: "2秒~5秒",
-      count: `${dashboardData?.medium_duration}`,
-      percentage: `${(dashboardData?.medium_duration / durationTotal) * 100}`,
+      count: `${dashboardData?.mediumDuration}`,
+      percentage: `${(dashboardData?.mediumDuration / durationTotal) * 100}`,
       color: "rose",
-      boxName: "medium_duration",
+      boxName: "mediumDuration",
     },
     {
       title: "5秒~",
-      count: `${dashboardData?.long_duration}`,
-      percentage: `${(dashboardData?.long_duration / durationTotal) * 100}`,
+      count: `${dashboardData?.longDuration}`,
+      percentage: `${(dashboardData?.longDuration / durationTotal) * 100}`,
       color: "rose",
-      boxName: "long_duration",
+      boxName: "longDuration",
     },
   ];
 

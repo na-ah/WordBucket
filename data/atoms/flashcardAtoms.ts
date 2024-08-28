@@ -1,6 +1,7 @@
 import { atom, useAtom } from "jotai";
 import axios from "axios";
 import { Dashboard, Word } from "@/types/types";
+import camelcaseKeys from "camelcase-keys";
 
 export const isLoadingAtom = atom(false);
 
@@ -20,7 +21,9 @@ export const fetchDashboard = async () => {
     const response = await axios.get<Dashboard>(
       process.env.NEXT_PUBLIC_LOCAL_HOST + "/dashboard"
     );
-    return response.data;
+    console.log(response.data);
+
+    return camelcaseKeys(response.data);
   } catch (error) {
     console.error("Error fetching words: ", error);
   }

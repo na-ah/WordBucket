@@ -1,3 +1,5 @@
+import { fetchDashboard, fetchWords } from "@/data/atoms/flashcardAtoms";
+import { queryByBoxName } from "@/data/dashboard/query";
 import { MenuPosition } from "@/types/types";
 import { MouseEvent, useState } from "react";
 
@@ -8,7 +10,7 @@ export default function useMenu() {
     left: 0,
   });
 
-  function handleBoxClick(e: MouseEvent<HTMLDivElement>, boxName) {
+  function handleBoxClick(e: MouseEvent<HTMLDivElement>, boxName: string) {
     const { clientX, clientY } = e;
     console.log(`
       clientX: ${e.clientX}
@@ -17,6 +19,7 @@ export default function useMenu() {
     setMenuPosition({ top: clientY, left: clientX });
     setMenuVisible(true);
     console.log(boxName);
+    fetchWords(queryByBoxName[boxName]).then((words) => console.log(words));
   }
 
   function handleMenuClose() {
