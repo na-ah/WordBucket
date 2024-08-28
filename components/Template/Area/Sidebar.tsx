@@ -1,6 +1,9 @@
 import SideBarButton from "@/components/shared/SideBarButton";
+import { isResultShownAtom } from "@/data/atoms/flashcardAtoms";
+import { useSetAtom } from "jotai";
 
 export default function Sidebar() {
+  const setIsResultShown = useSetAtom(isResultShownAtom);
   return (
     <>
       <div className="bg-zinc-900 text-white w-14 py-3">
@@ -19,6 +22,7 @@ export default function Sidebar() {
             text="F"
             link="/flashcard"
             color="lime"
+            handleClick={() => setIsResultShown(false)}
           />
           <SideBarButton
             text="w"

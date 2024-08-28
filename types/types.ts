@@ -227,3 +227,13 @@ export interface Dashboard {
 export interface QueryByBoxName {
   [key: string]: string;
 }
+
+export interface FlashcardResultStatisticsProps {
+  totalAverageResponseTime: number;
+  totalAccuracyRate: number;
+}
+
+export interface FlashcardResultListProps {
+  correctList: Word[];
+  incorrectList: Word[];
+}

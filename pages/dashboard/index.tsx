@@ -1,6 +1,5 @@
 import LeftBarTitle from "@/components/shared/LeftBarTitle";
 import useDashboard from "@/hooks/dashboard/useDashboard";
-import DashboardMenu from "@/components/dashboard/Menu/dashboardMenu";
 import Layout from "@/components/Template/Layout/Layout";
 import DashboardBoxList from "@/components/dashboard/Box/dashboardBoxList";
 import DashboardInformationList from "@/components/dashboard/Information/dashboardInformationList";

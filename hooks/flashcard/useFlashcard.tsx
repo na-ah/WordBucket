@@ -17,17 +17,23 @@ export default function useFlashcard() {
     remainingTimePercentage,
   } = useFlashcardState();
 
-  const { showResults, nextWord, flipCard, markCorrect, markIncorrect } =
-    useFlashcardLogic({
-      isFront,
-      setIsFront,
-      currentWordIndex,
-      setCurrentWordIndex,
-      currentDeck,
-      timeLimit,
-      time,
-      setTime,
-    });
+  const {
+    showResult,
+    closeResult,
+    nextWord,
+    flipCard,
+    markCorrect,
+    markIncorrect,
+  } = useFlashcardLogic({
+    isFront,
+    setIsFront,
+    currentWordIndex,
+    setCurrentWordIndex,
+    currentDeck,
+    timeLimit,
+    time,
+    setTime,
+  });
 
   return {
     isFront,
@@ -36,7 +42,7 @@ export default function useFlashcard() {
     setCurrentWordIndex,
     currentDeck,
     currentWord,
-    showResults,
+    closeResult,
     nextWord,
     progressStatus,
     wordStats,

@@ -6,6 +6,7 @@ import { queryByBoxName } from "../dashboard/query";
 
 export const isLoadingAtom = atom(false);
 
+// flashcard用単語取得
 export const fetchWords = async (newQuery: string) => {
   try {
     const response = await axios.get<{ words: Word[] }>(
@@ -17,6 +18,7 @@ export const fetchWords = async (newQuery: string) => {
   }
 };
 
+// dashboard用単語取得
 export const fetchDashboard = async () => {
   try {
     const response = await axios.get<Dashboard>(
@@ -30,13 +32,19 @@ export const fetchDashboard = async () => {
   }
 };
 
-export const wordsPoolAtom = atom<Word>(
+// 取得した単語一覧のプール
+export const wordsPoolAtom = atom<Word[]>(
   fetchWords(`${queryByBoxName["mediumAccuracyRate"]}`)
 );
 
+// プールからflashcardで使用するデッキを切り出す
+// 現在のデッキのインデックス
 export const currentDeckIndexAtom = atom(0);
+
+// 1デッキあたりののカード枚数
 export const batchSizeAtom = atom(10);
 
+// 現在のデッキのカードリスト
 export const currentDeckAtom = atom(async (get) => {
   const wordsPool = await get(wordsPoolAtom);
   const batchSize = get(batchSizeAtom);
@@ -47,3 +55,6 @@ export const currentDeckAtom = atom(async (get) => {
     batchSize * (currentDeckIndex + 1)
   );
 });
+
+// flashcardの結果画面を表示するかどうかのフラグ
+export const isResultShownAtom = atom(false);

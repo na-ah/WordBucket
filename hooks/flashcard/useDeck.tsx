@@ -43,7 +43,7 @@ export default function useDeck() {
 
   function nextDeck() {
     setCurrentDeckIndex((prevIndex) => prevIndex + 1);
-    router.push("/flashcard");
+    // router.push("/flashcard");
   }
 
   return {

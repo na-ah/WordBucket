@@ -1,11 +1,12 @@
 import {
   fetchDashboard,
   fetchWords,
+  isResultShownAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
 import { queryByBoxName } from "@/data/dashboard/query";
 import { Dashboard } from "@/types/types";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -30,6 +31,7 @@ export default function useDashboard() {
 
   const [wordsPool, setWordsPool] = useAtom(wordsPoolAtom);
   const router = useRouter();
+  const setIsResultShown = useSetAtom(isResultShownAtom);
 
   function handleBoxClick(boxName: string) {
     console.log(boxName);
@@ -37,6 +39,7 @@ export default function useDashboard() {
       console.log(words);
       if (words && words.length > 0) {
         setWordsPool(words);
+        setIsResultShown(false);
         router.push("/flashcard");
       }
     });

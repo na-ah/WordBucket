@@ -1,5 +1,6 @@
+import { isResultShownAtom } from "@/data/atoms/flashcardAtoms";
 import { UseFlashcardLogicProps } from "@/types/types";
-import { useRouter } from "next/router";
+import { useAtom } from "jotai";
 import { useCallback, useEffect } from "react";
 
 export default function useFlashcardLogic({
@@ -12,26 +13,24 @@ export default function useFlashcardLogic({
   time,
   setTime,
 }: UseFlashcardLogicProps) {
-  const router = useRouter();
+  const [isResultShown, setIsResultShown] = useAtom(isResultShownAtom);
 
   const flipCard = useCallback(() => {
     setIsFront(!isFront);
     setTime(timeLimit);
   }, [isFront, setIsFront, setTime, timeLimit]);
 
-  const showResults = useCallback(() => {
-    router.push({
-      pathname: "/flashcard/results",
-    });
-  }, [router]);
+  const showResult = useCallback(() => {
+    setIsResultShown(true);
+  }, [setIsResultShown]);
 
   const nextWord = useCallback(() => {
     if (currentWordIndex === currentDeck.length - 1) {
-      showResults();
+      showResult();
     } else {
       setCurrentWordIndex((prevIndex) => prevIndex + 1);
     }
-  }, [currentWordIndex, setCurrentWordIndex, currentDeck.length, showResults]);
+  }, [currentWordIndex, setCurrentWordIndex, currentDeck.length, showResult]);
 
   const markCorrect = useCallback(() => {
     nextWord();
@@ -54,7 +53,7 @@ export default function useFlashcardLogic({
   }, [time, flipCard]);
 
   return {
-    showResults,
+    showResult,
     nextWord,
     flipCard,
     markCorrect,
