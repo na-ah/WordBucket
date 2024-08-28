@@ -4,14 +4,13 @@ import FlashcardButton from "../Organisms/flashcardButton";
 import FlashcardResult from "../Result/flashcardResult";
 import Layout from "@/components/Template/Layout/Layout";
 import useFlashcard from "@/hooks/flashcard/useFlashcard";
-import { isLoadingAtom, isResultShownAtom } from "@/data/atoms/flashcardAtoms";
-import { useAtom, useAtomValue } from "jotai";
+import { isResultShownAtom } from "@/data/atoms/flashcardAtoms";
+import { useAtomValue } from "jotai";
 import { currentDeckAtom } from "@/pages/test";
 
 export default function InnerFlashcard() {
-  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
   const currentDeck = useAtomValue(currentDeckAtom);
-  const [isResultShown, setIsResultShown] = useAtom(isResultShownAtom);
+  const isResultShown = useAtomValue(isResultShownAtom);
 
   const {
     isFront,
@@ -22,7 +21,6 @@ export default function InnerFlashcard() {
     wordStats,
     markCorrect,
     markIncorrect,
-    closeResult,
   } = useFlashcard();
 
   if (currentDeck.length === 0) {
@@ -37,7 +35,6 @@ export default function InnerFlashcard() {
     return (
       <>
         <FlashcardResult />
-        <button onClick={closeResult}>結果画面を閉じる</button>
       </>
     );
   }

@@ -1,20 +1,14 @@
 import {
-  batchSizeAtom,
   currentDeckAtom,
   currentDeckIndexAtom,
   isResultShownAtom,
-  wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
-import { useAtom, useAtomValue } from "jotai";
-import { useRouter } from "next/router";
+import { useAtomValue, useSetAtom } from "jotai";
 
 export default function useDeck() {
   const currentDeck = useAtomValue(currentDeckAtom);
-  const [batchSize, setBatchSize] = useAtom(batchSizeAtom);
-  const [wordsPool, setWordsPool] = useAtom(wordsPoolAtom);
-  const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
-  const [isResultShown, setIsResultShown] = useAtom(isResultShownAtom);
-  const router = useRouter();
+  const setCurrentDeckIndex = useSetAtom(currentDeckIndexAtom);
+  const setIsResultShown = useSetAtom(isResultShownAtom);
 
   const sortedDeck = currentDeck.map((word) => ({
     ...word,
@@ -46,16 +40,9 @@ export default function useDeck() {
   function nextDeck() {
     setCurrentDeckIndex((prevIndex) => prevIndex + 1);
     setIsResultShown(false);
-    // router.push("/flashcard");
   }
 
   return {
-    wordsPool,
-    setWordsPool,
-    batchSize,
-    setBatchSize,
-    currentDeckIndex,
-    setCurrentDeckIndex,
     currentDeck,
     nextDeck,
     correctList,

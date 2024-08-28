@@ -4,18 +4,22 @@ import Layout from "@/components/Template/Layout/Layout";
 import useDeck from "@/hooks/flashcard/useDeck";
 import FlashcardResultList from "./flashcardResultList";
 import FlashcardResultStatistics from "./flashcardResultStatistics";
+import { wordsPoolAtom } from "@/data/atoms/flashcardAtoms";
+import { useAtomValue } from "jotai";
+import { batchSizeAtom, currentDeckIndexAtom } from "@/pages/test";
 
 export default function FlashcardResult() {
   const {
-    wordsPool,
-    batchSize,
-    currentDeckIndex,
     nextDeck,
     correctList,
     incorrectList,
     totalAverageResponseTime,
     totalAccuracyRate,
   } = useDeck();
+
+  const wordsPool = useAtomValue(wordsPoolAtom);
+  const batchSize = useAtomValue(batchSizeAtom);
+  const currentDeckIndex = useAtomValue(currentDeckIndexAtom);
 
   const lastRap =
     (wordsPool.length % batchSize === 0
