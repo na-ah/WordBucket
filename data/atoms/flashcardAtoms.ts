@@ -24,8 +24,6 @@ export const fetchDashboard = async () => {
     const response = await axios.get<Dashboard>(
       process.env.NEXT_PUBLIC_LOCAL_HOST + "/dashboard"
     );
-    console.log(response.data);
-
     return camelcaseKeys(response.data);
   } catch (error) {
     console.error("Error fetching words: ", error);
@@ -33,9 +31,15 @@ export const fetchDashboard = async () => {
 };
 
 // 取得した単語一覧のプール
-export const wordsPoolAtom = atom<Word[]>(
-  fetchWords(`${queryByBoxName["mediumAccuracyRate"]}`)
-);
+export const queryAtom = atom(queryByBoxName["inProgress"]);
+export const wordsPoolAtom = atom(async (get) => {
+  const query = get(queryAtom);
+  const response = await axios.get<Word[]>(
+    `${process.env.NEXT_PUBLIC_LOCAL_HOST}${query}`
+  );
+  const data: Word[] = await response.data.words;
+  return data;
+});
 
 // プールからflashcardで使用するデッキを切り出す
 // 現在のデッキのインデックス
