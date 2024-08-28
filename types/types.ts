@@ -12,7 +12,7 @@ export interface DashboardMenuProps {
 
 export interface DashboardBoxListProps {
   boxPropsList: DashboardBoxPropsList[];
-  handleBoxClick: (e: MouseEvent<HTMLDivElement>) => void;
+  handleBoxClick: (arg: string) => void;
 }
 
 export interface DashboardBoxPropsList {
@@ -44,7 +44,7 @@ export interface DashboardBoxProps {
   percentage: string;
   color?: string;
   boxName: string;
-  handleBoxClick: (e: MouseEvent<HTMLDivElement>, arg: string) => void;
+  handleBoxClick: (arg: string) => void;
 }
 
 export interface Colors {
@@ -222,4 +222,8 @@ export interface Dashboard {
   shortDuration: number;
   mediumDuration: number;
   longDuration: number;
+}
+
+export interface QueryByBoxName {
+  [key: string]: string;
 }

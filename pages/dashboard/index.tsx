@@ -1,5 +1,4 @@
 import LeftBarTitle from "@/components/shared/LeftBarTitle";
-import useMenu from "@/hooks/dashboard/useMenu";
 import useDashboard from "@/hooks/dashboard/useDashboard";
 import DashboardMenu from "@/components/dashboard/Menu/dashboardMenu";
 import Layout from "@/components/Template/Layout/Layout";
@@ -8,9 +7,6 @@ import DashboardInformationList from "@/components/dashboard/Information/dashboa
 import DashboardBoxWrapper from "@/components/dashboard/Box/dashboardBoxWrapper";
 
 export default function Dashboard() {
-  const { menuPosition, menuVisible, handleBoxClick, handleMenuClose } =
-    useMenu();
-
   const {
     informations,
     reviewList,
@@ -18,16 +14,13 @@ export default function Dashboard() {
     studyCountList,
     correctRatioList,
     requiredTimeList,
+    handleBoxClick,
   } = useDashboard();
 
   return (
     <>
       <Layout>
-        <div
-          className="flex flex-col w-full px-5 py-3 relative"
-          onClick={() => menuVisible && handleMenuClose()}
-        >
-          {menuVisible && <DashboardMenu menuPosition={menuPosition} />}
+        <div className="flex flex-col w-full px-5 py-3 relative">
           <DashboardInformationList
             informations={informations}
             pageTitle={"pageTitle"}

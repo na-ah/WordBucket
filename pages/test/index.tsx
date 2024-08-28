@@ -1,8 +1,6 @@
 import {
   currentDeckAtom,
-  fetchWords,
   getWords,
-  poolAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
 import { useAtom } from "jotai";

@@ -2,6 +2,7 @@ import { atom, useAtom } from "jotai";
 import axios from "axios";
 import { Dashboard, Word } from "@/types/types";
 import camelcaseKeys from "camelcase-keys";
+import { queryByBoxName } from "../dashboard/query";
 
 export const isLoadingAtom = atom(false);
 
@@ -29,32 +30,9 @@ export const fetchDashboard = async () => {
   }
 };
 
-export const getWords = async (query: string) => {
-  try {
-    const words = await fetchWords(query);
-    return words;
-  } catch (error) {
-    console.error("Error fetching words: ", error);
-  }
-};
-
-export const poolAtom = atom<Word[]>([]);
-
-export const wordsPoolAtom = atom([]);
-
-// export const wordsPoolAtom = atom(async (get) => {
-//   try {
-//     const query = get(queryAtom);
-//     const response = await axios.get<{ words: Word[] }>(
-//       process.env.NEXT_PUBLIC_LOCAL_HOST + (query || "")
-//     );
-
-//     return response.data.words;
-//   } catch (error) {
-//     console.error("Error fetchin words:", error);
-//     throw error;
-//   }
-// });
+export const wordsPoolAtom = atom<Word>(
+  fetchWords(`${queryByBoxName["mediumAccuracyRate"]}`)
+);
 
 export const currentDeckIndexAtom = atom(0);
 export const batchSizeAtom = atom(10);

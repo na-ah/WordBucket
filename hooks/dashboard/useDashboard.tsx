@@ -1,5 +1,13 @@
-import { fetchDashboard } from "@/data/atoms/flashcardAtoms";
+import {
+  fetchDashboard,
+  fetchWords,
+  wordsPoolAtom,
+} from "@/data/atoms/flashcardAtoms";
+import { queryByBoxName } from "@/data/dashboard/query";
 import { Dashboard } from "@/types/types";
+import { useAtom } from "jotai";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function useDashboard() {
@@ -19,6 +27,20 @@ export default function useDashboard() {
     mediumDuration: 0,
     longDuration: 0,
   });
+
+  const [wordsPool, setWordsPool] = useAtom(wordsPoolAtom);
+  const router = useRouter();
+
+  function handleBoxClick(boxName: string) {
+    console.log(boxName);
+    fetchWords(queryByBoxName[boxName]).then((words) => {
+      console.log(words);
+      if (words && words.length > 0) {
+        setWordsPool(words);
+        router.push("/flashcard");
+      }
+    });
+  }
 
   useEffect(() => {
     fetchDashboard().then((data) => {
@@ -47,10 +69,6 @@ export default function useDashboard() {
     dashboardData?.shortDuration +
     dashboardData?.mediumDuration +
     dashboardData?.longDuration;
-
-  console.log(dashboardData.lowCount);
-  console.log(dashboardData.mediumCount);
-  console.log(dashboardData.highCount);
 
   const informations = [
     { title: "本日の新規カード", text: `${dashboardData?.newCards}card` },
@@ -184,5 +202,6 @@ export default function useDashboard() {
     studyCountList,
     correctRatioList,
     requiredTimeList,
+    handleBoxClick,
   };
 }
