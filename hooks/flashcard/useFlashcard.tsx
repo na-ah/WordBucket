@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useDeck from "./useDeck";
 import useWordStats from "./useWordStats";
 import useTimer from "./useTimer";
-import { isResultShownAtom } from "@/data/atoms/flashcardAtoms";
-import { useSetAtom } from "jotai";
+import {
+  currentDeckAtom,
+  isResultShownAtom,
+} from "@/data/atoms/flashcardAtoms";
+import { useAtomValue, useSetAtom } from "jotai";
 
 export default function useFlashcard() {
-  const { currentDeck } = useDeck();
+  const currentDeck = useAtomValue(currentDeckAtom);
+
   const [isFront, setIsFront] = useState(true);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 

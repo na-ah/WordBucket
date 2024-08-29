@@ -4,9 +4,11 @@ import FlashcardButton from "../Organisms/flashcardButton";
 import FlashcardResult from "../Result/flashcardResult";
 import Layout from "@/components/Template/Layout/Layout";
 import useFlashcard from "@/hooks/flashcard/useFlashcard";
-import { isResultShownAtom } from "@/data/atoms/flashcardAtoms";
+import {
+  currentDeckAtom,
+  isResultShownAtom,
+} from "@/data/atoms/flashcardAtoms";
 import { useAtomValue } from "jotai";
-import { currentDeckAtom } from "@/pages/test";
 
 export default function InnerFlashcard() {
   const currentDeck = useAtomValue(currentDeckAtom);

@@ -1,4 +1,6 @@
 import {
+  currentDeckAtom,
+  currentDeckIndexAtom,
   fetchDashboard,
   isResultShownAtom,
   queryAtom,
@@ -6,7 +8,8 @@ import {
 } from "@/data/atoms/flashcardAtoms";
 import { queryByBoxName } from "@/data/dashboard/query";
 import { Dashboard } from "@/types/types";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { cookies } from "next/headers";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -32,9 +35,21 @@ export default function useDashboard() {
   const setIsResultShown = useSetAtom(isResultShownAtom);
   const setQuery = useSetAtom(queryAtom);
 
+  const currentDeck = useAtomValue(currentDeckAtom);
+  const query = useAtomValue(queryAtom);
+  const [wordsPool] = useAtom(wordsPoolAtom);
+  const [currentDeckIndex] = useAtom(currentDeckIndexAtom);
+
+  console.log("query: ", query);
+  console.log("wordsPool: ", wordsPool);
+  console.log("currentDeckIndex: ", currentDeckIndex);
+  console.log("currentDeck: ", currentDeck);
+
   function handleBoxClick(boxName: string) {
     console.log(boxName);
     setQuery(queryByBoxName[boxName]);
+    console.log("queryByBoxName[boxName]: ", queryByBoxName[boxName]);
+
     setIsResultShown(false);
     router.push("/flashcard");
   }

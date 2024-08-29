@@ -1,30 +1,16 @@
-import Button from "@/components/shared/Button";
 import PageTitle from "@/components/shared/PageTitle";
-import Layout from "@/components/Template/Layout/Layout";
-import useDeck from "@/hooks/flashcard/useDeck";
 import FlashcardResultList from "./flashcardResultList";
 import FlashcardResultStatistics from "./flashcardResultStatistics";
-import { wordsPoolAtom } from "@/data/atoms/flashcardAtoms";
-import { useAtomValue } from "jotai";
-import { batchSizeAtom, currentDeckIndexAtom } from "@/pages/test";
+import useResult from "@/hooks/flashcard/useResult";
+import FlashcardResultButton from "./flashcardResultButton";
 
 export default function FlashcardResult() {
   const {
-    nextDeck,
     correctList,
     incorrectList,
     totalAverageResponseTime,
     totalAccuracyRate,
-  } = useDeck();
-
-  const wordsPool = useAtomValue(wordsPoolAtom);
-  const batchSize = useAtomValue(batchSizeAtom);
-  const currentDeckIndex = useAtomValue(currentDeckIndexAtom);
-
-  const lastRap =
-    (wordsPool.length % batchSize === 0
-      ? wordsPool.length / batchSize
-      : Math.floor(wordsPool.length / batchSize) + 1) - 1;
+  } = useResult();
 
   return (
     <>
@@ -48,19 +34,7 @@ export default function FlashcardResult() {
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex justify-center flex-col items-center gap-5">
-            <Button
-              text="間違えた問題を復習する"
-              bgColor="zinc800"
-              className="border py-2 rounded-lg w-3/4"
-            />
-            {currentDeckIndex !== lastRap && (
-              <Button
-                text="次のセットへ"
-                onClick={nextDeck}
-                bgColor="zinc800"
-                className="border py-2 rounded-lg w-3/4"
-              />
-            )}
+            <FlashcardResultButton />
           </div>
         </div>
       </div>

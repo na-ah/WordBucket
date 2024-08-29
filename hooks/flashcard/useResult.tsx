@@ -1,14 +1,25 @@
+import Button from "@/components/shared/Button";
 import {
+  batchSizeAtom,
   currentDeckAtom,
   currentDeckIndexAtom,
   isResultShownAtom,
+  wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
-export default function useDeck() {
+export default function useResult() {
   const currentDeck = useAtomValue(currentDeckAtom);
-  const setCurrentDeckIndex = useSetAtom(currentDeckIndexAtom);
+  const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
   const setIsResultShown = useSetAtom(isResultShownAtom);
+
+  const wordsPool = useAtomValue(wordsPoolAtom);
+  const batchSize = useAtomValue(batchSizeAtom);
+
+  const lastRap =
+    (wordsPool.length % batchSize === 0
+      ? wordsPool.length / batchSize
+      : Math.floor(wordsPool.length / batchSize) + 1) - 1;
 
   const sortedDeck = currentDeck.map((word) => ({
     ...word,
@@ -37,17 +48,17 @@ export default function useDeck() {
       (correctList.length / (correctList.length + incorrectList.length)) * 100
     ) / 100;
 
-  function nextDeck() {
+  const nextDeck = () => {
     setCurrentDeckIndex((prevIndex) => prevIndex + 1);
     setIsResultShown(false);
-  }
+  };
 
   return {
-    currentDeck,
     nextDeck,
     correctList,
     incorrectList,
     totalAverageResponseTime,
     totalAccuracyRate,
+    lastRap,
   };
 }
