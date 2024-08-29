@@ -32,7 +32,7 @@ export const fetchDashboard = async () => {
 export const queryAtom = atom(queryByBoxName["inProgress"]);
 export const wordsPoolAtom = atom(async (get) => {
   const query = get(queryAtom);
-  const response = await axios.get<Word[]>(
+  const response = await axios.get<{ words: Word[] }>(
     `${process.env.NEXT_PUBLIC_LOCAL_HOST}${query}`
   );
   const data: Word[] = await response.data.words;
