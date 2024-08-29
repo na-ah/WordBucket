@@ -5,6 +5,7 @@ export default function FlashcardHistoryTable({
 }: FlashcardHistoryTableProps) {
   return (
     <>
+      {word.id}
       <table className="table-auto w-full">
         <thead>
           <tr>

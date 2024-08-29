@@ -21,7 +21,7 @@ export default function useTimer() {
 
     const timerId = setInterval(() => {
       setTime((prevTime) => prevTime - 10);
-    }, 50);
+    }, 10);
 
     return () => {
       clearInterval(timerId);

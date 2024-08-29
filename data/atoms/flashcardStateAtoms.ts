@@ -10,4 +10,4 @@ export const currentWordAtom = atom(async (get) => {
 
   return currentDeck[currentWordIndex];
 });
-export const timeLimitAtom = atom(5 * 200);
+export const timeLimitAtom = atom(5 * 1000);

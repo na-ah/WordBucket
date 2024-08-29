@@ -20,7 +20,10 @@ export default function useFlashcard() {
   const wordStats = useWordStats(currentWord);
 
   const { time, setTime, remainingTimePercentage } = useTimer();
-  const { markCorrect, markIncorrect, flipCard } = useFlashcardActions(setTime);
+  const { markCorrect, markIncorrect, flipCard } = useFlashcardActions(
+    time,
+    setTime
+  );
 
   useEffect(() => {
     if (time <= 0) {

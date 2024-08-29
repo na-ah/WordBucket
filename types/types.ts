@@ -237,3 +237,10 @@ export interface FlashcardResultListProps {
   correctList: Word[];
   incorrectList: Word[];
 }
+
+export interface UpdateWordHistoryProps {
+  word_id: number;
+  duration: number;
+  result: boolean;
+  datetime: string;
+}
