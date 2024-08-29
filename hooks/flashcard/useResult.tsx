@@ -1,15 +1,19 @@
 import {
   batchSizeAtom,
-  currentDeckAtom,
   currentDeckIndexAtom,
   isResultShownAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
-import { currentWordIndexAtom } from "@/data/atoms/flashcardStateAtoms";
-import { useAtomValue, useSetAtom } from "jotai";
+import {
+  answeredDeckDataAtom,
+  answeredDeckIdAtom,
+  currentWordIndexAtom,
+} from "@/data/atoms/flashcardStateAtoms";
+import axios from "axios";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useMemo } from "react";
 
 export default function useResult() {
-  const currentDeck = useAtomValue(currentDeckAtom);
   const setCurrentDeckIndex = useSetAtom(currentDeckIndexAtom);
   const setIsResultShown = useSetAtom(isResultShownAtom);
 
@@ -17,29 +21,54 @@ export default function useResult() {
   const batchSize = useAtomValue(batchSizeAtom);
 
   const setCurrentWordIndex = useSetAtom(currentWordIndexAtom);
+  const [answeredDeckId, setAnsweredDeckId] = useAtom(answeredDeckIdAtom);
+  const [answeredDeckData, setAnsweredDeckData] = useAtom(answeredDeckDataAtom);
+
+  const getIdsData = () => {
+    console.log("answeredDeckId:", answeredDeckId);
+    axios
+      .get(
+        `${
+          process.env.NEXT_PUBLIC_LOCAL_HOST
+        }/words/ids?ids=${answeredDeckId.join(",")}`
+      )
+      .then((response) => {
+        console.log("getidsdata, data.words:", response.data.words);
+        setAnsweredDeckData(response.data.words);
+      })
+      .catch((error) => {
+        console.log("get ids error");
+      });
+  };
 
   const lastRap =
     (wordsPool.length % batchSize === 0
       ? wordsPool.length / batchSize
       : Math.floor(wordsPool.length / batchSize) + 1) - 1;
 
-  const sortedDeck = currentDeck.map((word) => ({
-    ...word,
-    history: word.histories.sort((a, b) => (a.datetime > b.datetime ? 1 : -1)),
-  }));
+  const sortedDeck = useMemo(() => {
+    if (!answeredDeckData) return [];
 
-  const correctList = sortedDeck.filter(
-    (word) => word.histories.at(-1)?.result === true
-  );
+    return answeredDeckData.map((word) => ({
+      ...word,
+      histories: word.histories.sort((a, b) =>
+        a.datetime > b.datetime ? 1 : -1
+      ),
+    }));
+  }, [answeredDeckData]);
 
-  const incorrectList = sortedDeck.filter(
-    (word) => word.history.at(-1)?.result === false
-  );
+  const correctList = useMemo(() => {
+    return sortedDeck.filter((word) => word.histories.at(-1)?.result === true);
+  }, [sortedDeck]);
+
+  const incorrectList = useMemo(() => {
+    return sortedDeck.filter((word) => word.histories.at(-1)?.result === false);
+  }, [sortedDeck]);
 
   const totalAverageResponseTime =
     Math.round(
       (correctList
-        .map((word) => word.history.at(-1)?.duration ?? 0)
+        .map((word) => word.histories.at(-1)?.duration ?? 0)
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0) /
         correctList.length) *
         100
@@ -54,6 +83,7 @@ export default function useResult() {
     setCurrentDeckIndex((prevIndex) => prevIndex + 1);
     setCurrentWordIndex(0);
     setIsResultShown(false);
+    setAnsweredDeckId([]);
   };
 
   return {
@@ -63,5 +93,7 @@ export default function useResult() {
     totalAverageResponseTime,
     totalAccuracyRate,
     lastRap,
+    answeredDeckId,
+    getIdsData,
   };
 }

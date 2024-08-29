@@ -4,6 +4,7 @@ import {
   queryAtom,
 } from "@/data/atoms/flashcardAtoms";
 import {
+  answeredDeckIdAtom,
   currentWordIndexAtom,
   isFrontAtom,
 } from "@/data/atoms/flashcardStateAtoms";
@@ -36,12 +37,15 @@ export default function useDashboard() {
   const setQuery = useSetAtom(queryAtom);
   const setCurrentWordIndex = useSetAtom(currentWordIndexAtom);
   const setIsFront = useSetAtom(isFrontAtom);
+  const setAnsweredDeckId = useSetAtom(answeredDeckIdAtom);
 
   function handleBoxClick(boxName: string) {
     console.log(boxName);
     setQuery(queryByBoxName[boxName]);
     setCurrentWordIndex(0);
     setIsFront(true);
+    setAnsweredDeckId([]);
+
     console.log("queryByBoxName[boxName]: ", queryByBoxName[boxName]);
 
     setIsResultShown(false);

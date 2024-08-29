@@ -1,16 +1,19 @@
 import {
+  answeredDeckDataAtom,
+  answeredDeckIdAtom,
   currentWordAtom,
   currentWordIndexAtom,
   isFrontAtom,
   timeLimitAtom,
 } from "@/data/atoms/flashcardStateAtoms";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   currentDeckAtom,
   isResultShownAtom,
 } from "@/data/atoms/flashcardAtoms";
 import useFlashcardUpdate from "./useFlashcardUpdate";
+import useResult from "./useResult";
 
 export default function useFlashcardActions(
   time: number,
@@ -19,11 +22,15 @@ export default function useFlashcardActions(
   const currentDeck = useAtomValue(currentDeckAtom);
   const [isFront, setIsFront] = useAtom(isFrontAtom);
   const setIsResultShown = useSetAtom(isResultShownAtom);
+  const isResultShown = useAtomValue(isResultShownAtom);
   const [currentWordIndex, setCurrentWordIndex] = useAtom(currentWordIndexAtom);
   const timeLimit = useAtomValue(timeLimitAtom);
   const { updateWordHistory } = useFlashcardUpdate();
   const currentWord = useAtomValue(currentWordAtom);
   const [duration, setDuration] = useState(0);
+  const setAnsweredDeckId = useSetAtom(answeredDeckIdAtom);
+  const answeredDeckId = useAtomValue(answeredDeckIdAtom);
+  const { getIdsData } = useResult();
 
   // 非公開関数
   const calculateDuration = (
@@ -33,9 +40,19 @@ export default function useFlashcardActions(
   ) => {
     return (totalTime - remainingTime) / unit;
   };
+
   const showResult = useCallback(() => {
     setIsResultShown(true);
+    console.log("getIdsData直前のansweredDeckID:", answeredDeckId);
+    // getIdsData();
   }, [setIsResultShown]);
+
+  useEffect(() => {
+    if (isResultShown) {
+      console.log("useEffectでのansweredDeckId:", answeredDeckId);
+      getIdsData();
+    }
+  }, [answeredDeckId, isResultShown]);
 
   const nextWord = useCallback(() => {
     if (currentWordIndex === currentDeck.length - 1) {
@@ -57,13 +74,28 @@ export default function useFlashcardActions(
     [currentWord.id, duration, updateWordHistory]
   );
 
+  const addAnsweredDeckId = useCallback(
+    (word_id: number) => {
+      setAnsweredDeckId((prevDeck) => [...prevDeck, word_id]);
+    },
+    [setAnsweredDeckId]
+  );
+
   const markWord = useCallback(
     (isCorrect: boolean) => {
       updateCurrentWordHistory(isCorrect);
+      console.log("markword_currentWord.id: ", currentWord.id);
+      addAnsweredDeckId(currentWord.id);
       nextWord();
       setIsFront(true);
     },
-    [nextWord, updateCurrentWordHistory, setIsFront]
+    [
+      nextWord,
+      updateCurrentWordHistory,
+      setIsFront,
+      addAnsweredDeckId,
+      currentWord.id,
+    ]
   );
 
   // 公開関数

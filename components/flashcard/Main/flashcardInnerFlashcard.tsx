@@ -2,7 +2,6 @@ import PageTitle from "@/components/shared/PageTitle";
 import FlashcardArea from "../Organisms/flashcardArea";
 import FlashcardButton from "../Organisms/flashcardButton";
 import FlashcardResult from "../Result/flashcardResult";
-import Layout from "@/components/Template/Layout/Layout";
 import useFlashcard from "@/hooks/flashcard/useFlashcard";
 import {
   currentDeckAtom,

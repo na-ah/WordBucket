@@ -4,8 +4,6 @@ import { Dashboard, Word } from "@/types/types";
 import camelcaseKeys from "camelcase-keys";
 import { queryByBoxName } from "../dashboard/query";
 
-export const isLoadingAtom = atom(false);
-
 // flashcard用単語取得
 export const fetchWords = async (newQuery: string) => {
   try {
