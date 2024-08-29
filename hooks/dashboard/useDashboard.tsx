@@ -1,10 +1,7 @@
 import {
-  currentDeckAtom,
-  currentDeckIndexAtom,
   fetchDashboard,
   isResultShownAtom,
   queryAtom,
-  wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
 import {
   currentWordIndexAtom,
@@ -12,8 +9,7 @@ import {
 } from "@/data/atoms/flashcardStateAtoms";
 import { queryByBoxName } from "@/data/dashboard/query";
 import { Dashboard } from "@/types/types";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { cookies } from "next/headers";
+import { useSetAtom } from "jotai";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
