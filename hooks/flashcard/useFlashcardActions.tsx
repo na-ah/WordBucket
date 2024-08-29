@@ -1,5 +1,4 @@
 import {
-  answeredDeckDataAtom,
   answeredDeckIdAtom,
   currentWordAtom,
   currentWordIndexAtom,
@@ -44,23 +43,30 @@ export default function useFlashcardActions(
   const showResult = useCallback(() => {
     setIsResultShown(true);
     console.log("getIdsData直前のansweredDeckID:", answeredDeckId);
-    // getIdsData();
-  }, [setIsResultShown]);
+  }, [setIsResultShown, answeredDeckId]);
 
   useEffect(() => {
     if (isResultShown) {
       console.log("useEffectでのansweredDeckId:", answeredDeckId);
       getIdsData();
     }
-  }, [answeredDeckId, isResultShown]);
+  }, [answeredDeckId, isResultShown, getIdsData]);
 
   const nextWord = useCallback(() => {
     if (currentWordIndex === currentDeck.length - 1) {
+      setIsFront(false);
       showResult();
     } else {
+      setIsFront(true);
       setCurrentWordIndex((prevIndex) => prevIndex + 1);
     }
-  }, [currentWordIndex, currentDeck.length, setCurrentWordIndex, showResult]);
+  }, [
+    currentWordIndex,
+    currentDeck.length,
+    setCurrentWordIndex,
+    showResult,
+    setIsFront,
+  ]);
 
   const updateCurrentWordHistory = useCallback(
     (result: boolean) => {
@@ -87,15 +93,8 @@ export default function useFlashcardActions(
       console.log("markword_currentWord.id: ", currentWord.id);
       addAnsweredDeckId(currentWord.id);
       nextWord();
-      setIsFront(true);
     },
-    [
-      nextWord,
-      updateCurrentWordHistory,
-      setIsFront,
-      addAnsweredDeckId,
-      currentWord.id,
-    ]
+    [nextWord, updateCurrentWordHistory, addAnsweredDeckId, currentWord.id]
   );
 
   // 公開関数

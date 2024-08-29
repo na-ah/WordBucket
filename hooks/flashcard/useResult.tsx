@@ -8,10 +8,11 @@ import {
   answeredDeckDataAtom,
   answeredDeckIdAtom,
   currentWordIndexAtom,
+  isFrontAtom,
 } from "@/data/atoms/flashcardStateAtoms";
 import axios from "axios";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 export default function useResult() {
   const setCurrentDeckIndex = useSetAtom(currentDeckIndexAtom);
@@ -23,8 +24,9 @@ export default function useResult() {
   const setCurrentWordIndex = useSetAtom(currentWordIndexAtom);
   const [answeredDeckId, setAnsweredDeckId] = useAtom(answeredDeckIdAtom);
   const [answeredDeckData, setAnsweredDeckData] = useAtom(answeredDeckDataAtom);
+  const setIsFront = useSetAtom(isFrontAtom);
 
-  const getIdsData = () => {
+  const getIdsData = useCallback(() => {
     console.log("answeredDeckId:", answeredDeckId);
     axios
       .get(
@@ -39,7 +41,7 @@ export default function useResult() {
       .catch((error) => {
         console.log("get ids error");
       });
-  };
+  }, [answeredDeckId, setAnsweredDeckData]);
 
   const lastRap =
     (wordsPool.length % batchSize === 0
@@ -82,6 +84,7 @@ export default function useResult() {
   const nextDeck = () => {
     setCurrentDeckIndex((prevIndex) => prevIndex + 1);
     setCurrentWordIndex(0);
+    setIsFront(true);
     setIsResultShown(false);
     setAnsweredDeckId([]);
   };
