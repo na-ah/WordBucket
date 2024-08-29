@@ -21,12 +21,10 @@ export default function FlashcardArea({
           />
         )}
         {!isFront && (
-          <>
-            <FlashcardAreaBack
-              word={word}
-              wordStats={wordStats}
-            />
-          </>
+          <FlashcardAreaBack
+            word={word}
+            wordStats={wordStats}
+          />
         )}
       </div>
     </>
