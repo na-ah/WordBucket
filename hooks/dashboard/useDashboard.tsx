@@ -35,16 +35,6 @@ export default function useDashboard() {
   const setIsResultShown = useSetAtom(isResultShownAtom);
   const setQuery = useSetAtom(queryAtom);
 
-  const currentDeck = useAtomValue(currentDeckAtom);
-  const query = useAtomValue(queryAtom);
-  const [wordsPool] = useAtom(wordsPoolAtom);
-  const [currentDeckIndex] = useAtom(currentDeckIndexAtom);
-
-  console.log("query: ", query);
-  console.log("wordsPool: ", wordsPool);
-  console.log("currentDeckIndex: ", currentDeckIndex);
-  console.log("currentDeck: ", currentDeck);
-
   function handleBoxClick(boxName: string) {
     console.log(boxName);
     setQuery(queryByBoxName[boxName]);

@@ -26,11 +26,7 @@ export default function InnerFlashcard() {
   } = useFlashcard();
 
   if (currentDeck.length === 0) {
-    return (
-      <Layout>
-        <p>currentDeck has no cards.</p>
-      </Layout>
-    );
+    return <p>currentDeck has no cards.</p>;
   }
 
   if (isResultShown) {

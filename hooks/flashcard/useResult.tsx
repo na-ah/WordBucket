@@ -1,4 +1,3 @@
-import Button from "@/components/shared/Button";
 import {
   batchSizeAtom,
   currentDeckAtom,
@@ -6,11 +5,11 @@ import {
   isResultShownAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 export default function useResult() {
   const currentDeck = useAtomValue(currentDeckAtom);
-  const [currentDeckIndex, setCurrentDeckIndex] = useAtom(currentDeckIndexAtom);
+  const setCurrentDeckIndex = useSetAtom(currentDeckIndexAtom);
   const setIsResultShown = useSetAtom(isResultShownAtom);
 
   const wordsPool = useAtomValue(wordsPoolAtom);
