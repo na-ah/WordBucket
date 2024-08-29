@@ -9,6 +9,7 @@ import {
   currentDeckAtom,
   isResultShownAtom,
 } from "@/data/atoms/flashcardAtoms";
+import useFlashcardUpdate from "./useFlashcardUpdate";
 
 export default function useFlashcardActions(setTime: (arg: number) => void) {
   const currentDeck = useAtomValue(currentDeckAtom);
@@ -16,6 +17,7 @@ export default function useFlashcardActions(setTime: (arg: number) => void) {
   const setIsResultShown = useSetAtom(isResultShownAtom);
   const [currentWordIndex, setCurrentWordIndex] = useAtom(currentWordIndexAtom);
   const timeLimit = useAtomValue(timeLimitAtom);
+  const updateWordHistory = useFlashcardUpdate();
 
   const flipCard = useCallback(() => {
     setIsFront(!isFront);
