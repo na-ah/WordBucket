@@ -4,6 +4,7 @@ import useTimer from "./useTimer";
 import { currentDeckAtom } from "@/data/atoms/flashcardAtoms";
 import { useAtomValue } from "jotai";
 import {
+  currentWordAtom,
   currentWordIndexAtom,
   isFrontAtom,
 } from "@/data/atoms/flashcardStateAtoms";
@@ -14,9 +15,7 @@ export default function useFlashcard() {
   const isFront = useAtomValue(isFrontAtom);
   const currentWordIndex = useAtomValue(currentWordIndexAtom);
 
-  const currentWord = useMemo(() => {
-    return currentDeck[currentWordIndex];
-  }, [currentWordIndex, currentDeck]);
+  const currentWord = useAtomValue(currentWordAtom);
 
   const wordStats = useWordStats(currentWord);
 
