@@ -5,6 +5,7 @@ import {
   isResultShownAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
+import { currentWordIndexAtom } from "@/data/atoms/flashcardStateAtoms";
 import { useAtomValue, useSetAtom } from "jotai";
 
 export default function useResult() {
@@ -14,6 +15,8 @@ export default function useResult() {
 
   const wordsPool = useAtomValue(wordsPoolAtom);
   const batchSize = useAtomValue(batchSizeAtom);
+
+  const setCurrentWordIndex = useSetAtom(currentWordIndexAtom);
 
   const lastRap =
     (wordsPool.length % batchSize === 0
@@ -49,6 +52,7 @@ export default function useResult() {
 
   const nextDeck = () => {
     setCurrentDeckIndex((prevIndex) => prevIndex + 1);
+    setCurrentWordIndex(0);
     setIsResultShown(false);
   };
 

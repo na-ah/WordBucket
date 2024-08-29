@@ -1,10 +1,14 @@
 import { isLoadingAtom } from "@/data/atoms/flashcardAtoms";
-import { useAtom } from "jotai";
+import { isFrontAtom, timeLimitAtom } from "@/data/atoms/flashcardStateAtoms";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 
-export default function useTimer(isFront: boolean, timeLimit: number) {
-  const [time, setTime] = useState(timeLimit);
+export default function useTimer() {
+  const isFront = useAtomValue(isFrontAtom);
+  const timeLimit = useAtomValue(timeLimitAtom);
   const [isLoading] = useAtom(isLoadingAtom);
+
+  const [time, setTime] = useState(timeLimit);
 
   useEffect(() => {
     if (!isFront) {
@@ -17,7 +21,7 @@ export default function useTimer(isFront: boolean, timeLimit: number) {
 
     const timerId = setInterval(() => {
       setTime((prevTime) => prevTime - 10);
-    }, 10);
+    }, 50);
 
     return () => {
       clearInterval(timerId);

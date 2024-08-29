@@ -6,6 +6,10 @@ import {
   queryAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
+import {
+  currentWordIndexAtom,
+  isFrontAtom,
+} from "@/data/atoms/flashcardStateAtoms";
 import { queryByBoxName } from "@/data/dashboard/query";
 import { Dashboard } from "@/types/types";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
@@ -34,10 +38,14 @@ export default function useDashboard() {
   const router = useRouter();
   const setIsResultShown = useSetAtom(isResultShownAtom);
   const setQuery = useSetAtom(queryAtom);
+  const setCurrentWordIndex = useSetAtom(currentWordIndexAtom);
+  const setIsFront = useSetAtom(isFrontAtom);
 
   function handleBoxClick(boxName: string) {
     console.log(boxName);
     setQuery(queryByBoxName[boxName]);
+    setCurrentWordIndex(0);
+    setIsFront(true);
     console.log("queryByBoxName[boxName]: ", queryByBoxName[boxName]);
 
     setIsResultShown(false);

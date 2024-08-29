@@ -1,66 +1,27 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import useWordStats from "./useWordStats";
 import useTimer from "./useTimer";
+import { currentDeckAtom } from "@/data/atoms/flashcardAtoms";
+import { useAtomValue } from "jotai";
 import {
-  currentDeckAtom,
-  isResultShownAtom,
-} from "@/data/atoms/flashcardAtoms";
-import { useAtomValue, useSetAtom } from "jotai";
+  currentWordIndexAtom,
+  isFrontAtom,
+} from "@/data/atoms/flashcardStateAtoms";
+import useFlashcardActions from "./useFlashcardActions";
 
 export default function useFlashcard() {
   const currentDeck = useAtomValue(currentDeckAtom);
-
-  const [isFront, setIsFront] = useState(true);
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const isFront = useAtomValue(isFrontAtom);
+  const currentWordIndex = useAtomValue(currentWordIndexAtom);
 
   const currentWord = useMemo(() => {
     return currentDeck[currentWordIndex];
   }, [currentWordIndex, currentDeck]);
 
-  const progressStatus = {
-    completed: currentWordIndex + 1,
-    total: currentDeck.length,
-  };
-
   const wordStats = useWordStats(currentWord);
 
-  const timeLimit = 5 * 1000;
-  const { time, setTime, remainingTimePercentage } = useTimer(
-    isFront,
-    timeLimit
-  );
-  const setIsResultShown = useSetAtom(isResultShownAtom);
-
-  const flipCard = useCallback(() => {
-    setIsFront(!isFront);
-    setTime(timeLimit);
-  }, [isFront, setIsFront, setTime, timeLimit]);
-
-  const showResult = useCallback(() => {
-    setIsResultShown(true);
-  }, [setIsResultShown]);
-
-  const nextWord = useCallback(() => {
-    if (currentWordIndex === currentDeck.length - 1) {
-      showResult();
-    } else {
-      setCurrentWordIndex((prevIndex) => prevIndex + 1);
-    }
-  }, [currentWordIndex, setCurrentWordIndex, currentDeck.length, showResult]);
-
-  const markCorrect = useCallback(() => {
-    nextWord();
-    if (currentWordIndex !== currentDeck.length - 1) {
-      setIsFront(true);
-    }
-  }, [nextWord, setIsFront, currentDeck.length, currentWordIndex]);
-
-  const markIncorrect = useCallback(() => {
-    nextWord();
-    if (currentWordIndex !== currentDeck.length - 1) {
-      setIsFront(true);
-    }
-  }, [nextWord, setIsFront, currentDeck.length, currentWordIndex]);
+  const { time, setTime, remainingTimePercentage } = useTimer();
+  const { markCorrect, markIncorrect, flipCard } = useFlashcardActions(setTime);
 
   useEffect(() => {
     if (time <= 0) {
@@ -68,14 +29,19 @@ export default function useFlashcard() {
     }
   }, [time, flipCard]);
 
+  const progressStatus = {
+    completed: currentWordIndex + 1,
+    total: currentDeck.length,
+  };
+
   return {
     isFront,
     currentWord,
     progressStatus,
     wordStats,
-    markCorrect,
-    markIncorrect,
     flipCard,
     remainingTimePercentage,
+    markCorrect,
+    markIncorrect,
   };
 }
