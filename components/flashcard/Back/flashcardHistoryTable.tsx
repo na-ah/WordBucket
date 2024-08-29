@@ -8,17 +8,19 @@ export default function FlashcardHistoryTable({
       <table className="table-auto w-full">
         <thead>
           <tr>
-            <td>日付</td>
-            <td>結果</td>
-            <td>時間</td>
+            <td className="text-left">日付</td>
+            <td className="text-center">結果</td>
+            <td className="text-center">時間</td>
           </tr>
         </thead>
         <tbody>
           {word.histories.map((result, i) => (
             <tr key={i}>
-              <td>{result.datetime}</td>
-              <td>{result.result}</td>
-              <td>{result.duration}</td>
+              <td className="text-left">
+                {new Date(result.datetime).toLocaleString("ja-JP")}
+              </td>
+              <td className="text-center">{result.result ? "○" : "×"}</td>
+              <td className="text-center">{result.duration}s</td>
             </tr>
           ))}
         </tbody>
