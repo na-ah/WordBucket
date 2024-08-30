@@ -5,15 +5,18 @@ import { useAtomValue } from "jotai";
 
 export default function FlashcardResultButton() {
   const currentDeckIndex = useAtomValue(currentDeckIndexAtom);
-  const { lastRap, nextDeck } = useResult();
+  const { lastRap, nextDeck, incorrectList, reviewIncorrectList } = useResult();
 
   return (
     <>
-      <Button
-        text="間違えた問題を復習する"
-        bgColor="zinc800"
-        className="border py-2 rounded-lg w-3/4"
-      />
+      {incorrectList.length > 0 && (
+        <Button
+          text="間違えた問題を復習する"
+          bgColor="zinc800"
+          className="border py-2 rounded-lg w-3/4"
+          onClick={reviewIncorrectList}
+        />
+      )}
       {currentDeckIndex !== lastRap && (
         <Button
           text="次のセットへ"

@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   currentDeckAtom,
   isResultShownAtom,
+  isReviewIncorrectListModeAtom,
 } from "@/data/atoms/flashcardAtoms";
 import useFlashcardUpdate from "./useFlashcardUpdate";
 import useResult from "./useResult";
@@ -30,6 +31,9 @@ export default function useFlashcardActions(
   const setAnsweredDeckId = useSetAtom(answeredDeckIdAtom);
   const answeredDeckId = useAtomValue(answeredDeckIdAtom);
   const { getIdsData } = useResult();
+  const [isReviewIncorrectListMode, setIsReviewIncorrectListMode] = useAtom(
+    isReviewIncorrectListModeAtom
+  );
 
   // 非公開関数
   const calculateDuration = (
@@ -42,8 +46,9 @@ export default function useFlashcardActions(
 
   const showResult = useCallback(() => {
     setIsResultShown(true);
+    setIsReviewIncorrectListMode(false);
     console.log("getIdsData直前のansweredDeckID:", answeredDeckId);
-  }, [setIsResultShown, answeredDeckId]);
+  }, [setIsResultShown, answeredDeckId, setIsReviewIncorrectListMode]);
 
   useEffect(() => {
     if (isResultShown) {

@@ -1,7 +1,10 @@
 import {
   batchSizeAtom,
+  correctListAtom,
   currentDeckIndexAtom,
+  incorrectListAtom,
   isResultShownAtom,
+  isReviewIncorrectListModeAtom,
   wordsPoolAtom,
 } from "@/data/atoms/flashcardAtoms";
 import {
@@ -12,7 +15,7 @@ import {
 } from "@/data/atoms/flashcardStateAtoms";
 import axios from "axios";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 export default function useResult() {
   const setCurrentDeckIndex = useSetAtom(currentDeckIndexAtom);
@@ -25,6 +28,12 @@ export default function useResult() {
   const [answeredDeckId, setAnsweredDeckId] = useAtom(answeredDeckIdAtom);
   const [answeredDeckData, setAnsweredDeckData] = useAtom(answeredDeckDataAtom);
   const setIsFront = useSetAtom(isFrontAtom);
+  const [correctList, setCorrectList] = useAtom(correctListAtom);
+  const [incorrectList, setInCorrectList] = useAtom(incorrectListAtom);
+
+  const setIsReviewIncorrectListMode = useSetAtom(
+    isReviewIncorrectListModeAtom
+  );
 
   const getIdsData = useCallback(() => {
     console.log("answeredDeckId:", answeredDeckId);
@@ -59,13 +68,23 @@ export default function useResult() {
     }));
   }, [answeredDeckData]);
 
-  const correctList = useMemo(() => {
-    return sortedDeck.filter((word) => word.histories.at(-1)?.result === true);
-  }, [sortedDeck]);
+  useEffect(() => {
+    setCorrectList(
+      sortedDeck.filter((word) => word.histories.at(-1)?.result === true)
+    );
 
-  const incorrectList = useMemo(() => {
-    return sortedDeck.filter((word) => word.histories.at(-1)?.result === false);
-  }, [sortedDeck]);
+    setInCorrectList(
+      sortedDeck.filter((word) => word.histories.at(-1)?.result === false)
+    );
+  }, [sortedDeck, setCorrectList, setInCorrectList]);
+
+  // const correctList = useMemo(() => {
+  //   return sortedDeck.filter((word) => word.histories.at(-1)?.result === true);
+  // }, [sortedDeck]);
+
+  // const incorrectList = useMemo(() => {
+  //   return sortedDeck.filter((word) => word.histories.at(-1)?.result === false);
+  // }, [sortedDeck]);
 
   const totalAverageResponseTime =
     Math.round(
@@ -89,6 +108,14 @@ export default function useResult() {
     setAnsweredDeckId([]);
   };
 
+  const reviewIncorrectList = () => {
+    setIsReviewIncorrectListMode(true);
+    setCurrentWordIndex(0);
+    setIsFront(true);
+    setIsResultShown(false);
+    setAnsweredDeckId([]);
+  };
+
   return {
     nextDeck,
     correctList,
@@ -98,5 +125,6 @@ export default function useResult() {
     lastRap,
     answeredDeckId,
     getIdsData,
+    reviewIncorrectList,
   };
 }

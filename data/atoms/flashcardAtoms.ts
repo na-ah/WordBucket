@@ -3,6 +3,7 @@ import axios from "axios";
 import { Dashboard, Word } from "@/types/types";
 import camelcaseKeys from "camelcase-keys";
 import { queryByBoxName } from "../dashboard/query";
+import useResult from "@/hooks/flashcard/useResult";
 
 // flashcard用単語取得
 export const fetchWords = async (newQuery: string) => {
@@ -48,6 +49,11 @@ export const batchSizeAtom = atom(10);
 
 // 現在のデッキのカードリスト
 export const currentDeckAtom = atom(async (get) => {
+  // 復習リストの場合
+  if (get(isReviewIncorrectListModeAtom) && get(incorrectListAtom).length > 0) {
+    return get(incorrectListAtom);
+  }
+
   const wordsPool = await get(wordsPoolAtom);
   const batchSize = get(batchSizeAtom);
   const currentDeckIndex = get(currentDeckIndexAtom);
@@ -60,3 +66,10 @@ export const currentDeckAtom = atom(async (get) => {
 
 // flashcardの結果画面を表示するかどうかのフラグ
 export const isResultShownAtom = atom(false);
+
+// 復習モードのフラグ
+export const isReviewIncorrectListModeAtom = atom(false);
+
+// 復習モードのカードリスト
+export const correctListAtom = atom<Word[]>([]);
+export const incorrectListAtom = atom<Word[]>([]);
