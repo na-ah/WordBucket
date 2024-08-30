@@ -39,21 +39,19 @@ export default function InnerFlashcard() {
     <>
       <div className="flex-1 flex flex-col w-full px-5 py-3">
         <PageTitle title={"Flashcard"} />
-        <>
-          <FlashcardArea
-            remainingTimePercentage={remainingTimePercentage}
-            progressStatus={progressStatus}
-            word={currentWord}
-            isFront={isFront}
-            wordStats={wordStats}
-          />
-          <FlashcardButton
-            isFront={isFront}
-            flipCard={flipCard}
-            markCorrect={markCorrect}
-            markIncorrect={markIncorrect}
-          />
-        </>
+        <FlashcardArea
+          remainingTimePercentage={remainingTimePercentage}
+          progressStatus={progressStatus}
+          word={currentWord}
+          isFront={isFront}
+          wordStats={wordStats}
+        />
+        <FlashcardButton
+          isFront={isFront}
+          flipCard={flipCard}
+          markCorrect={markCorrect}
+          markIncorrect={markIncorrect}
+        />
       </div>
     </>
   );
