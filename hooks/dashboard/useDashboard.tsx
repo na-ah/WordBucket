@@ -1,6 +1,7 @@
 import {
   fetchDashboard,
   isResultShownAtom,
+  isReviewIncorrectListModeAtom,
   queryAtom,
 } from "@/data/atoms/flashcardAtoms";
 import {
@@ -38,6 +39,9 @@ export default function useDashboard() {
   const setCurrentWordIndex = useSetAtom(currentWordIndexAtom);
   const setIsFront = useSetAtom(isFrontAtom);
   const setAnsweredDeckId = useSetAtom(answeredDeckIdAtom);
+  const setIsReviewIncorrectListMode = useSetAtom(
+    isReviewIncorrectListModeAtom
+  );
 
   function handleBoxClick(boxName: string) {
     console.log(boxName);
@@ -45,6 +49,9 @@ export default function useDashboard() {
     setCurrentWordIndex(0);
     setIsFront(true);
     setAnsweredDeckId([]);
+
+    // 復習モードのフラグをオフ
+    setIsReviewIncorrectListMode(false);
 
     console.log("queryByBoxName[boxName]: ", queryByBoxName[boxName]);
 

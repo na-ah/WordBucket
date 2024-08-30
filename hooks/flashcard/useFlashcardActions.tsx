@@ -31,7 +31,7 @@ export default function useFlashcardActions(
   const setAnsweredDeckId = useSetAtom(answeredDeckIdAtom);
   const answeredDeckId = useAtomValue(answeredDeckIdAtom);
   const { getIdsData } = useResult();
-  const [isReviewIncorrectListMode, setIsReviewIncorrectListMode] = useAtom(
+  const setIsReviewIncorrectListMode = useSetAtom(
     isReviewIncorrectListModeAtom
   );
 

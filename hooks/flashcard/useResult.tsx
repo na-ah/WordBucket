@@ -78,14 +78,6 @@ export default function useResult() {
     );
   }, [sortedDeck, setCorrectList, setInCorrectList]);
 
-  // const correctList = useMemo(() => {
-  //   return sortedDeck.filter((word) => word.histories.at(-1)?.result === true);
-  // }, [sortedDeck]);
-
-  // const incorrectList = useMemo(() => {
-  //   return sortedDeck.filter((word) => word.histories.at(-1)?.result === false);
-  // }, [sortedDeck]);
-
   const totalAverageResponseTime =
     Math.round(
       (correctList
