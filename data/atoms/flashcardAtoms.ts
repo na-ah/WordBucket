@@ -30,7 +30,7 @@ export const fetchDashboard = async () => {
 };
 
 // 取得した単語一覧のプール
-export const queryAtom = atom(queryByBoxName["inProgress"]);
+export const queryAtom = atom(queryByBoxName["unlearned"]);
 export const wordsPoolAtom = atom(async (get) => {
   const query = get(queryAtom);
   const response = await axios.get<{ words: Word[] }>(

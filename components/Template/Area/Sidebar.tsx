@@ -25,8 +25,8 @@ export default function Sidebar() {
             handleClick={() => setIsResultShown(false)}
           />
           <SideBarButton
-            text="w"
-            link="/word"
+            text="R"
+            link="/word/form"
             color="lime"
           />
         </ul>

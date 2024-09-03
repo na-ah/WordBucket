@@ -244,3 +244,15 @@ export interface UpdateWordHistoryProps {
   result: boolean;
   datetime: string;
 }
+
+export interface WordInputs {
+  word: string;
+}
+
+export interface MeaningInput {
+  meaning: string;
+}
+
+export interface NewWordProps {
+  newWord: Word;
+}
