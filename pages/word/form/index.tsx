@@ -1,5 +1,6 @@
 import PageTitle from "@/components/shared/PageTitle";
 import Layout from "@/components/Template/Layout/Layout";
+import WordMenu from "@/components/word/wordMenu";
 import EditWord from "@/components/wordEdit/EditWord";
 import { Word, WordInputs } from "@/types/types";
 import axios from "axios";
@@ -32,6 +33,7 @@ export default function WordForm() {
       <Layout>
         <div className="flex flex-col h-dvh">
           <PageTitle title={"WordForm"} />
+          <WordMenu />
           <div className="flex-grow">form</div>
           <div className="overflow-y-auto">
             {newWords.length > 0 &&

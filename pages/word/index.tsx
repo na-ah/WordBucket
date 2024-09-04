@@ -1,33 +1,66 @@
-import { Meaning, Word } from "@/types/types";
+import PageTitle from "@/components/shared/PageTitle";
+import Layout from "@/components/Template/Layout/Layout";
+import WordMenu from "@/components/word/wordMenu";
+import EditWord from "@/components/wordEdit/EditWord";
+import { Word, WordInputs } from "@/types/types";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-export default function WordTest() {
-  const [words, setWords] = useState<Word[]>([]);
-  const [meanings, setMeanings] = useState<Meaning[]>([]);
-  useEffect(() => {
+export default function WordIndex() {
+  const [newWords, setNewWords] = useState<Word[]>([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<WordInputs>();
+
+  const onSubmit: SubmitHandler<WordInputs> = (data) => {
     axios
-      .get((process.env.NEXT_PUBLIC_LOCAL_HOST + "/words") as string)
+      .post(`${process.env.NEXT_PUBLIC_LOCAL_HOST}/words?word=${data.word}`)
       .then((res) => {
-        console.log(res.data);
-        setWords(res.data.words);
-        setMeanings(res.data.meanings);
+        console.log(res.data.data);
+        const newWord = res.data.data;
+        setNewWords([...newWords, newWord]);
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
+      .catch((error) => console.log(error));
+    reset();
+  };
   return (
     <>
-      <div>test</div>
-      <br />
-      {words.map((item, i) => (
-        <p key={i}>{item.word}</p>
-      ))}
-      {meanings.map((item, i) => (
-        <p key={i}>{item.meaning}</p>
-      ))}
+      <Layout>
+        <div className="flex flex-col h-dvh">
+          <PageTitle title={"WordForm"} />
+          <WordMenu />
+          <div className="flex-grow"></div>
+          <div className="overflow-y-auto">
+            {newWords.length > 0 &&
+              newWords.map((newWord, i) => (
+                <EditWord
+                  word={newWord}
+                  key={i}
+                />
+              ))}
+          </div>
+          <form
+            className="py-5 px-3 flex gap-3"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <input
+              {...register("word", { required: true })}
+              placeholder="新規単語を追加"
+              className="bg-zinc-700 w-full py-3 outline-none px-6 rounded"
+            />
+            {errors.word && <span>This field is required</span>}
+            <input
+              type="submit"
+              value="+ 追加"
+              className="bg-zinc-700 rounded px-5"
+            />
+          </form>
+        </div>
+      </Layout>
     </>
   );
 }

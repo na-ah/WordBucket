@@ -9,7 +9,6 @@ export default function DashboardInformationList({
   return (
     <>
       <div>
-        <PageTitle title={pageTitle} />
         <DashboardInformation informations={informations} />
       </div>
     </>

@@ -3,6 +3,7 @@ import DashboardInformationList from "../Information/dashboardInformationList";
 import DashboardBoxWrapper from "../Box/dashboardBoxWrapper";
 import DashboardBoxList from "../Box/dashboardBoxList";
 import LeftBarTitle from "@/components/shared/LeftBarTitle";
+import PageTitle from "@/components/shared/PageTitle";
 
 export default function InnerDashboard() {
   const {
@@ -17,7 +18,8 @@ export default function InnerDashboard() {
 
   return (
     <>
-      <div className="flex flex-col w-full px-5 py-3 relative">
+      <div className="flex-1 flex flex-col w-full px-5 py-3 relative">
+        <PageTitle title={"dashboard"} />
         <DashboardInformationList
           informations={informations}
           pageTitle={"pageTitle"}

@@ -6,7 +6,7 @@ export default function Sidebar() {
   const setIsResultShown = useSetAtom(isResultShownAtom);
   return (
     <>
-      <div className="bg-zinc-900 text-white w-14 py-3">
+      <div className="bg-zinc-900 text-white w-14 py-3 shrink-0">
         <ul className="flex flex-col gap-3 mx-auto items-center">
           <SideBarButton
             text="/"
@@ -25,8 +25,8 @@ export default function Sidebar() {
             handleClick={() => setIsResultShown(false)}
           />
           <SideBarButton
-            text="R"
-            link="/word/form"
+            text="W"
+            link="/word"
             color="lime"
           />
         </ul>

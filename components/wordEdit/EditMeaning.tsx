@@ -20,7 +20,6 @@ export default function EditMeaning({
   };
 
   const handleSubmit = () => {
-    // wordの該当のmeaningを更新
     axios
       .patch(
         `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${word.id}/meanings/${meaning.id}?meaning=${newMeaning}`
@@ -39,7 +38,14 @@ export default function EditMeaning({
 
   return (
     <>
-      {!isEditing && <div onClick={handleClick}>{newMeaning}</div>}
+      {!isEditing && (
+        <div
+          className="hover:cursor-pointer"
+          onClick={handleClick}
+        >
+          {newMeaning}
+        </div>
+      )}
       {isEditing && (
         <form onSubmit={handleSubmit}>
           <input
@@ -47,7 +53,7 @@ export default function EditMeaning({
             defaultValue={newMeaning}
             onBlur={handleSubmit}
             onChange={handleChange}
-            className="text-zinc-700 w-32 outline-none rounded px-3"
+            className="text-zinc-700 w-full outline-none rounded px-3"
             autoFocus
           />
         </form>

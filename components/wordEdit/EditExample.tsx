@@ -37,15 +37,23 @@ export default function EditExample({
 
   return (
     <>
-      {!isEditing && <div onClick={handleClick}>{newExample}</div>}
+      {!isEditing && (
+        <div
+          className="hover:cursor-pointer"
+          onClick={handleClick}
+        >
+          {newExample}
+        </div>
+      )}
       {isEditing && (
         <form onSubmit={handleSubmit}>
-          <input
+          <textarea
             type="text"
             defaultValue={newExample}
             onBlur={handleSubmit}
             onChange={handleChange}
-            className="text-zinc-700 w-32 outline-none rounded px-3"
+            rows={3}
+            className="text-zinc-700 w-full outline-none rounded px-3"
             autoFocus
           />
         </form>

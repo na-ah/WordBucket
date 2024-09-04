@@ -1,6 +1,7 @@
 import { Word } from "@/types/types";
 import axios from "axios";
 import { useState } from "react";
+import { IoMdAdd } from "react-icons/io";
 
 export default function NewExample({
   word,
@@ -31,13 +32,20 @@ export default function NewExample({
   };
   return (
     <>
-      {!isEditing && <div onClick={() => setIsEditing(true)}>+</div>}
+      {!isEditing && (
+        <div
+          onClick={() => setIsEditing(true)}
+          className="hover:cursor-pointer hover:backdrop-brightness-150 rounded-full w-fit mx-auto p-1"
+        >
+          <IoMdAdd />
+        </div>
+      )}
       {isEditing && (
         <form onSubmit={handleSubmit}>
-          <input
+          <textarea
             type="text"
             placeholder="例文を追加"
-            className="outline-none text-zinc-700 px-3 w-32 rounded"
+            className="outline-none text-zinc-700 px-3 w-full rounded"
             value={newExample}
             onChange={handleChange}
             onBlur={handleSubmit}
