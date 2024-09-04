@@ -1,38 +1,50 @@
 import type { Meaning, Word } from "@/types/types";
-import { ReactElement, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 
-export default function Meaning({
+export default function EditMeaning({
   word,
   meaning,
+  setWord,
 }: {
   word: Word;
   meaning: Meaning;
+  setWord: (arg: Word) => void;
 }) {
   const handleClick = () => {
-    console.log(meaning.meaning);
     setIsEditing(true);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentMeaning(e.target.value);
+    setNewMeaning(e.target.value);
   };
 
   const handleSubmit = () => {
     // wordの該当のmeaningを更新
+    axios
+      .patch(
+        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${word.id}/meanings/${meaning.id}?meaning=${newMeaning}`
+      )
+      .then((res) => {
+        const newWord = { ...word, meanings: res.data.word.meanings };
+        setWord(newWord);
+      })
+      .catch((e) => console.log(e));
+
     setIsEditing(false);
   };
 
   const [isEditing, setIsEditing] = useState(false);
-  const [currentMeaning, setCurrentMeaning] = useState(meaning.meaning);
+  const [newMeaning, setNewMeaning] = useState(meaning.meaning);
 
   return (
     <>
-      {!isEditing && <div onClick={handleClick}>{currentMeaning}</div>}
+      {!isEditing && <div onClick={handleClick}>{newMeaning}</div>}
       {isEditing && (
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            defaultValue={currentMeaning}
+            defaultValue={newMeaning}
             onBlur={handleSubmit}
             onChange={handleChange}
             className="text-zinc-700 w-32 outline-none rounded px-3"
