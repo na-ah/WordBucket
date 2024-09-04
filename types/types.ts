@@ -20,7 +20,7 @@ export interface DashboardBoxPropsList {
   count: string;
   percentage: string;
   color?: string;
-  boxName: string;
+  boxName?: string;
 }
 
 export interface DashboardInformationListProps {
