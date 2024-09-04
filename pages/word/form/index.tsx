@@ -1,6 +1,6 @@
 import PageTitle from "@/components/shared/PageTitle";
 import Layout from "@/components/Template/Layout/Layout";
-import NewWord from "@/components/wordForm/newWord";
+import EditWord from "@/components/wordEdit/EditWord";
 import { Word, WordInputs } from "@/types/types";
 import axios from "axios";
 import { useState } from "react";
@@ -36,8 +36,8 @@ export default function WordForm() {
           <div className="overflow-y-auto">
             {newWords.length > 0 &&
               newWords.map((newWord, i) => (
-                <NewWord
-                  newWord={newWord}
+                <EditWord
+                  word={newWord}
                   key={i}
                 />
               ))}
