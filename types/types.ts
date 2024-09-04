@@ -210,6 +210,7 @@ export interface Dashboard {
   [key: string]: unknown;
   newCards: number;
   todayLearningCards: number;
+  missingMeanings: number;
   unlearned: number;
   inProgress: number;
   completed: number;

@@ -19,6 +19,7 @@ export default function useDashboard() {
   const [dashboardData, setDashboardData] = useState<Dashboard>({
     newCards: 0,
     todayLearningCards: 0,
+    missing_meanings: 0,
     unlearned: 0,
     inProgress: 0,
     completed: 0,
@@ -88,11 +89,16 @@ export default function useDashboard() {
     dashboardData?.longDuration;
 
   const informations = [
-    { title: "本日の新規カード", text: `${dashboardData?.newCards}card` },
+    { title: "本日の新規カード", text: `${dashboardData?.newCards} card` },
     {
       title: "本日の学習件数",
-      text: `${dashboardData?.todayLearningCards}cards`,
+      text: `${dashboardData?.todayLearningCards} cards`,
       color: "lime",
+    },
+    {
+      title: "意味未登録カード",
+      text: `${dashboardData?.missingMeanings} cards`,
+      color: "rose",
     },
   ];
 
