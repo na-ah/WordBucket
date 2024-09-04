@@ -10,7 +10,7 @@ export default function FlashcardButtonFront({
       <Button
         onClick={flipCard}
         text={<GrPowerCycle />}
-        className="w-full mx-auto py-3 flex justify-center text-5xl text-zinc-200  bg-zinc-700"
+        className="w-full mx-auto my-3 py-3 flex justify-center text-5xl text-zinc-200  bg-zinc-700"
       />
     </>
   );

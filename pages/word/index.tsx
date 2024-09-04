@@ -4,7 +4,7 @@ import WordMenu from "@/components/word/wordMenu";
 import EditWord from "@/components/wordEdit/EditWord";
 import { Word, WordInputs } from "@/types/types";
 import axios from "axios";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export default function WordIndex() {
@@ -30,36 +30,38 @@ export default function WordIndex() {
   return (
     <>
       <Layout>
-        <div className="flex flex-col h-dvh">
-          <PageTitle title={"WordForm"} />
-          <WordMenu />
-          <div className="flex-grow"></div>
-          <div className="overflow-y-auto">
-            {newWords.length > 0 &&
-              newWords.map((newWord, i) => (
-                <EditWord
-                  word={newWord}
-                  key={i}
-                />
-              ))}
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <div className="flex flex-col h-dvh">
+            <PageTitle title={"WordForm"} />
+            <WordMenu />
+            <div className="flex-grow"></div>
+            <div className="overflow-y-auto">
+              {newWords.length > 0 &&
+                newWords.map((newWord, i) => (
+                  <EditWord
+                    word={newWord}
+                    key={i}
+                  />
+                ))}
+            </div>
+            <form
+              className="py-5 px-3 flex gap-3"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <input
+                {...register("word", { required: true })}
+                placeholder="新規単語を追加"
+                className="bg-zinc-700 w-full py-3 outline-none px-6 rounded"
+              />
+              {errors.word && <span>This field is required</span>}
+              <input
+                type="submit"
+                value="+ 追加"
+                className="bg-zinc-700 rounded px-5"
+              />
+            </form>
           </div>
-          <form
-            className="py-5 px-3 flex gap-3"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <input
-              {...register("word", { required: true })}
-              placeholder="新規単語を追加"
-              className="bg-zinc-700 w-full py-3 outline-none px-6 rounded"
-            />
-            {errors.word && <span>This field is required</span>}
-            <input
-              type="submit"
-              value="+ 追加"
-              className="bg-zinc-700 rounded px-5"
-            />
-          </form>
-        </div>
+        </Suspense>
       </Layout>
     </>
   );
