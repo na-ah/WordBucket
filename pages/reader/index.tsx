@@ -16,67 +16,132 @@ export default function Reader() {
 
   const wordIndexDecrease = () => {
     setWordIndex((prev) => {
-      if (prev === 0) {
-        return 0;
-      } else {
+      const isFirstWord = prev === 0;
+      const isFirstSentence = sentenceIndex === 0;
+      const isFirstParagraph = paragraphIndex === 0;
+
+      if (!isFirstWord) {
         return prev - 1;
       }
+      if (isFirstWord && !isFirstSentence) {
+        setSentenceIndex((prev) => prev - 1);
+        return article[paragraphIndex][sentenceIndex - 1].length - 1;
+      }
+      if (isFirstWord && isFirstSentence && !isFirstParagraph) {
+        const previousParagraphLastSentenceIndex =
+          article[paragraphIndex - 1].length - 1;
+        setParagraphIndex((prev) => prev - 1);
+        setSentenceIndex(previousParagraphLastSentenceIndex);
+        return (
+          article[paragraphIndex - 1][previousParagraphLastSentenceIndex]
+            .length - 1
+        );
+      }
+      if (isFirstWord && isFirstSentence && isFirstParagraph) {
+        return 0;
+      }
+      return prev;
     });
     setCurrentMode("word");
   };
 
   const wordIndexIncrease = () => {
     setWordIndex((prev) => {
-      if (prev === article[paragraphIndex][sentenceIndex].length - 1) {
-        return prev;
-      } else {
+      const isLastWord =
+        prev === article[paragraphIndex][sentenceIndex].length - 1;
+      const isLastSentence =
+        sentenceIndex === article[paragraphIndex].length - 1;
+      const isLastParagraph = paragraphIndex === article.length - 1;
+
+      if (!isLastWord) {
         return prev + 1;
       }
+      if (isLastWord && !isLastSentence) {
+        setSentenceIndex((prev) => prev + 1);
+        return 0;
+      }
+      if (isLastWord && isLastSentence && !isLastParagraph) {
+        setParagraphIndex((prev) => prev + 1);
+        setSentenceIndex(0);
+        return 0;
+      }
+      return prev;
     });
     setCurrentMode("word");
   };
 
   const sentenceIndexDecrease = () => {
     setSentenceIndex((prev) => {
-      if (prev === 0) {
-        return 0;
-      } else {
+      const isFirstSentence = prev === 0;
+      const isFirstParagraph = paragraphIndex === 0;
+
+      if (!isFirstSentence) {
         return prev - 1;
       }
+      if (isFirstSentence && !isFirstParagraph) {
+        setParagraphIndex((prev) => prev - 1);
+        return article[paragraphIndex - 1].length - 1;
+      }
+      if (isFirstSentence && isFirstParagraph) {
+        return 0;
+      }
+      return prev;
     });
+    setWordIndex(0);
     setCurrentMode("sentence");
   };
 
   const sentenceIndexIncrease = () => {
     setSentenceIndex((prev) => {
-      if (prev === article[paragraphIndex].length - 1) {
-        return prev;
-      } else {
+      const isLastSentence = prev === article[paragraphIndex].length - 1;
+      const isLastParagraph = paragraphIndex === article.length - 1;
+      if (!isLastSentence) {
         return prev + 1;
       }
+
+      if (isLastSentence && !isLastParagraph) {
+        setParagraphIndex((prev) => prev + 1);
+        return 0;
+      }
+
+      if (isLastSentence && isLastParagraph) {
+        return prev;
+      }
+      return prev;
     });
+    setWordIndex(0);
     setCurrentMode("sentence");
   };
 
   const paragraphIndexDecrease = () => {
     setParagraphIndex((prev) => {
-      if (prev === 0) {
-        return 0;
-      } else {
+      const isFirstParagraph = prev === 0;
+      if (!isFirstParagraph) {
         return prev - 1;
       }
+      if (isFirstParagraph) {
+        return 0;
+      }
+      return prev;
     });
+    setSentenceIndex(0);
+    setWordIndex(0);
     setCurrentMode("paragraph");
   };
 
   const paragraphIndexIncrease = () => {
     setParagraphIndex((prev) => {
-      if (prev === article.length - 1) {
-        return prev;
-      } else {
+      const isLastParagraph = prev === article.length - 1;
+      if (!isLastParagraph) {
         return prev + 1;
       }
+      if (isLastParagraph) {
+        return prev;
+      }
+      return prev;
     });
+    setSentenceIndex(0);
+    setWordIndex(0);
     setCurrentMode("paragraph");
   };
 
@@ -261,7 +326,7 @@ const wordMap = {
   },
 };
 
-const sample = `X’s advertising woes are about to get a whole lot worse, according to a new report from Kantar, details of which were published by Advanced Television. The market research firm found that 26 percent of marketers plan to cut their spending on X in the coming year, and that advertisers’ trust in X is “historically low.”
+const sample = `X’s advertising woes are about to get a whole lot worse. According to a new report from Kantar, details of which were published by Advanced Television. The market research firm found that 26 percent of marketers plan to cut their spending on X in the coming year, and that advertisers’ trust in X is “historically low.”
 Kantar’s report, which is based on interviews with 18,000 consumers and 1,000 marketers from around the world, underscores just how far X’s advertising business has declined since Elon Musk took over the company. Over the last year and a half, the platform has seen numerous high-profile advertisers halt or slow down their spending amid concerns about hate speech and other toxic content.
 Musk has also antagonized major advertisers, saying that brands worried about hate speech should “go fuck yourself.” he’s also accused advertisers of “blackmail,” and recently sued an industry group and several global companies for conducting an “illegal boycott” of the platform. Of note, Kantar found that only 4 percent of marketers believe X is safe for brands.
 X didn’t immediately respond to a request for comment. The company told the Financial Times that “advertisers know that X now offers stronger brand safety, performance and analytics capabilities than ever before, while seeing all-time-high levels of usage.”
