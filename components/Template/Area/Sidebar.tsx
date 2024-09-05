@@ -29,6 +29,11 @@ export default function Sidebar() {
             link="/word"
             color="lime"
           />
+          <SideBarButton
+            text="R"
+            link="/reader"
+            color="rose"
+          />
         </ul>
       </div>
     </>
