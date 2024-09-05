@@ -186,6 +186,7 @@ export default function useIndex(sourceArticle: string) {
     sentence_i: number,
     paragraph_i: number
   ) => {
+    setCurrentMode("word");
     setWordIndex(word_i);
     setSentenceIndex(sentence_i);
     setParagraphIndex(paragraph_i);
