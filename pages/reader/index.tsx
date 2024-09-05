@@ -15,6 +15,11 @@ export default function Reader() {
   const [wordIndex, setWordIndex] = useState(0);
 
   const wordIndexDecrease = () => {
+    setCurrentMode("word");
+    if (currentMode !== "word") {
+      setWordIndex(0);
+      return;
+    }
     setWordIndex((prev) => {
       const isFirstWord = prev === 0;
       const isFirstSentence = sentenceIndex === 0;
@@ -42,10 +47,14 @@ export default function Reader() {
       }
       return prev;
     });
-    setCurrentMode("word");
   };
 
   const wordIndexIncrease = () => {
+    setCurrentMode("word");
+    if (currentMode !== "word") {
+      setWordIndex(0);
+      return;
+    }
     setWordIndex((prev) => {
       const isLastWord =
         prev === article[paragraphIndex][sentenceIndex].length - 1;
@@ -67,10 +76,14 @@ export default function Reader() {
       }
       return prev;
     });
-    setCurrentMode("word");
   };
 
   const sentenceIndexDecrease = () => {
+    setCurrentMode("sentence");
+    if (currentMode !== "sentence") {
+      setSentenceIndex((prev) => prev);
+      return;
+    }
     setSentenceIndex((prev) => {
       const isFirstSentence = prev === 0;
       const isFirstParagraph = paragraphIndex === 0;
@@ -88,10 +101,14 @@ export default function Reader() {
       return prev;
     });
     setWordIndex(0);
-    setCurrentMode("sentence");
   };
 
   const sentenceIndexIncrease = () => {
+    setCurrentMode("sentence");
+    if (currentMode !== "sentence") {
+      setSentenceIndex((prev) => prev);
+      return;
+    }
     setSentenceIndex((prev) => {
       const isLastSentence = prev === article[paragraphIndex].length - 1;
       const isLastParagraph = paragraphIndex === article.length - 1;
@@ -110,10 +127,14 @@ export default function Reader() {
       return prev;
     });
     setWordIndex(0);
-    setCurrentMode("sentence");
   };
 
   const paragraphIndexDecrease = () => {
+    setCurrentMode("paragraph");
+    if (currentMode !== "paragraph") {
+      setParagraphIndex((prev) => prev);
+      return;
+    }
     setParagraphIndex((prev) => {
       const isFirstParagraph = prev === 0;
       if (!isFirstParagraph) {
@@ -126,10 +147,14 @@ export default function Reader() {
     });
     setSentenceIndex(0);
     setWordIndex(0);
-    setCurrentMode("paragraph");
   };
 
   const paragraphIndexIncrease = () => {
+    setCurrentMode("paragraph");
+    if (currentMode !== "paragraph") {
+      setParagraphIndex((prev) => prev);
+      return;
+    }
     setParagraphIndex((prev) => {
       const isLastParagraph = prev === article.length - 1;
       if (!isLastParagraph) {
@@ -142,7 +167,6 @@ export default function Reader() {
     });
     setSentenceIndex(0);
     setWordIndex(0);
-    setCurrentMode("paragraph");
   };
 
   const paragraphs = currentArticle
