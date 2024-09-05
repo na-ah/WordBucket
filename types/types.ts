@@ -257,3 +257,40 @@ export interface MeaningInput {
 export interface NewWordProps {
   newWord: Word;
 }
+
+export interface ReaderButtonProps {
+  wordIndexDecrease: () => void;
+  wordIndexIncrease: () => void;
+  sentenceIndexDecrease: () => void;
+  sentenceIndexIncrease: () => void;
+  paragraphIndexDecrease: () => void;
+  paragraphIndexIncrease: () => void;
+}
+export interface ReaderArticleProps {
+  article: string[][][][];
+  currentMode: "paragraph" | "sentence" | "word";
+  paragraphIndex: number;
+  sentenceIndex: number;
+  wordIndex: number;
+}
+
+export interface ReaderWordInformationProps {
+  currentWord: string;
+}
+
+export interface WordMap {
+  [key: string]: {
+    word: string;
+    meanings: {
+      meaning: string;
+    }[];
+    examples: {
+      example: string;
+    }[];
+    histories: {
+      datetime: string;
+      duration: number;
+      result: boolean;
+    }[];
+  };
+}
