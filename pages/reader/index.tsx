@@ -2,10 +2,9 @@ import ShowExamples from "@/components/reader/showExamples";
 import ShowMeanings from "@/components/reader/showMeanings";
 import PageTitle from "@/components/shared/PageTitle";
 import Layout from "@/components/Template/Layout/Layout";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Reader() {
-  const [currentArticle, setCurrentArticle] = useState(sample);
   const [currentMode, setCurrentMode] = useState<
     "word" | "sentence" | "paragraph"
   >("word");
@@ -169,15 +168,16 @@ export default function Reader() {
     setWordIndex(0);
   };
 
-  const paragraphs = currentArticle
-    .split(/\n\s*/)
-    .filter((p) => p.trim() !== "");
-
-  const article = paragraphs.map((paragraph) =>
-    paragraph
-      .split(/(?<=[.!?])\s+(?=[A-Z“”"])/)
-      .map((sentence) => sentence.split(" ").map((word) => [word]))
-  );
+  const article = useMemo(() => {
+    return sample
+      .split(/\n\s*/)
+      .filter((p) => p.trim() !== "")
+      .map((paragraph) =>
+        paragraph
+          .split(/(?<=[.!?])\s+(?=[A-Z“”"])/)
+          .map((sentence) => sentence.split(" ").map((word) => [word]))
+      );
+  }, [sample]);
 
   useEffect(() => {
     setCurrentWord(
