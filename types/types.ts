@@ -272,6 +272,11 @@ export interface ReaderArticleProps {
   paragraphIndex: number;
   sentenceIndex: number;
   wordIndex: number;
+  handleClickWord: (
+    word_i: number,
+    sentence_i: number,
+    paragraph_i: number
+  ) => void;
 }
 
 export interface ReaderWordInformationProps {

@@ -181,6 +181,16 @@ export default function useIndex(sourceArticle: string) {
     );
   }, [paragraphIndex, sentenceIndex, wordIndex, article]);
 
+  const handleClickWord = (
+    word_i: number,
+    sentence_i: number,
+    paragraph_i: number
+  ) => {
+    setWordIndex(word_i);
+    setSentenceIndex(sentence_i);
+    setParagraphIndex(paragraph_i);
+  };
+
   return {
     currentWord,
     article,
@@ -194,5 +204,6 @@ export default function useIndex(sourceArticle: string) {
     sentenceIndexIncrease,
     paragraphIndexDecrease,
     paragraphIndexIncrease,
+    handleClickWord,
   };
 }

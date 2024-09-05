@@ -20,6 +20,7 @@ export default function Reader() {
     sentenceIndexIncrease,
     paragraphIndexDecrease,
     paragraphIndexIncrease,
+    handleClickWord,
   } = useIndex(sample);
   return (
     <>
@@ -33,6 +34,7 @@ export default function Reader() {
               paragraphIndex={paragraphIndex}
               sentenceIndex={sentenceIndex}
               wordIndex={wordIndex}
+              handleClickWord={handleClickWord}
             />
           </div>
           <div className="basis-3/12 overflow-auto">
