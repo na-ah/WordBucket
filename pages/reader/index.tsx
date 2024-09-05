@@ -12,27 +12,63 @@ export default function Reader() {
   const [wordIndex, setWordIndex] = useState(0);
 
   const wordIndexDecrease = () => {
-    setWordIndex((prev) => prev - 1);
+    setWordIndex((prev) => {
+      if (prev === 0) {
+        return 0;
+      } else {
+        return prev - 1;
+      }
+    });
   };
 
   const wordIndexIncrease = () => {
-    setWordIndex((prev) => prev + 1);
+    setWordIndex((prev) => {
+      if (prev === article[paragraphIndex][sentenceIndex].length - 1) {
+        return prev;
+      } else {
+        return prev + 1;
+      }
+    });
   };
 
   const sentenceIndexDecrease = () => {
-    setSentenceIndex((prev) => prev - 1);
+    setSentenceIndex((prev) => {
+      if (prev === 0) {
+        return 0;
+      } else {
+        return prev - 1;
+      }
+    });
   };
 
   const sentenceIndexIncrease = () => {
-    setSentenceIndex((prev) => prev + 1);
+    setSentenceIndex((prev) => {
+      if (prev === article[paragraphIndex].length - 1) {
+        return prev;
+      } else {
+        return prev + 1;
+      }
+    });
   };
 
   const paragraphIndexDecrease = () => {
-    setParagraphIndex((prev) => prev - 1);
+    setParagraphIndex((prev) => {
+      if (prev === 0) {
+        return 0;
+      } else {
+        return prev - 1;
+      }
+    });
   };
 
   const paragraphIndexIncrease = () => {
-    setParagraphIndex((prev) => prev + 1);
+    setParagraphIndex((prev) => {
+      if (prev === article.length - 1) {
+        return prev;
+      } else {
+        return prev + 1;
+      }
+    });
   };
 
   const paragraphs = currentArticle
@@ -73,8 +109,8 @@ export default function Reader() {
                             paragraphIndex === paragraph_i &&
                             sentenceIndex === sentence_i &&
                             wordIndex === word_i
-                              ? "gray"
-                              : "white",
+                              ? "white"
+                              : "gray",
                         }}
                       >
                         {word}
