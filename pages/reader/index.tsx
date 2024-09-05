@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 
 export default function Reader() {
   const [currentArticle, setCurrentArticle] = useState(sample);
+  const [currentMode, setCurrentMode] = useState<
+    "word" | "sentence" | "paragraph"
+  >("word");
   const [currentWord, setCurrentWord] = useState("");
   const [paragraphIndex, setParagraphIndex] = useState(0);
   const [sentenceIndex, setSentenceIndex] = useState(0);
@@ -19,6 +22,7 @@ export default function Reader() {
         return prev - 1;
       }
     });
+    setCurrentMode("word");
   };
 
   const wordIndexIncrease = () => {
@@ -29,6 +33,7 @@ export default function Reader() {
         return prev + 1;
       }
     });
+    setCurrentMode("word");
   };
 
   const sentenceIndexDecrease = () => {
@@ -39,6 +44,7 @@ export default function Reader() {
         return prev - 1;
       }
     });
+    setCurrentMode("sentence");
   };
 
   const sentenceIndexIncrease = () => {
@@ -49,6 +55,7 @@ export default function Reader() {
         return prev + 1;
       }
     });
+    setCurrentMode("sentence");
   };
 
   const paragraphIndexDecrease = () => {
@@ -59,6 +66,7 @@ export default function Reader() {
         return prev - 1;
       }
     });
+    setCurrentMode("paragraph");
   };
 
   const paragraphIndexIncrease = () => {
@@ -69,6 +77,7 @@ export default function Reader() {
         return prev + 1;
       }
     });
+    setCurrentMode("paragraph");
   };
 
   const paragraphs = currentArticle
@@ -94,11 +103,28 @@ export default function Reader() {
           <PageTitle title="Reader" />
           <div className="basis-8/12 flex flex-col gap-3 overflow-y-auto">
             {article.map((paragraph, paragraph_i) => (
-              <div key={paragraph_i}>
+              <div
+                key={paragraph_i}
+                style={{
+                  color:
+                    currentMode === "paragraph" &&
+                    paragraphIndex === paragraph_i
+                      ? "white"
+                      : "gray",
+                }}
+              >
                 {paragraph.map((sentence, sentence_i) => (
                   <div
                     key={sentence_i}
                     className="inline"
+                    style={{
+                      color:
+                        currentMode === "sentence" &&
+                        paragraphIndex === paragraph_i &&
+                        sentenceIndex === sentence_i
+                          ? "white"
+                          : "inherit",
+                    }}
                   >
                     {sentence.map((word, word_i) => (
                       <div
@@ -106,11 +132,12 @@ export default function Reader() {
                         className="inline-block me-2"
                         style={{
                           color:
+                            currentMode === "word" &&
                             paragraphIndex === paragraph_i &&
                             sentenceIndex === sentence_i &&
                             wordIndex === word_i
                               ? "white"
-                              : "gray",
+                              : "inherit",
                         }}
                       >
                         {word}
