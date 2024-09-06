@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function SideBarButton({
   text,
@@ -12,15 +13,27 @@ export default function SideBarButton({
   handleClick?: () => void;
 }) {
   const colors: { [key: string]: string } = {
-    blue: "hover:bg-sky-600",
-    lime: "hover:bg-lime-600",
-    rose: "hover:bg-rose-600",
+    blue: "#0284c7",
+    lime: "#65a30d",
+    rose: "#e11a48",
   };
+  const router = useRouter();
+  const bgColor = () => {
+    if (router.pathname.indexOf(link) > -1) {
+      return `${colors[color]}`;
+    } else {
+      return "inherit";
+    }
+  };
+
+  console.log(router.pathname.indexOf(link) === -1);
+
   return (
     <>
       <Link
         href={link}
-        className={`bg-zinc-700 rounded-full flex justify-center items-center aspect-square w-3/4 transition-all duration-50  hover:cursor-pointer ${colors[color]}`}
+        className={`bg-zinc-700 rounded-full flex justify-center items-center aspect-square w-3/4 transition-all duration-50  hover:cursor-pointer`}
+        style={{ backgroundColor: bgColor() }}
         onClick={handleClick}
       >
         <li>{text}</li>

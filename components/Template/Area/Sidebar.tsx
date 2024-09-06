@@ -16,7 +16,7 @@ export default function Sidebar() {
           <SideBarButton
             text="D"
             link="/dashboard"
-            color="rose"
+            color="blue"
           />
           <SideBarButton
             text="F"
