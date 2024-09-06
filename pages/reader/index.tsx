@@ -27,7 +27,7 @@ export default function Reader() {
       <Layout>
         <div className="flex flex-col w-full px-5 py-3 relative h-dvh">
           <PageTitle title="Reader" />
-          <div className="basis-8/12 flex flex-col gap-3 overflow-y-auto">
+          <div className="basis-7/12 flex flex-col gap-3 overflow-y-auto">
             <ReaderArticle
               article={article}
               currentMode={currentMode}
@@ -37,7 +37,7 @@ export default function Reader() {
               handleClickWord={handleClickWord}
             />
           </div>
-          <div className="basis-3/12 overflow-auto">
+          <div className="basis-4/12 overflow-auto">
             <ReaderWordInformation currentWord={currentWord} />
           </div>
           <div className="basis-1/12 flex justify-center items-center gap-5">

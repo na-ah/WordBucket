@@ -3,6 +3,9 @@ import { WordMap } from "@/types/types";
 export const wordMap: WordMap = {
   advertising: {
     word: "advertising",
+    status: "in_progress",
+    accuracyRate: 0.3,
+    learningCount: 3,
     meanings: [
       {
         meaning: "広告",
@@ -34,6 +37,9 @@ export const wordMap: WordMap = {
   },
   market: {
     word: "market",
+    status: "memorizing",
+    accuracyRate: 0.8,
+    learningCount: 8,
     meanings: [
       {
         meaning: "市場",
@@ -48,6 +54,40 @@ export const wordMap: WordMap = {
         datetime: "2024-08-31",
         duration: 5,
         result: false,
+      },
+    ],
+  },
+  business: {
+    word: "business",
+    status: "unlearned",
+    accuracyRate: 0,
+    learningCount: 0,
+    meanings: [
+      {
+        meaning: "広告",
+      },
+      {
+        meaning: "宣伝する",
+      },
+    ],
+    examples: [
+      {
+        example: "an advertising agency",
+      },
+      {
+        example: "an advertising man",
+      },
+    ],
+    histories: [
+      {
+        datetime: "2024-09-03",
+        duration: 3.2,
+        result: false,
+      },
+      {
+        datetime: "2024-09-04",
+        duration: 2.8,
+        result: true,
       },
     ],
   },

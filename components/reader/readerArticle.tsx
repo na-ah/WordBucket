@@ -1,3 +1,4 @@
+import { wordMap } from "@/data/reader/source";
 import { ReaderArticleProps } from "@/types/types";
 
 export default function ReaderArticle({
@@ -31,6 +32,12 @@ export default function ReaderArticle({
                   sentenceIndex === sentence_i
                     ? "white"
                     : "inherit",
+                filter:
+                  currentMode === "sentence" &&
+                  paragraphIndex === paragraph_i &&
+                  sentenceIndex === sentence_i
+                    ? "none"
+                    : "brightness(0.1)",
               }}
             >
               {sentence.map((word, word_i) => (
@@ -48,6 +55,14 @@ export default function ReaderArticle({
                       sentenceIndex === sentence_i &&
                       wordIndex === word_i
                         ? "white"
+                        : wordMap.hasOwnProperty(word.toString())
+                        ? wordMap[word.toString()].status === "unlearned"
+                          ? "orange"
+                          : wordMap[word.toString()].status === "in_progress"
+                          ? "fuchsia"
+                          : wordMap[word.toString()].status === "memorizing"
+                          ? "aqua"
+                          : "inherit"
                         : "inherit",
                   }}
                 >

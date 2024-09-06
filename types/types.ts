@@ -286,6 +286,9 @@ export interface ReaderWordInformationProps {
 export interface WordMap {
   [key: string]: {
     word: string;
+    status: "unlearned" | "in_progress" | "memorizing";
+    accuracyRate: number;
+    learningCount: number;
     meanings: {
       meaning: string;
     }[];
