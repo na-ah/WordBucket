@@ -75,10 +75,6 @@ export default function useIndex(sourceArticle: string) {
 
   const sentenceIndexDecrease = () => {
     setCurrentMode("sentence");
-    if (currentMode !== "sentence") {
-      setSentenceIndex((prev) => prev);
-      return;
-    }
     setSentenceIndex((prev) => {
       const isFirstSentence = prev === 0;
       const isFirstParagraph = paragraphIndex === 0;
@@ -100,10 +96,6 @@ export default function useIndex(sourceArticle: string) {
 
   const sentenceIndexIncrease = () => {
     setCurrentMode("sentence");
-    if (currentMode !== "sentence") {
-      setSentenceIndex((prev) => prev);
-      return;
-    }
     setSentenceIndex((prev) => {
       const isLastSentence = prev === article[paragraphIndex].length - 1;
       const isLastParagraph = paragraphIndex === article.length - 1;
@@ -126,10 +118,6 @@ export default function useIndex(sourceArticle: string) {
 
   const paragraphIndexDecrease = () => {
     setCurrentMode("paragraph");
-    if (currentMode !== "paragraph") {
-      setParagraphIndex((prev) => prev);
-      return;
-    }
     setParagraphIndex((prev) => {
       const isFirstParagraph = prev === 0;
       if (!isFirstParagraph) {
@@ -146,10 +134,6 @@ export default function useIndex(sourceArticle: string) {
 
   const paragraphIndexIncrease = () => {
     setCurrentMode("paragraph");
-    if (currentMode !== "paragraph") {
-      setParagraphIndex((prev) => prev);
-      return;
-    }
     setParagraphIndex((prev) => {
       const isLastParagraph = prev === article.length - 1;
       if (!isLastParagraph) {
