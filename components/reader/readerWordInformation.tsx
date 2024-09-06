@@ -3,10 +3,16 @@ import { ReaderWordInformationProps } from "@/types/types";
 
 export default function ReaderWordInformation({
   currentWord,
+  currentMode,
 }: ReaderWordInformationProps) {
   return (
     <>
-      <div className="text-slate-200 flex flex-col gap-3 py-3">
+      <div
+        className="text-slate-200 flex flex-col gap-3 py-3"
+        style={{
+          display: currentMode === "word" ? "block" : "none",
+        }}
+      >
         <div className="font-bold text-2xl">{currentWord}</div>
         <div className="font-bold text-lg flex">
           {wordMap[currentWord]?.meanings && (

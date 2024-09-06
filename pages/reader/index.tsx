@@ -38,7 +38,10 @@ export default function Reader() {
             />
           </div>
           <div className="basis-4/12 overflow-auto">
-            <ReaderWordInformation currentWord={currentWord} />
+            <ReaderWordInformation
+              currentWord={currentWord}
+              currentMode={currentMode}
+            />
           </div>
           <div className="basis-1/12 flex justify-center items-center gap-5">
             <ReaderButtons

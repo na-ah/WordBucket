@@ -19,6 +19,7 @@ export default function ReaderArticle({
               currentMode === "paragraph" && paragraphIndex === paragraph_i
                 ? "white"
                 : "gray",
+            display: paragraph_i === paragraphIndex ? "block" : "none",
           }}
         >
           {paragraph.map((sentence, sentence_i) => (

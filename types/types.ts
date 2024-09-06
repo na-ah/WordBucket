@@ -281,6 +281,7 @@ export interface ReaderArticleProps {
 
 export interface ReaderWordInformationProps {
   currentWord: string;
+  currentMode: "paragraph" | "sentence" | "word";
 }
 
 export interface WordMap {
