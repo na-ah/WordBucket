@@ -280,6 +280,7 @@ export interface ReaderArticleProps {
 export interface ReaderWordInformationProps {
   currentWord: string;
   currentMode: "paragraph" | "sentence" | "word";
+  handleClickInformationClose: () => void;
 }
 
 export interface WordMap {

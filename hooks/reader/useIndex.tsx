@@ -112,6 +112,10 @@ export default function useIndex(sourceArticle: string) {
     setParagraphIndex(paragraph_i);
   };
 
+  const handleClickInformationClose = () => {
+    setCurrentMode("sentence");
+  };
+
   return {
     currentWord,
     article,
@@ -124,5 +128,6 @@ export default function useIndex(sourceArticle: string) {
     paragraphIndexDecrease,
     paragraphIndexIncrease,
     handleClickWord,
+    handleClickInformationClose,
   };
 }

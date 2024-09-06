@@ -19,13 +19,14 @@ export default function Reader() {
     paragraphIndexDecrease,
     paragraphIndexIncrease,
     handleClickWord,
+    handleClickInformationClose,
   } = useIndex(sample);
   return (
     <>
       <Layout>
         <div className="flex flex-col w-full px-5 py-3 relative h-dvh">
           <PageTitle title="Reader" />
-          <div className="basis-7/12 flex flex-col text-xl gap-3 overflow-y-auto py-4">
+          <div className="flex-1 flex flex-col text-xl gap-3 overflow-y-auto py-4">
             <ReaderArticle
               article={article}
               currentMode={currentMode}
@@ -35,10 +36,14 @@ export default function Reader() {
               handleClickWord={handleClickWord}
             />
           </div>
-          <div className="basis-4/12 overflow-auto">
+          <div
+            className="overflow-auto mb-5"
+            style={{ display: currentMode === "word" ? "block" : "none" }}
+          >
             <ReaderWordInformation
               currentWord={currentWord}
               currentMode={currentMode}
+              handleClickInformationClose={handleClickInformationClose}
             />
           </div>
           <div className="basis-1/12 flex justify-between items-center">
