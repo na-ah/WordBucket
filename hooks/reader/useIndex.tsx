@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 export default function useIndex(sourceArticle: string) {
   const [currentMode, setCurrentMode] = useState<
     "word" | "sentence" | "paragraph"
-  >("word");
+  >("sentence");
   const [currentWord, setCurrentWord] = useState("");
   const [paragraphIndex, setParagraphIndex] = useState(0);
   const [sentenceIndex, setSentenceIndex] = useState(0);
@@ -53,7 +53,7 @@ export default function useIndex(sourceArticle: string) {
   };
 
   const paragraphIndexDecrease = () => {
-    setCurrentMode("paragraph");
+    setCurrentMode("sentence");
     setParagraphIndex((prev) => {
       const isFirstParagraph = prev === 0;
       if (!isFirstParagraph) {
@@ -69,7 +69,7 @@ export default function useIndex(sourceArticle: string) {
   };
 
   const paragraphIndexIncrease = () => {
-    setCurrentMode("paragraph");
+    setCurrentMode("sentence");
     setParagraphIndex((prev) => {
       const isLastParagraph = prev === article.length - 1;
       if (!isLastParagraph) {
