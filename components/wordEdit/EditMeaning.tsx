@@ -1,5 +1,5 @@
+import useWordApi from "@/hooks/common/useWordApi";
 import type { Meaning, Word } from "@/types/types";
-import axios from "axios";
 import { useState } from "react";
 
 export default function EditMeaning({
@@ -11,6 +11,7 @@ export default function EditMeaning({
   meaning: Meaning;
   setWord: (arg: Word) => void;
 }) {
+  const { editMeaningApi } = useWordApi();
   const handleClick = () => {
     setIsEditing(true);
   };
@@ -20,16 +21,7 @@ export default function EditMeaning({
   };
 
   const handleSubmit = () => {
-    axios
-      .patch(
-        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${word.id}/meanings/${meaning.id}?meaning=${newMeaning}`
-      )
-      .then((res) => {
-        const newWord = { ...word, meanings: res.data.word.meanings };
-        setWord(newWord);
-      })
-      .catch((e) => console.log(e));
-
+    editMeaningApi(newMeaning, word, meaning, setWord);
     setIsEditing(false);
   };
 

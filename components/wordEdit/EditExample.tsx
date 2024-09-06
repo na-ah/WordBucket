@@ -1,5 +1,5 @@
+import useWordApi from "@/hooks/common/useWordApi";
 import type { Example, Word } from "@/types/types";
-import axios from "axios";
 import { useState } from "react";
 
 export default function EditExample({
@@ -19,16 +19,10 @@ export default function EditExample({
     setNewExample(e.target.value);
   };
 
+  const { editExampleApi } = useWordApi();
+
   const handleSubmit = () => {
-    axios
-      .patch(
-        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${word.id}/examples/${example.id}?example=${newExample}`
-      )
-      .then((res) => {
-        const newWord = { ...word, examples: res.data.word.examples };
-        setWord(newWord);
-      })
-      .catch((e) => console.log(e));
+    editExampleApi(newExample, word, example, setWord);
     setIsEditing(false);
   };
 

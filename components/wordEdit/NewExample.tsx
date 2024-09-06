@@ -1,5 +1,5 @@
+import useWordApi from "@/hooks/common/useWordApi";
 import { Word } from "@/types/types";
-import axios from "axios";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
@@ -12,24 +12,18 @@ export default function NewExample({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newExample, setNewExample] = useState("");
+  const { addNewExampleApi } = useWordApi();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewExample(e.target.value);
   };
+
   const handleSubmit = () => {
-    if (newExample != "") {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${word.id}/examples?example=${newExample}`
-        )
-        .then((res) => {
-          const newWord = { ...word, examples: res.data.word.examples };
-          setWord(newWord);
-        })
-        .catch((e) => console.log(e));
-    }
+    addNewExampleApi(newExample, word, setWord);
     setIsEditing(false);
     setNewExample("");
   };
+
   return (
     <>
       {!isEditing && (
@@ -42,7 +36,7 @@ export default function NewExample({
       )}
       {isEditing && (
         <form onSubmit={handleSubmit}>
-          <textarea
+          <input
             type="text"
             placeholder="例文を追加"
             className="outline-none text-zinc-700 px-3 w-full rounded"

@@ -1,5 +1,5 @@
+import useWordApi from "@/hooks/common/useWordApi";
 import { Word } from "@/types/types";
-import axios from "axios";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
@@ -12,24 +12,18 @@ export default function NewMeaning({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newMeaning, setNewMeaning] = useState("");
+  const { addNewMeaningApi } = useWordApi();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewMeaning(e.target.value);
   };
+
   const handleSubmit = () => {
-    if (newMeaning != "") {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${word.id}/meanings?meaning=${newMeaning}`
-        )
-        .then((res) => {
-          const newWord = { ...word, meanings: res.data.word.meanings };
-          setWord(newWord);
-        })
-        .catch((e) => console.log(e));
-    }
+    addNewMeaningApi(newMeaning, word, setWord);
     setIsEditing(false);
     setNewMeaning("");
   };
+
   return (
     <>
       {!isEditing && (
