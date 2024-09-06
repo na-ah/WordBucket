@@ -27,8 +27,6 @@ export default function SideBarButton({
     }
   };
 
-  console.log(router.pathname.indexOf(link) === -1);
-
   return (
     <>
       <Link

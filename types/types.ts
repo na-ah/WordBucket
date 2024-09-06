@@ -275,12 +275,28 @@ export interface ReaderArticleProps {
     sentence_i: number,
     paragraph_i: number
   ) => void;
+  wordStatus: WordStatus | undefined;
 }
 
 export interface ReaderWordInformationProps {
   currentWord: string;
   currentMode: "paragraph" | "sentence" | "word";
   handleClickInformationClose: () => void;
+  wordStatus: WordStatus | undefined;
+}
+
+export interface WordStatus {
+  [key: string]: {
+    id: number;
+    word: string;
+    average_duration: string;
+    correct_rate: string;
+    learning_count: number;
+    status: string;
+    meanings: [];
+    examples: [];
+    histories: [];
+  };
 }
 
 export interface WordMap {

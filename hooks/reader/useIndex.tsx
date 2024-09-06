@@ -95,9 +95,17 @@ export default function useIndex(sourceArticle: string) {
       );
   }, [sourceArticle]);
 
+  const articleWords = useMemo(() => {
+    return article
+      .flat(3)
+      .map((word) => word.replace(/^[^\w]+|[^\w]+$/g, "").toLowerCase());
+  }, [article]);
+
   useEffect(() => {
     setCurrentWord(
-      article[paragraphIndex][sentenceIndex][wordIndex].toString()
+      article[paragraphIndex][sentenceIndex][wordIndex]
+        .toString()
+        .replace(/^[^\w]+|[^\w]+$/g, "")
     );
   }, [paragraphIndex, sentenceIndex, wordIndex, article]);
 
@@ -119,6 +127,7 @@ export default function useIndex(sourceArticle: string) {
   return {
     currentWord,
     article,
+    articleWords,
     currentMode,
     paragraphIndex,
     sentenceIndex,

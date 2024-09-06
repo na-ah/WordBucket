@@ -1,5 +1,4 @@
 import { ArticleWordColor } from "@/data/reader/readerColor";
-import { wordMap } from "@/data/reader/source";
 import { ReaderArticleProps } from "@/types/types";
 
 export default function ReaderArticle({
@@ -9,6 +8,7 @@ export default function ReaderArticle({
   sentenceIndex,
   wordIndex,
   handleClickWord,
+  wordStatus,
 }: ReaderArticleProps) {
   return (
     <>
@@ -46,15 +46,16 @@ export default function ReaderArticle({
                     handleClickWord(word_i, sentence_i, paragraph_i);
                   }}
                   style={{
-                    color: wordMap.hasOwnProperty(word.toString())
-                      ? wordMap[word.toString()].status === "unlearned"
-                        ? ArticleWordColor["unlearned"]
-                        : wordMap[word.toString()].status === "in_progress"
-                        ? ArticleWordColor["inProgress"]
-                        : wordMap[word.toString()].status === "memorizing"
-                        ? ArticleWordColor["memorizing"]
-                        : "inherit"
-                      : "inherit",
+                    color:
+                      wordStatus && wordStatus.hasOwnProperty(word.toString())
+                        ? wordStatus[word.toString()].status === "unlearned"
+                          ? ArticleWordColor["unlearned"]
+                          : wordStatus[word.toString()].status === "in_progress"
+                          ? ArticleWordColor["inProgress"]
+                          : wordStatus[word.toString()].status === "memorizing"
+                          ? ArticleWordColor["memorizing"]
+                          : "inherit"
+                        : "inherit",
                   }}
                 >
                   {word}
