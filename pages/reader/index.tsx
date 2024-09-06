@@ -41,7 +41,7 @@ export default function Reader() {
               currentMode={currentMode}
             />
           </div>
-          <div className="basis-1/12 flex justify-center items-center gap-5">
+          <div className="basis-1/12 flex justify-between items-center">
             <ReaderButtons
               sentenceIndexDecrease={sentenceIndexDecrease}
               sentenceIndexIncrease={sentenceIndexIncrease}
