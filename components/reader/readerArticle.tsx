@@ -40,7 +40,7 @@ export default function ReaderArticle({
               {sentence.map((word, word_i) => (
                 <div
                   key={word_i}
-                  className="inline-block me-2 hover:cursor-pointer"
+                  className="inline-block me-2 mt-1 hover:cursor-pointer"
                   onClick={() => {
                     console.log(word.toString());
                     handleClickWord(word_i, sentence_i, paragraph_i);
