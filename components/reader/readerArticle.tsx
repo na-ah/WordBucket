@@ -1,3 +1,4 @@
+import { ArticleWordColor } from "@/data/reader/readerColor";
 import { wordMap } from "@/data/reader/source";
 import { ReaderArticleProps } from "@/types/types";
 
@@ -47,11 +48,11 @@ export default function ReaderArticle({
                   style={{
                     color: wordMap.hasOwnProperty(word.toString())
                       ? wordMap[word.toString()].status === "unlearned"
-                        ? "orange"
+                        ? ArticleWordColor["unlearned"]
                         : wordMap[word.toString()].status === "in_progress"
-                        ? "fuchsia"
+                        ? ArticleWordColor["inProgress"]
                         : wordMap[word.toString()].status === "memorizing"
-                        ? "aqua"
+                        ? ArticleWordColor["memorizing"]
                         : "inherit"
                       : "inherit",
                   }}
