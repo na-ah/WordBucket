@@ -27,7 +27,7 @@ export default function Reader() {
       <Layout>
         <div className="flex flex-col w-full px-5 py-3 relative h-dvh">
           <PageTitle title="Reader" />
-          <div className="basis-7/12 flex flex-col gap-3 overflow-y-auto">
+          <div className="basis-7/12 flex flex-col gap-3 overflow-y-auto py-4">
             <ReaderArticle
               article={article}
               currentMode={currentMode}
