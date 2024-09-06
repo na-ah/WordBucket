@@ -1,8 +1,6 @@
 import { ReaderButtonProps } from "@/types/types";
 
 export default function ReaderButtons({
-  wordIndexDecrease,
-  wordIndexIncrease,
   sentenceIndexDecrease,
   sentenceIndexIncrease,
   paragraphIndexDecrease,
@@ -21,18 +19,6 @@ export default function ReaderButtons({
         onClick={sentenceIndexDecrease}
       >
         ⇐
-      </button>
-      <button
-        className="text-3xl"
-        onClick={wordIndexDecrease}
-      >
-        ←
-      </button>
-      <button
-        className="text-3xl"
-        onClick={wordIndexIncrease}
-      >
-        →
       </button>
       <button
         className="text-3xl"

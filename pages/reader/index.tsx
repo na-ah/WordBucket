@@ -14,8 +14,6 @@ export default function Reader() {
     paragraphIndex,
     sentenceIndex,
     wordIndex,
-    wordIndexDecrease,
-    wordIndexIncrease,
     sentenceIndexDecrease,
     sentenceIndexIncrease,
     paragraphIndexDecrease,
@@ -45,8 +43,6 @@ export default function Reader() {
           </div>
           <div className="basis-1/12 flex justify-center items-center gap-5">
             <ReaderButtons
-              wordIndexDecrease={wordIndexDecrease}
-              wordIndexIncrease={wordIndexIncrease}
               sentenceIndexDecrease={sentenceIndexDecrease}
               sentenceIndexIncrease={sentenceIndexIncrease}
               paragraphIndexDecrease={paragraphIndexDecrease}

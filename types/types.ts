@@ -259,8 +259,6 @@ export interface NewWordProps {
 }
 
 export interface ReaderButtonProps {
-  wordIndexDecrease: () => void;
-  wordIndexIncrease: () => void;
   sentenceIndexDecrease: () => void;
   sentenceIndexIncrease: () => void;
   paragraphIndexDecrease: () => void;
