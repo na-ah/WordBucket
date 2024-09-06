@@ -16,13 +16,14 @@ export default function SideBarButton({
     blue: "#0284c7",
     lime: "#65a30d",
     rose: "#e11a48",
+    amber: "#f59e0b",
   };
   const router = useRouter();
   const bgColor = () => {
     if (router.pathname.indexOf(link) > -1) {
       return `${colors[color]}`;
     } else {
-      return "inherit";
+      return "#52525b";
     }
   };
 
