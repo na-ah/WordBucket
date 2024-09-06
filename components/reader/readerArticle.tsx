@@ -10,6 +10,7 @@ export default function ReaderArticle({
   handleClickWord,
   wordStatus,
 }: ReaderArticleProps) {
+  const cleanWord = (word) => word.toString().replace(/^[^\w]+|[^\w]+$/g, "");
   return (
     <>
       {article.map((paragraph, paragraph_i) => (
@@ -47,12 +48,12 @@ export default function ReaderArticle({
                   }}
                   style={{
                     color:
-                      wordStatus && wordStatus.hasOwnProperty(word.toString())
-                        ? wordStatus[word.toString()].status === "unlearned"
+                      wordStatus && wordStatus.hasOwnProperty(cleanWord(word))
+                        ? wordStatus[cleanWord(word)].status === "unlearned"
                           ? ArticleWordColor["unlearned"]
-                          : wordStatus[word.toString()].status === "in_progress"
+                          : wordStatus[cleanWord(word)].status === "in_progress"
                           ? ArticleWordColor["inProgress"]
-                          : wordStatus[word.toString()].status === "memorizing"
+                          : wordStatus[cleanWord(word)].status === "memorizing"
                           ? ArticleWordColor["memorizing"]
                           : "inherit"
                         : "inherit",
