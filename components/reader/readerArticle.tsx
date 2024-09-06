@@ -15,10 +15,6 @@ export default function ReaderArticle({
         <div
           key={paragraph_i}
           style={{
-            color:
-              currentMode === "paragraph" && paragraphIndex === paragraph_i
-                ? "white"
-                : "gray",
             display: paragraph_i === paragraphIndex ? "block" : "none",
           }}
         >
@@ -34,11 +30,11 @@ export default function ReaderArticle({
                     ? "white"
                     : "inherit",
                 filter:
-                  currentMode === "sentence" &&
+                  (currentMode === "sentence" || currentMode === "word") &&
                   paragraphIndex === paragraph_i &&
                   sentenceIndex === sentence_i
                     ? "none"
-                    : "brightness(0.1)",
+                    : "brightness(0.4)",
               }}
             >
               {sentence.map((word, word_i) => (
@@ -50,21 +46,15 @@ export default function ReaderArticle({
                     handleClickWord(word_i, sentence_i, paragraph_i);
                   }}
                   style={{
-                    color:
-                      currentMode === "word" &&
-                      paragraphIndex === paragraph_i &&
-                      sentenceIndex === sentence_i &&
-                      wordIndex === word_i
-                        ? "white"
-                        : wordMap.hasOwnProperty(word.toString())
-                        ? wordMap[word.toString()].status === "unlearned"
-                          ? "orange"
-                          : wordMap[word.toString()].status === "in_progress"
-                          ? "fuchsia"
-                          : wordMap[word.toString()].status === "memorizing"
-                          ? "aqua"
-                          : "inherit"
-                        : "inherit",
+                    color: wordMap.hasOwnProperty(word.toString())
+                      ? wordMap[word.toString()].status === "unlearned"
+                        ? "orange"
+                        : wordMap[word.toString()].status === "in_progress"
+                        ? "fuchsia"
+                        : wordMap[word.toString()].status === "memorizing"
+                        ? "aqua"
+                        : "inherit"
+                      : "inherit",
                   }}
                 >
                   {word}
