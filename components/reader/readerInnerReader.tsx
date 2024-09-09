@@ -24,7 +24,6 @@ export default function InnerReader() {
   } = useIndex(sample);
 
   const { wordStatus, fetchStatus } = useWordStatus();
-  console.log(wordStatus && wordStatus.hasOwnProperty("research"));
 
   return (
     <>

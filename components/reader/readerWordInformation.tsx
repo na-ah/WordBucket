@@ -164,7 +164,7 @@ export default function ReaderWordInformation({
           </div>
         )}
         {wordStatus && !wordStatus[currentWord] && (
-          <div className="flex justify-center">
+          <div className="flex">
             <button
               onClick={handleSubmitWord}
               className="border rounded-xl px-3 cursor-pointer"

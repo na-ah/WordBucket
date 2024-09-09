@@ -15,7 +15,6 @@ export default function useWordStatus() {
           process.env.NEXT_PUBLIC_LOCAL_HOST
         }/words/list?words=${articleWords.join(",")}`
       );
-      console.log(res.data);
       return res.data;
     } catch (e) {
       console.log(e);

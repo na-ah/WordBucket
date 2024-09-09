@@ -24,7 +24,7 @@ export default function ReaderWordInformationAddMeaning({
       {!isEditing && (
         <div
           onClick={() => setIsEditing(true)}
-          className="hover:cursor-pointer hover:backdrop-brightness-150 rounded-full w-fit mx-auto p-1"
+          className="hover:cursor-pointer hover:backdrop-brightness-150 rounded-full w-fit ms-auto p-1"
         >
           <IoMdAdd />
         </div>
