@@ -283,6 +283,7 @@ export interface ReaderWordInformationProps {
   currentMode: "paragraph" | "sentence" | "word";
   handleClickInformationClose: () => void;
   wordStatus: WordStatus | undefined;
+  fetchStatus: () => void;
 }
 
 export interface WordStatus {

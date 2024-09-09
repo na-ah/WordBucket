@@ -1,12 +1,99 @@
 import { ArticleWordColor } from "@/data/reader/readerColor";
-import { ReaderWordInformationProps } from "@/types/types";
+import { Example, Meaning, ReaderWordInformationProps } from "@/types/types";
+import axios from "axios";
+import ReaderWordInformationAddMeaning from "./readerWordInformationAddMeaning";
+import ReaderWordInformationAddExample from "./readerWordInformationAddExample";
+import ReaderWordInformationEditMeaning from "./readerWordInformationEditMeaning";
+import ReaderWordInformationEditExample from "./readerWordInformationEditExample";
 
 export default function ReaderWordInformation({
   currentWord,
   currentMode,
   handleClickInformationClose,
   wordStatus,
+  fetchStatus,
 }: ReaderWordInformationProps) {
+  const handleSubmitWord = () => {
+    axios
+      .post(`${process.env.NEXT_PUBLIC_LOCAL_HOST}/words?word=${currentWord}`)
+      .then((res) => {
+        console.log(res.data);
+        fetchStatus();
+      })
+
+      .catch((e) => console.log(e));
+  };
+
+  const handleSubmitMeaning = (newMeaning: string) => {
+    if (!(wordStatus && wordStatus[currentWord])) {
+      return;
+    }
+    const currentWordId = wordStatus[currentWord].id;
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${currentWordId}/meanings?meaning=${newMeaning}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        fetchStatus();
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleSubmitEditMeaning = (
+    currentMeaning: Meaning,
+    newMeaning: string
+  ) => {
+    if (!(wordStatus && wordStatus[currentWord])) {
+      return;
+    }
+    const currentWordId = wordStatus[currentWord].id;
+    axios
+      .patch(
+        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${currentWordId}/meanings/${currentMeaning.id}?meaning=${newMeaning}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        fetchStatus();
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleSubmitExample = (newExample: string) => {
+    if (!(wordStatus && wordStatus[currentWord])) {
+      return;
+    }
+    const currentWordId = wordStatus[currentWord].id;
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${currentWordId}/examples?example=${newExample}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        fetchStatus();
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleSubmitEditExample = (
+    currentExample: Example,
+    newExample: string
+  ) => {
+    if (!(wordStatus && wordStatus[currentWord])) {
+      return;
+    }
+    const currentWordId = wordStatus[currentWord].id;
+    axios
+      .patch(
+        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words/${currentWordId}/examples/${currentExample.id}?example=${newExample}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        fetchStatus();
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
     <>
       <div className="text-white flex flex-col gap-4 py-3 px-3 rounded-xl bg-zinc-700">
@@ -35,32 +122,57 @@ export default function ReaderWordInformation({
             ×
           </button>
         </div>
-        <div className="font-bold text-lg flex">
-          {wordStatus && wordStatus[currentWord]?.meanings && (
-            <>
-              <p className="border-l-4 ps-2 border-gray-500">意味：</p>
+        {wordStatus && wordStatus[currentWord]?.meanings && (
+          <div className="font-bold text-lg flex">
+            <p className="border-l-4 ps-2 border-gray-500 basis-1/4">意味：</p>
+            <div className="w-full">
               <div>
-                {wordStatus &&
-                  wordStatus[currentWord].meanings.map((meaning, i) => (
-                    <p key={i}>{meaning.meaning}</p>
-                  ))}
+                {wordStatus[currentWord].meanings?.map(
+                  (meaning: Meaning, i) => (
+                    <ReaderWordInformationEditMeaning
+                      key={i}
+                      currentMeaning={meaning}
+                      handleSubmitEditMeaning={handleSubmitEditMeaning}
+                    />
+                  )
+                )}
               </div>
-            </>
-          )}
-        </div>
-        <div className="font-bold text-lg flex">
-          {wordStatus && wordStatus[currentWord]?.examples && (
-            <>
-              <p className="border-l-4 ps-2 border-gray-500">例文：</p>
+              <ReaderWordInformationAddMeaning
+                handleSubmitMeaning={handleSubmitMeaning}
+              />
+            </div>
+          </div>
+        )}
+        {wordStatus && wordStatus[currentWord]?.examples && (
+          <div className="font-bold text-lg flex">
+            <p className="border-l-4 ps-2 border-gray-500 basis-1/4">例文：</p>
+            <div className="w-full">
               <div>
-                {wordStatus &&
-                  wordStatus[currentWord].examples.map((example, i) => (
-                    <p key={i}>{example.example}</p>
-                  ))}
+                {wordStatus[currentWord].examples.map((example, i) => (
+                  <ReaderWordInformationEditExample
+                    key={i}
+                    currentExample={example}
+                    handleSubmitEditExample={handleSubmitEditExample}
+                  />
+                  // <p key={i}>{example.example}</p>
+                ))}
               </div>
-            </>
-          )}
-        </div>
+              <ReaderWordInformationAddExample
+                handleSubmitExample={handleSubmitExample}
+              />
+            </div>
+          </div>
+        )}
+        {wordStatus && !wordStatus[currentWord] && (
+          <div className="flex justify-center">
+            <button
+              onClick={handleSubmitWord}
+              className="border rounded-xl px-3 cursor-pointer"
+            >
+              add DB
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

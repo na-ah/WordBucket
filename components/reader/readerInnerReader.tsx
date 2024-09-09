@@ -23,7 +23,7 @@ export default function InnerReader() {
     handleClickInformationClose,
   } = useIndex(sample);
 
-  const { wordStatus } = useWordStatus();
+  const { wordStatus, fetchStatus } = useWordStatus();
   console.log(wordStatus && wordStatus.hasOwnProperty("research"));
 
   return (
@@ -51,6 +51,7 @@ export default function InnerReader() {
               currentMode={currentMode}
               handleClickInformationClose={handleClickInformationClose}
               wordStatus={wordStatus}
+              fetchStatus={fetchStatus}
             />
           </div>
           <div className="basis-1/12 flex justify-between items-center">

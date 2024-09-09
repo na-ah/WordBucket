@@ -23,15 +23,17 @@ export default function useWordStatus() {
     }
   }, [articleWords]);
 
-  useEffect(() => {
-    const fetchStatus = async () => {
-      const status = await fetchWordsStatus();
-      setWordStatus(status);
-    };
-    fetchStatus();
+  const fetchStatus = useCallback(async () => {
+    const status = await fetchWordsStatus();
+    setWordStatus(status);
   }, [fetchWordsStatus]);
+
+  useEffect(() => {
+    fetchStatus();
+  }, [fetchStatus]);
 
   return {
     wordStatus,
+    fetchStatus,
   };
 }
