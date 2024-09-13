@@ -8,6 +8,7 @@ import ReaderWordInformationEditExample from "./readerWordInformationEditExample
 
 export default function ReaderWordInformation({
   currentWord,
+  currentSentence,
   currentMode,
   handleClickInformationClose,
   wordStatus,
@@ -15,12 +16,13 @@ export default function ReaderWordInformation({
 }: ReaderWordInformationProps) {
   const handleSubmitWord = () => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_LOCAL_HOST}/words?word=${currentWord}`)
+      .post(
+        `${process.env.NEXT_PUBLIC_LOCAL_HOST}/words?word=${currentWord}&example=${currentSentence}`
+      )
       .then((res) => {
         console.log(res.data);
         fetchStatus();
       })
-
       .catch((e) => console.log(e));
   };
 

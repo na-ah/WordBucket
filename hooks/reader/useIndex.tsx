@@ -5,6 +5,7 @@ export default function useIndex(sourceArticle: string) {
     "word" | "sentence" | "paragraph"
   >("sentence");
   const [currentWord, setCurrentWord] = useState("");
+  const [currentSentence, setCurrentSentence] = useState("");
   const [paragraphIndex, setParagraphIndex] = useState(0);
   const [sentenceIndex, setSentenceIndex] = useState(0);
   const [wordIndex, setWordIndex] = useState(0);
@@ -107,6 +108,8 @@ export default function useIndex(sourceArticle: string) {
         .toString()
         .replace(/^[^\w]+|[^\w]+$/g, "")
     );
+
+    setCurrentSentence(article[paragraphIndex][sentenceIndex].join(" "));
   }, [paragraphIndex, sentenceIndex, wordIndex, article]);
 
   const handleClickWord = (
@@ -114,7 +117,16 @@ export default function useIndex(sourceArticle: string) {
     sentence_i: number,
     paragraph_i: number
   ) => {
-    setCurrentMode("word");
+    if (
+      currentMode === "word" &&
+      wordIndex == word_i &&
+      sentenceIndex === sentence_i &&
+      paragraphIndex === paragraph_i
+    ) {
+      setCurrentMode("sentence");
+    } else {
+      setCurrentMode("word");
+    }
     setWordIndex(word_i);
     setSentenceIndex(sentence_i);
     setParagraphIndex(paragraph_i);
@@ -126,6 +138,7 @@ export default function useIndex(sourceArticle: string) {
 
   return {
     currentWord,
+    currentSentence,
     article,
     articleWords,
     currentMode,
