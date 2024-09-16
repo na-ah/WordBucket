@@ -27,7 +27,7 @@ export default function InnerReader() {
     handleClickInformationClose,
   } = useIndex(sourceArticle);
 
-  const { wordStatus, fetchStatus } = useWordStatus();
+  const { wordStatus, fetchStatus } = useWordStatus(sourceArticle);
   const [isShowAddArticleForm, setIsShowAddArticleForm] = useState(false);
   const [newArticle, setNewArticle] = useState("");
   const handleSubmit = (e) => {
@@ -103,6 +103,7 @@ export default function InnerReader() {
               </div>
               <div className="basis-1/12 flex justify-between items-center">
                 <ReaderButtons
+                  currentSentence={currentSentence}
                   sentenceIndexDecrease={sentenceIndexDecrease}
                   sentenceIndexIncrease={sentenceIndexIncrease}
                   paragraphIndexDecrease={paragraphIndexDecrease}

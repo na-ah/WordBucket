@@ -1,11 +1,10 @@
-import { sample } from "@/data/reader/source";
 import useIndex from "./useIndex";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { WordStatus } from "@/types/types";
 
-export default function useWordStatus() {
-  const { articleWords } = useIndex(sample);
+export default function useWordStatus(sourceArticle: string) {
+  const { articleWords } = useIndex(sourceArticle);
   const [wordStatus, setWordStatus] = useState<WordStatus | undefined>();
 
   const fetchWordsStatus = useCallback(async () => {
