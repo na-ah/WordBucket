@@ -259,6 +259,7 @@ export interface NewWordProps {
 }
 
 export interface ReaderButtonProps {
+  currentSentence: string;
   sentenceIndexDecrease: () => void;
   sentenceIndexIncrease: () => void;
   paragraphIndexDecrease: () => void;
