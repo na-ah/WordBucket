@@ -49,10 +49,12 @@ export default function ReaderArticle({
                   style={{
                     color:
                       wordStatus && wordStatus.hasOwnProperty(cleanWord(word))
-                        ? wordStatus[cleanWord(word)].status === "unlearned"
-                          ? ArticleWordColor["unlearned"]
-                          : wordStatus[cleanWord(word)].status === "in_progress"
-                          ? ArticleWordColor["inProgress"]
+                        ? wordStatus[cleanWord(word)].meanings.length === 0
+                          ? ArticleWordColor["noMeanings"]
+                          : wordStatus[cleanWord(word)].status ===
+                              "unlearned" ||
+                            wordStatus[cleanWord(word)].status === "in_progress"
+                          ? ArticleWordColor["studying"]
                           : wordStatus[cleanWord(word)].status === "memorizing"
                           ? ArticleWordColor["memorizing"]
                           : "inherit"

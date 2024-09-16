@@ -1,5 +1,5 @@
 export const ArticleWordColor = {
-  unlearned: "red",
-  inProgress: "yellow",
-  memorizing: "aqua",
+  noMeanings: "#FF8C9E",
+  studying: "#FFD35A",
+  memorizing: "#A7E6FF",
 };
