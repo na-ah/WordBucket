@@ -26,15 +26,6 @@ export default function InnerDashboard() {
             pageTitle={"pageTitle"}
           />
           <DashboardBoxWrapper
-            listTitle={"reviewList"}
-            listContent={"total: 45 card"}
-          >
-            <DashboardBoxList
-              boxPropsList={reviewList}
-              handleBoxClick={handleBoxClick}
-            />
-          </DashboardBoxWrapper>
-          <DashboardBoxWrapper
             listTitle={"learning"}
             listContent={`total: ${2} card`}
           >
