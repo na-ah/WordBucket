@@ -11,9 +11,7 @@ export default function FlashcardResult() {
     totalAverageResponseTime,
     totalAccuracyRate,
   } = useResult();
-  console.log("resultない");
-  console.log("correctList:", correctList);
-  console.log("incorrectList:", incorrectList);
+
   return (
     <>
       <div className="py-3 px-5 h-dvh grid grid-rows-[32px_5fr_2fr_1fr_2fr] ">
