@@ -31,7 +31,7 @@ export default function MissingAll() {
   return (
     <>
       <Layout>
-        <div className="flex flex-col h-vh min-h-dvh ">
+        <div className="flex flex-col h-vh px-5 py-3 min-h-dvh ">
           <PageTitle title={"MissingMeaning"} />
           <WordMenu />
           <MissingMenu />
