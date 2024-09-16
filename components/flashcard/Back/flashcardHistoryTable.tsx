@@ -5,8 +5,7 @@ export default function FlashcardHistoryTable({
 }: FlashcardHistoryTableProps) {
   return (
     <>
-      {word.id}
-      <table className="table-auto w-full">
+      <table className="mt-3 table-auto w-full">
         <thead>
           <tr>
             <td className="text-left">日付</td>

@@ -5,7 +5,7 @@ export default function FlashcardWordStatsArea({
 }: FlashcardWordStatsAreaProps) {
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col py-3 gap-1">
         <div className="flex justify-between">
           <span>accuracyRate:</span>
           <span>{wordStats.accuracyRate * 100} %</span>
