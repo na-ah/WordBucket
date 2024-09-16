@@ -5,6 +5,8 @@ import ReaderWordInformationAddMeaning from "./readerWordInformationAddMeaning";
 import ReaderWordInformationAddExample from "./readerWordInformationAddExample";
 import ReaderWordInformationEditMeaning from "./readerWordInformationEditMeaning";
 import ReaderWordInformationEditExample from "./readerWordInformationEditExample";
+import { FaGoogle } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
 export default function ReaderWordInformation({
   currentWord,
@@ -117,12 +119,25 @@ export default function ReaderWordInformation({
           >
             {currentWord}
           </p>
-          <button
-            onClick={handleClickInformationClose}
-            className="text-zinc-300"
-          >
-            ×
-          </button>
+          <div className="flex items-center gap-5">
+            <a
+              href={`${
+                "https://www.google.com/search?q=" +
+                encodeURIComponent(currentWord) +
+                encodeURIComponent(" 意味")
+              }`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGoogle className="text-base" />
+            </a>
+            <button
+              onClick={handleClickInformationClose}
+              className="text-zinc-300"
+            >
+              <IoMdClose className="text-xl" />
+            </button>
+          </div>
         </div>
         {wordStatus && wordStatus[currentWord]?.meanings && (
           <div className="font-bold text-lg flex">
