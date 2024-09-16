@@ -32,7 +32,7 @@ export default function MissingAll() {
     <>
       <Layout>
         <div className="flex flex-col px-5 py-3 h-vh min-h-dvh ">
-          <PageTitle title={"MissingMeaning"} />
+          <PageTitle title={"MissingAll"} />
           <WordMenu />
           <MissingMenu />
           <div className="flex-grow">
