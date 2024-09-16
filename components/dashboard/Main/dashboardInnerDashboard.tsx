@@ -27,7 +27,12 @@ export default function InnerDashboard() {
           />
           <DashboardBoxWrapper
             listTitle={"learning"}
-            listContent={`total: ${2} card`}
+            listContent={`total: ${learningList.reduce(
+              (accum, currentValue) => {
+                return accum + Number(currentValue.count);
+              },
+              0
+            )} card`}
           >
             <DashboardBoxList
               boxPropsList={learningList}
@@ -36,7 +41,12 @@ export default function InnerDashboard() {
           </DashboardBoxWrapper>
           <DashboardBoxWrapper
             listTitle="memorizing"
-            listContent="total: 235 card"
+            listContent={`total: ${studyCountList.reduce(
+              (accum, currentValue) => {
+                return accum + Number(currentValue.count);
+              },
+              0
+            )} cards`}
           >
             <LeftBarTitle
               title="学習回数"
