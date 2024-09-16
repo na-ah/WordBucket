@@ -15,13 +15,13 @@ export default function MissingMenu() {
 
   return (
     <>
-      <div className="flex justify-center gap-3">
+      <div className="grid grid-cols-3 gap-3">
         <Link href="/word/missing">
           <div
             className="border py-2 px-4 rounded-xl hover:cursor-pointer"
             style={activeStyle("/word/missing")}
           >
-            すべて未登録
+            すべて
           </div>
         </Link>
         <Link href="/word/missing/meaning">
@@ -29,7 +29,7 @@ export default function MissingMenu() {
             className="border py-2 px-4 rounded-xl hover:cursor-pointer"
             style={activeStyle("/word/missing/meaning")}
           >
-            意味未登録
+            意味
           </div>
         </Link>
         <Link href="/word/missing/example">
@@ -37,7 +37,7 @@ export default function MissingMenu() {
             className="border py-2 px-4 rounded-xl hover:cursor-pointer"
             style={activeStyle("/word/missing/example")}
           >
-            例文未登録
+            例文
           </div>
         </Link>
       </div>

@@ -23,13 +23,13 @@ export default function WordMenu() {
 
   return (
     <>
-      <div className="flex justify-center gap-3 my-5">
+      <div className="grid  grid-cols-3 gap-3 my-5 w-full">
         <Link href="/word">
           <div
             className="border py-2 px-4 rounded-xl hover:cursor-pointer"
             style={activeStyle("/word")}
           >
-            新規単語登録
+            新規登録
           </div>
         </Link>
         <Link href="/word/missing">
@@ -37,7 +37,7 @@ export default function WordMenu() {
             className="border py-2 px-4 rounded-xl hover:cursor-pointer"
             style={forMissingStyle("/word/missing")}
           >
-            未完成カード
+            未完成
           </div>
         </Link>
         <Link href="/word/history">
