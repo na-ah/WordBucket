@@ -12,11 +12,11 @@ export default function FlashcardAreaBack({
   return (
     <>
       <div className="flex flex-col h-full">
-        <div className="basis-2/5 flex flex-col">
+        <div className="basis-2/5 flex flex-col min-h-0">
           <div className="text-sm">
             <FlashcardWordStatsArea wordStats={wordStats} />
           </div>
-          <div className="my-3 text-sm overflow-auto h-full">
+          <div className="my-3 text-sm overflow-auto flex-1">
             <FlashcardHistoryTable word={word} />
           </div>
         </div>

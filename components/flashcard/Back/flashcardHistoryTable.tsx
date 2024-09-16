@@ -6,11 +6,11 @@ export default function FlashcardHistoryTable({
   return (
     <>
       <table className="mt-3 table-auto w-full">
-        <thead>
+        <thead className="font-bold text-base">
           <tr>
             <td className="text-left">日付</td>
             <td className="text-center">結果</td>
-            <td className="text-center">時間</td>
+            <td className="text-right">時間</td>
           </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@ export default function FlashcardHistoryTable({
                 {new Date(result.datetime).toLocaleString("ja-JP")}
               </td>
               <td className="text-center">{result.result ? "○" : "×"}</td>
-              <td className="text-center">{result.duration}s</td>
+              <td className="text-right">{result.duration}s</td>
             </tr>
           ))}
         </tbody>

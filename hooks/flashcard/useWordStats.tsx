@@ -11,7 +11,7 @@ export default function useWordStats(currentWord: Word) {
       (data) => data.result === true
     ).length;
 
-    return Math.round((correctCount / learningCount) * 100) / 100;
+    return Math.round((correctCount / learningCount) * 100);
   }
 
   function calcAverageResponseTime(word: Word) {
