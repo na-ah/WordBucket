@@ -31,7 +31,7 @@ export default function WordIndex() {
     <>
       <Layout>
         <Suspense fallback={<h2>Loading...</h2>}>
-          <div className="flex flex-col h-dvh">
+          <div className="flex flex-col w-full px-5 py-3 relative h-dvh">
             <PageTitle title={"WordForm"} />
             <WordMenu />
             <div className="flex-grow"></div>
