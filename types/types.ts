@@ -12,7 +12,7 @@ export interface DashboardMenuProps {
 
 export interface DashboardBoxListProps {
   boxPropsList: DashboardBoxPropsList[];
-  handleBoxClick: (arg: string) => void;
+  handleBoxClick: (arg: string | undefined) => void;
 }
 
 export interface DashboardBoxPropsList {
@@ -43,8 +43,8 @@ export interface DashboardBoxProps {
   count: string;
   percentage: string;
   color?: string;
-  boxName: string;
-  handleBoxClick: (arg: string) => void;
+  boxName: string | undefined;
+  handleBoxClick: (arg: string | undefined) => void;
 }
 
 export interface Colors {
