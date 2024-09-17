@@ -92,7 +92,7 @@ export default function useIndex(sourceArticle: string) {
       .map((paragraph) =>
         paragraph
           .split(/(?<=[.!?])\s+(?=[A-Z“”"])/)
-          .map((sentence) => sentence.split(" ").map((word) => [word]))
+          .map((sentence) => sentence.split(" ").map((word) => word))
       );
   }, [sourceArticle]);
 

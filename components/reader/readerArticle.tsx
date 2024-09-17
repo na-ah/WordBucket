@@ -10,7 +10,8 @@ export default function ReaderArticle({
   handleClickWord,
   wordStatus,
 }: ReaderArticleProps) {
-  const cleanWord = (word) => word.toString().replace(/^[^\w]+|[^\w]+$/g, "");
+  const cleanWord = (word: string) =>
+    word.toString().replace(/^[^\w]+|[^\w]+$/g, "");
   return (
     <>
       {article.map((paragraph, paragraph_i) => (

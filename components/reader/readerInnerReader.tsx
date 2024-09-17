@@ -30,12 +30,12 @@ export default function InnerReader() {
   const { wordStatus, fetchStatus } = useWordStatus(sourceArticle);
   const [isShowAddArticleForm, setIsShowAddArticleForm] = useState(false);
   const [newArticle, setNewArticle] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSourceArticle(newArticle);
     setIsShowAddArticleForm(false);
   };
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewArticle(e.target.value);
   };
 
@@ -73,7 +73,6 @@ export default function InnerReader() {
               <div className="flex justify-between items-center">
                 <PageTitle title="Reader" />
                 <ReaderAddArticle
-                  isShowAddArticleForm={isShowAddArticleForm}
                   setIsShowAddArticleForm={setIsShowAddArticleForm}
                 />
               </div>

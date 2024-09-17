@@ -1,6 +1,9 @@
+import { Dispatch, SetStateAction } from "react";
+
 export default function ReaderAddArticle({
-  isShowAddArticleForm,
   setIsShowAddArticleForm,
+}: {
+  setIsShowAddArticleForm: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <>

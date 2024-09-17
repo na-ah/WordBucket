@@ -19,7 +19,7 @@ export default function useDashboard() {
   const [dashboardData, setDashboardData] = useState<Dashboard>({
     newCards: 0,
     todayLearningCards: 0,
-    missing_meanings: 0,
+    missingMeanings: 0,
     unlearned: 0,
     inProgress: 0,
     completed: 0,

@@ -12,7 +12,7 @@ export interface DashboardMenuProps {
 
 export interface DashboardBoxListProps {
   boxPropsList: DashboardBoxPropsList[];
-  handleBoxClick: (arg: string | undefined) => void;
+  handleBoxClick: (arg: string) => void;
 }
 
 export interface DashboardBoxPropsList {
@@ -20,7 +20,7 @@ export interface DashboardBoxPropsList {
   count: string;
   percentage: string;
   color?: string;
-  boxName?: string;
+  boxName: string;
 }
 
 export interface DashboardInformationListProps {
@@ -43,8 +43,8 @@ export interface DashboardBoxProps {
   count: string;
   percentage: string;
   color?: string;
-  boxName: string | undefined;
-  handleBoxClick: (arg: string | undefined) => void;
+  boxName: string;
+  handleBoxClick: (arg: string) => void;
 }
 
 export interface Colors {
@@ -266,7 +266,7 @@ export interface ReaderButtonProps {
   paragraphIndexIncrease: () => void;
 }
 export interface ReaderArticleProps {
-  article: string[][][][];
+  article: string[][][];
   currentMode: "paragraph" | "sentence" | "word";
   paragraphIndex: number;
   sentenceIndex: number;

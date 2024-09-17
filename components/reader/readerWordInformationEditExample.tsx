@@ -15,7 +15,7 @@ export default function ReaderWordInformationEditExample({
     setIsEditing(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewExample(e.target.value);
   };
 
@@ -40,7 +40,6 @@ export default function ReaderWordInformationEditExample({
       {isEditing && (
         <form onSubmit={handleSubmit}>
           <textarea
-            type="text"
             defaultValue={newExample}
             onBlur={handleSubmit}
             onChange={handleChange}
