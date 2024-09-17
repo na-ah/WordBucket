@@ -10,13 +10,15 @@ export default function FlashcardButton({
 }: FlashcardButtonProps) {
   return (
     <>
-      {isFront && <FlashcardButtonFront flipCard={flipCard} />}
-      {!isFront && (
-        <FlashcardButtonBack
-          markCorrect={markCorrect}
-          markIncorrect={markIncorrect}
-        />
-      )}
+      <div>
+        {isFront && <FlashcardButtonFront flipCard={flipCard} />}
+        {!isFront && (
+          <FlashcardButtonBack
+            markCorrect={markCorrect}
+            markIncorrect={markIncorrect}
+          />
+        )}
+      </div>
     </>
   );
 }

@@ -12,21 +12,19 @@ export default function FlashcardArea({
 }: FlashcardAreaProps) {
   return (
     <>
-      <div className="h-full w-full my-auto flex flex-col">
-        <FlashcardProgressStatus progressStatus={progressStatus} />
-        {isFront && (
-          <FlashcardAreaFront
-            word={word}
-            remainingTimePercentage={remainingTimePercentage}
-          />
-        )}
-        {!isFront && (
-          <FlashcardAreaBack
-            word={word}
-            wordStats={wordStats}
-          />
-        )}
-      </div>
+      <FlashcardProgressStatus progressStatus={progressStatus} />
+      {isFront && (
+        <FlashcardAreaFront
+          word={word}
+          remainingTimePercentage={remainingTimePercentage}
+        />
+      )}
+      {!isFront && (
+        <FlashcardAreaBack
+          word={word}
+          wordStats={wordStats}
+        />
+      )}
     </>
   );
 }

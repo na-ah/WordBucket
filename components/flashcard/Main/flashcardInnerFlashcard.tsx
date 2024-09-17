@@ -37,7 +37,7 @@ export default function InnerFlashcard() {
   }
   return (
     <>
-      <div className="flex-1 flex flex-col w-full px-5 py-3">
+      <div className="flex flex-col px-5 py-3 h-dvh">
         <PageTitle title={"Flashcard"} />
         <FlashcardArea
           remainingTimePercentage={remainingTimePercentage}
