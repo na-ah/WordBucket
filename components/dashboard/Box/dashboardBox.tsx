@@ -14,7 +14,7 @@ export default function DashboardBox({
     <>
       <div
         className="border flex-1 aspect-square flex justify-center items-center relative"
-        onClick={() => handleBoxClick(boxName)}
+        onClick={() => Number(count) !== 0 && handleBoxClick(boxName)}
         {...props}
       >
         <p className="absolute -top-3 bg-zinc-700 px-2 z-10">{title}</p>
